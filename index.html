@@ -69,28 +69,36 @@
       
       <!-- Brand Identity: stylesdays -->
       <div class="flex items-center space-x-3">
-        <a href="?post=minimalist-bedroom-ideas-for-2026" class="flex items-center space-x-3 group">
+        <a href="/moroccan-wool-runners" onclick="event.preventDefault(); navigateToCleanSlug('moroccan-wool-runners');" class="flex items-center space-x-3 group">
           <div class="w-10 h-10 rounded-xl bg-stone-900 flex items-center justify-center text-white shadow-sm group-hover:bg-[#E60023] transition">
             <span class="font-serif-editorial font-bold text-xl tracking-tighter">sd</span>
           </div>
           <div>
             <div class="flex items-center gap-2">
               <span class="font-serif-editorial text-xl font-bold tracking-tight text-stone-900 leading-none">stylesdays</span>
-              <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 border border-stone-200">Editorial Hub</span>
+              <span class="text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full bg-stone-100 text-stone-700 border border-stone-200">Clean Path Hub</span>
             </div>
-            <span class="text-[11px] text-stone-500 font-medium block mt-0.5">Home Decor • IKEA Hacks • Bedroom & Storage Guides</span>
+            <span class="text-[11px] text-stone-500 font-medium block mt-0.5">/<span id="brandSubSlugText">moroccan-wool-runners</span> → stylesdays.com</span>
           </div>
         </a>
       </div>
 
-      <!-- Action Pills: Sitemap Sync, Compliance Audit & Editorial Builder -->
+      <!-- Action Pills: GitHub Pages 404 Router, Sitemap Sync, Compliance Audit & Editorial Builder -->
       <div class="flex flex-wrap items-center gap-2">
+        <!-- GitHub Pages Clean URL Setup (404.html Generator) -->
+        <button id="btnToggleGhPagesModal" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 transition flex items-center gap-1.5 shadow-2xs">
+          <svg class="w-3.5 h-3.5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+          </svg>
+          <span>GitHub Pages Clean URL Kit (<code class="font-mono text-[11px]">404.html</code>)</span>
+        </button>
+
         <!-- Live Sitemap XML Sync Trigger -->
         <button id="btnToggleSitemapModal" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 transition flex items-center gap-1.5 shadow-2xs">
           <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
           </svg>
-          <span>Sitemap XML Sync (<span id="sitemapCountBadge">8</span> Posts)</span>
+          <span>Sitemap Sync (<span id="sitemapCountBadge">9</span>)</span>
         </button>
 
         <!-- Pinterest Policy Audit Status Pill -->
@@ -104,11 +112,137 @@
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
           </svg>
-          <span id="studioBtnLabel">Builder & Static Exporter</span>
+          <span id="studioBtnLabel">Builder &amp; Exporter</span>
         </button>
       </div>
     </div>
   </header>
+
+  <!-- 2A. INTERACTIVE CLEAN PATH BAR & LIVE URL MAPPER (https://<org-name>.github.io/<slug> -> https://stylesdays.com/<slug>/) -->
+  <div class="bg-stone-900 text-stone-100 border-b border-stone-800 py-2.5 px-4">
+    <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 text-xs">
+      
+      <!-- Left: Simulated Clean Path Address Bar -->
+      <div class="flex flex-wrap sm:flex-nowrap items-center gap-1.5 bg-stone-950 border border-stone-700/90 rounded-xl px-3 py-1.5 flex-1">
+        <span class="text-emerald-400 font-bold flex items-center gap-1 shrink-0" title="Zero Query Parameters - Clean Path Routing">
+          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+          <span>https://</span>
+        </span>
+        <input 
+          type="text" 
+          id="ghOrgDomainInput" 
+          value="stylesdays-hub.github.io" 
+          aria-label="GitHub Pages Organization Domain"
+          class="bg-stone-800/90 text-amber-300 font-mono text-[11px] px-2 py-0.5 rounded border border-stone-700 focus:outline-none focus:border-amber-400 w-44 shrink-0"
+          title="Edit your GitHub Organization domain (<org-name>.github.io)"
+        />
+        <span class="text-stone-400 font-mono font-bold">/</span>
+        <input 
+          type="text" 
+          id="livePathSlugInput" 
+          value="moroccan-wool-runners" 
+          placeholder="moroccan-wool-runners"
+          aria-label="Clean URL Path Slug"
+          class="bg-transparent text-white font-mono font-semibold text-xs focus:outline-none w-full min-w-[160px]"
+          title="Type any slug (e.g., moroccan-wool-runners) to extract & prepend https://stylesdays.com/"
+        />
+        <button id="btnLoadPathSlug" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-3 py-1 rounded-lg text-[11px] transition shrink-0">
+          Load Path
+        </button>
+      </div>
+
+      <!-- Center: Automatic Prefix Mapping Indicator -->
+      <div class="flex items-center justify-between sm:justify-start gap-2 text-[11px] font-mono bg-stone-800/70 px-3 py-1.5 rounded-xl border border-stone-700/70 shrink-0">
+        <span class="text-stone-400">Auto-Prepends:</span>
+        <a id="liveMappedStylesdaysUrl" href="https://stylesdays.com/moroccan-wool-runners/" target="_blank" rel="noopener" class="text-emerald-300 hover:underline font-semibold truncate max-w-[260px] sm:max-w-xs">
+          https://stylesdays.com/moroccan-wool-runners/
+        </a>
+      </div>
+
+      <!-- Right: Copy Clean Pin URL (No ?post=) -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="btnTopCopyCleanPinUrl" class="w-full sm:w-auto bg-white hover:bg-stone-200 text-stone-950 font-bold px-3.5 py-1.5 rounded-xl text-[11px] transition flex items-center justify-center gap-1.5 shadow-2xs">
+          <svg class="w-3.5 h-3.5 text-[#E60023]" fill="currentColor" viewBox="0 0 20 20"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
+          <span>Copy Clean Pin URL</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2A-MODAL. GITHUB PAGES CLEAN URL SETUP DRAWER (404.HTML CATCH-ALL ROUTER & EXPORTER) -->
+  <section id="ghPagesSetupDrawer" class="bg-indigo-950 text-indigo-50 border-b border-indigo-800 hidden">
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="flex flex-wrap items-start justify-between gap-4 pb-4 mb-5 border-b border-indigo-800/80">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-indigo-400 text-indigo-950 rounded">Zero Query Params</span>
+            <h2 class="text-base font-bold text-white">How to Serve <code class="text-amber-300">https://&lt;org-name&gt;.github.io/moroccan-wool-runners</code> on GitHub Pages</h2>
+          </div>
+          <p class="text-xs text-indigo-200 mt-1">
+            Because GitHub Pages is a static host, visiting <code class="text-white">/moroccan-wool-runners</code> without a query string looks for a matching file or serves <code class="text-white">404.html</code>. Choose either method below:
+          </p>
+        </div>
+        <button id="btnCloseGhPagesModal" class="text-indigo-300 hover:text-white text-xs px-3 py-1.5 rounded-lg bg-indigo-900 hover:bg-indigo-800">Close ✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+        <!-- Method A: Universal 404.html Catch-All Router -->
+        <div class="p-5 rounded-2xl bg-indigo-900/60 border border-indigo-700/80 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-400 text-emerald-950">Method A • Recommended (1 File Supports All Slugs)</span>
+              <span class="font-mono text-[11px] text-indigo-300">index.html + 404.html</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-2">Universal <code class="text-amber-300">404.html</code> Catch-All Clean Path Router</h3>
+            <p class="text-indigo-200 leading-relaxed mb-3">
+              Upload this file as both <code class="text-white font-bold">index.html</code> and <code class="text-white font-bold">404.html</code> in the root of your <code class="text-white">&lt;org-name&gt;.github.io</code> repository.
+            </p>
+            <ol class="list-decimal list-inside space-y-1.5 text-indigo-100/90 text-[11px] mb-4">
+              <li>When someone visits <code class="text-amber-300">https://&lt;org-name&gt;.github.io/moroccan-wool-runners</code>, GitHub Pages serves <code class="text-white">404.html</code> while keeping the clean URL in the address bar.</li>
+              <li>This app reads <code class="text-white">window.location.pathname</code> (<code class="text-amber-300">/moroccan-wool-runners</code>).</li>
+              <li>It automatically prepends <code class="text-emerald-300">https://stylesdays.com/</code> → <code class="text-emerald-300">https://stylesdays.com/moroccan-wool-runners/</code> and fetches live WordPress &amp; OpenGraph data!</li>
+            </ol>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-indigo-800/80">
+            <button id="btnDownloadCatchAll404" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span>Download Universal <code class="font-mono">404.html</code> Router</span>
+            </button>
+            <button id="btnDownloadRootIndex" class="bg-indigo-800 hover:bg-indigo-700 text-white font-semibold px-3.5 py-2.5 rounded-xl transition">
+              Download Matching <code class="font-mono">index.html</code>
+            </button>
+          </div>
+        </div>
+
+        <!-- Method B: Dedicated Static HTML File per Slug -->
+        <div class="p-5 rounded-2xl bg-indigo-900/60 border border-indigo-700/80 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-indigo-300 text-indigo-950">Method B • HTTP 200 Static Pre-Rendered</span>
+              <span class="font-mono text-[11px] text-indigo-300">/&lt;slug&gt;.html</span>
+            </div>
+            <h3 class="text-sm font-bold text-white mb-2">Pre-Baked Static File (<code class="text-amber-300">moroccan-wool-runners.html</code>)</h3>
+            <p class="text-indigo-200 leading-relaxed mb-3">
+              GitHub Pages automatically resolves extensionless clean URLs! If you upload <code class="text-white font-bold">moroccan-wool-runners.html</code> to your repo root (or <code class="text-white font-bold">moroccan-wool-runners/index.html</code>), visiting <code class="text-amber-300">https://&lt;org-name&gt;.github.io/moroccan-wool-runners</code> returns an HTTP 200 status with hardcoded OpenGraph tags.
+            </p>
+            <div class="p-3 rounded-xl bg-indigo-950/90 border border-indigo-800 font-mono text-[11px] text-indigo-200 mb-4">
+              <div>Repo Root Structure for Clean URLs:</div>
+              <div class="text-emerald-300 mt-1">├── index.html</div>
+              <div class="text-emerald-300">├── 404.html <span class="text-indigo-400">(fallback for any new stylesdays.com slug)</span></div>
+              <div class="text-amber-300">└── moroccan-wool-runners.html <span class="text-indigo-400">(served at /moroccan-wool-runners)</span></div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-indigo-800/80">
+            <button onclick="document.getElementById('btnDownloadStaticHtml').click()" class="bg-white hover:bg-stone-200 text-stone-950 font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
+              <svg class="w-4 h-4 text-[#E60023]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span id="ghModalStaticBtnLabel">Download Static moroccan-wool-runners.html</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- 2B. SITEMAP_INDEX.XML LIVE SYNC & PARSER DRAWER (Custom Built for stylesdays.com) -->
   <section id="sitemapSyncDrawer" class="bg-stone-950 text-stone-100 border-b border-stone-800 hidden">
@@ -147,14 +281,14 @@
           </div>
 
           <div class="p-4 rounded-2xl bg-stone-900 border border-stone-800">
-            <h3 class="font-bold text-white text-sm mb-1">2. Instant stylesdays.com Post URL / Slug Resolver</h3>
+            <h3 class="font-bold text-white text-sm mb-1">2. Instant Clean Path Slug or stylesdays.com URL Resolver</h3>
             <p class="text-stone-400 text-[11px] mb-2.5">
-              Paste any single <code class="text-stone-300">https://stylesdays.com/...</code> URL and we will auto-extract its slug, fetch its live OpenGraph image/title, and build a compliant hub entry:
+              Type any path slug (e.g. <code class="text-amber-300">/moroccan-wool-runners</code>) or full <code class="text-stone-300">https://stylesdays.com/...</code> link. We automatically prepend <code class="text-emerald-400">https://stylesdays.com/</code> and fetch live metadata:
             </p>
             <div class="flex gap-2">
-              <input type="text" id="quickStylesdaysUrlInput" placeholder="https://stylesdays.com/gorgeous-ikea-nightstand-hacks/" class="flex-1 bg-stone-950 border border-stone-700 rounded-xl px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400">
+              <input type="text" id="quickStylesdaysUrlInput" placeholder="/moroccan-wool-runners or https://stylesdays.com/..." class="flex-1 bg-stone-950 border border-stone-700 rounded-xl px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400">
               <button id="btnResolveSingleStylesdaysUrl" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold px-3.5 py-2 rounded-xl transition shrink-0">
-                Import URL
+                Resolve Slug
               </button>
             </div>
           </div>
@@ -169,9 +303,9 @@
                 <button id="btnLoadSampleSitemapXml" class="text-[11px] text-amber-300 hover:underline">Load stylesdays XML Sample</button>
               </div>
               <p class="text-stone-400 text-[11px] mb-2.5">
-                Paste the XML source from <code class="text-stone-300">https://stylesdays.com/post-sitemap.xml</code>. Every <code class="text-stone-300">&lt;loc&gt;</code> URL is parsed into a Pinterest-safe <code class="text-stone-300">?post=slug</code> editorial guide.
+                Paste the XML source from <code class="text-stone-300">https://stylesdays.com/post-sitemap.xml</code>. Every <code class="text-stone-300">&lt;loc&gt;</code> URL is parsed into a clean path <code class="text-amber-300">/&lt;slug&gt;</code> editorial guide.
               </p>
-              <textarea id="rawSitemapXmlInput" rows="5" placeholder="<urlset>&#10;  <url><loc>https://stylesdays.com/minimalist-bedroom-ideas-for-2026/</loc></url>&#10;  <url><loc>https://stylesdays.com/gorgeous-ikea-nightstand-hacks/</loc></url>&#10;</urlset>" class="w-full bg-stone-950 border border-stone-700 rounded-xl p-3 text-stone-200 font-mono text-[11px] placeholder-stone-600 focus:outline-none focus:border-amber-400"></textarea>
+              <textarea id="rawSitemapXmlInput" rows="5" placeholder="<urlset>&#10;  <url><loc>https://stylesdays.com/moroccan-wool-runners/</loc></url>&#10;  <url><loc>https://stylesdays.com/minimalist-bedroom-ideas-for-2026/</loc></url>&#10;</urlset>" class="w-full bg-stone-950 border border-stone-700 rounded-xl p-3 text-stone-200 font-mono text-[11px] placeholder-stone-600 focus:outline-none focus:border-amber-400"></textarea>
             </div>
             <div class="flex flex-wrap items-center justify-between gap-2 mt-3 pt-3 border-t border-stone-800">
               <span class="text-[11px] text-stone-400">Automatically strips <code class="text-stone-300">/category/</code>, <code class="text-stone-300">/tag/</code>, and non-article URLs.</span>
@@ -212,19 +346,10 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
         <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
           <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 1. Zero Automated Redirects</span>
+            <span>✓ 2. Clean Path Routing (Zero Query Strings)</span>
           </div>
           <p class="text-emerald-100/80 leading-relaxed">
-            No <code class="text-emerald-300">setTimeout</code>, <code class="text-emerald-300">window.location.replace</code>, or <code class="text-emerald-300">&lt;meta http-equiv="refresh"&gt;</code> exists in the DOM. Visitors click through intentionally.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
-          <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 2. Locked to stylesdays.com Slugs</span>
-          </div>
-          <p class="text-emerald-100/80 leading-relaxed">
-            Rather than acting as an open redirector for arbitrary domains, routing is strictly scoped to <code class="text-emerald-300">stylesdays.com</code> article slugs (<code class="text-emerald-300">?post=ikea-headboard-hacks</code>).
+            Extracts the slug directly from <code class="text-emerald-300">https://&lt;org-name&gt;.github.io/&lt;slug&gt;</code> and prepends <code class="text-emerald-300">https://stylesdays.com/</code> with zero suspicious query parameters.
           </p>
         </div>
 
@@ -303,12 +428,12 @@
         </div>
 
         <div class="md:col-span-5">
-          <label class="block text-stone-300 font-semibold mb-1">2. Post Slug (Matches stylesdays.com Permalink) <span class="text-red-400">*</span></label>
+          <label class="block text-stone-300 font-semibold mb-1">2. Clean URL Path Slug (Auto-Prepends stylesdays.com/) <span class="text-red-400">*</span></label>
           <div class="flex items-center bg-stone-800 border border-stone-700 rounded-lg overflow-hidden focus-within:border-[#E60023]">
-            <span class="px-2.5 py-2 bg-stone-950 text-stone-400 font-mono text-[11px] border-r border-stone-700">?post=</span>
-            <input type="text" id="studioSlug" placeholder="gorgeous-ikea-nightstand-hacks" class="w-full bg-transparent px-3 py-2 text-white font-mono placeholder-stone-500 focus:outline-none">
+            <span class="px-2.5 py-2 bg-stone-950 text-amber-300 font-mono text-[11px] border-r border-stone-700">/</span>
+            <input type="text" id="studioSlug" placeholder="moroccan-wool-runners" class="w-full bg-transparent px-3 py-2 text-white font-mono placeholder-stone-500 focus:outline-none">
           </div>
-          <p class="text-[11px] text-stone-400 mt-1">Pin link format: <code class="text-stone-300">?post=slug</code> or static <code class="text-stone-300">slug.html</code>.</p>
+          <p class="text-[11px] text-stone-400 mt-1">Maps <code class="text-stone-300">/&lt;slug&gt;</code> ➔ <code class="text-emerald-400">https://stylesdays.com/&lt;slug&gt;/</code></p>
         </div>
 
         <!-- Row 2: Headline & Image URL -->
@@ -363,10 +488,10 @@
       <div class="mt-5 pt-4 border-t border-stone-800 flex flex-wrap items-center justify-between gap-3">
         <div class="flex flex-wrap items-center gap-2">
           <button id="btnStudioApplyLive" class="bg-stone-700 hover:bg-stone-600 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition">
-            Save &amp; Preview in Hub
+            Save &amp; Preview Clean Path
           </button>
           <button id="btnCopySafeSlugUrl" class="bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-200 font-semibold px-3.5 py-2.5 rounded-xl text-xs transition flex items-center gap-1.5">
-            <span>Copy Pinterest-Safe Link (?post=...)</span>
+            <span>Copy Clean Pin URL (https://&lt;org&gt;.github.io/&lt;slug&gt;)</span>
           </button>
         </div>
 
@@ -376,7 +501,7 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
-            <span id="downloadBtnText">Download Static HTML Page for GitHub Pages</span>
+            <span id="downloadBtnText">Download Static moroccan-wool-runners.html</span>
           </button>
         </div>
       </div>
@@ -396,7 +521,7 @@
         </div>
         <div class="text-[11px] text-stone-500 font-mono hidden md:flex items-center gap-2 shrink-0">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span id="activeRouteIndicator">Route: ?post=minimalist-bedroom-ideas-for-2026</span>
+          <span id="activeRouteIndicator">Path: /moroccan-wool-runners → stylesdays.com/moroccan-wool-runners/</span>
         </div>
       </div>
 
@@ -624,19 +749,22 @@
         <!-- Shareable Pinterest Hub Link Box -->
         <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#E60023]">Pinterest Pin Destination Link</span>
-            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">100% Safe Slug</span>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-[#E60023]">Clean Pinterest Destination URL</span>
+            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Zero Query Params</span>
           </div>
-          <h3 class="text-sm font-bold text-stone-900 mb-1.5">Pin URL for This Article</h3>
+          <h3 class="text-sm font-bold text-stone-900 mb-1.5">Clean Path Pin Link</h3>
           <p class="text-xs text-stone-500 leading-relaxed mb-3">
-            Use this clean slug URL in your Pinterest Pin destination field, or export a static <code class="bg-stone-100 px-1 py-0.5 rounded">.html</code> file for GitHub Pages:
+            Extracts <code id="sidebarSlugCodeBadge" class="bg-stone-100 px-1 py-0.5 rounded text-stone-800">/moroccan-wool-runners</code> from the path and automatically prepends <code class="bg-stone-100 px-1 py-0.5 rounded text-stone-800">https://stylesdays.com/</code>:
           </p>
-          <div class="bg-stone-50 border border-stone-200 rounded-xl p-2.5 font-mono text-[11px] text-stone-700 break-all mb-3" id="sidebarPinSlugUrlBox">
-            ?post=minimalist-bedroom-ideas-for-2026
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-2.5 font-mono text-[11px] text-stone-800 break-all mb-2" id="sidebarPinSlugUrlBox">
+            https://stylesdays-hub.github.io/moroccan-wool-runners
+          </div>
+          <div class="text-[11px] text-stone-500 font-mono mb-3 truncate">
+            ↳ Target: <span id="sidebarTargetUrlPreview" class="text-emerald-700 font-semibold">https://stylesdays.com/moroccan-wool-runners/</span>
           </div>
           <div class="grid grid-cols-2 gap-2">
             <button id="btnSidebarCopyPinUrl" class="py-2 px-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs transition">
-              Copy Pin Link
+              Copy Clean URL
             </button>
             <button onclick="document.getElementById('btnDownloadStaticHtml').click()" class="py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-xs transition">
               Export .HTML
@@ -645,52 +773,27 @@
         </div>
 
       </aside>
-
-    </div>
-
-    <!-- 7. MORE FROM STYLESDAYS.COM SITEMAP CATALOG -->
-    <section class="mt-14 pt-10 border-t border-stone-200">
-      <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-        <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-stone-400 block">Indexed from stylesdays.com/sitemap_index.xml</span>
-          <h2 class="font-serif-editorial text-2xl font-bold text-stone-900">More Home Decor &amp; IKEA Hack Guides</h2>
-        </div>
-        <button onclick="document.getElementById('btnToggleSitemapModal').click()" class="text-xs font-semibold text-stone-700 hover:text-stone-900 bg-white border border-stone-300 px-3.5 py-2 rounded-xl shadow-2xs transition">
-          + Import More Posts from Sitemap XML
-        </button>
-      </div>
-
-      <div id="relatedGuidesGrid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Populated dynamically from the stylesdays registry -->
-      </div>
-    </section>
-
-  </main>
-
-  <!-- 8. FOOTER -->
-  <footer class="w-full bg-white border-t border-stone-200/80 py-8 mt-12">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
-      <div>
-        <strong class="text-stone-900 font-serif-editorial text-base">stylesdays</strong>
-        <p class="mt-0.5">© <span id="footerYear"></span> <a href="https://stylesdays.com" target="_blank" rel="noopener" class="underline hover:text-stone-800">stylesdays.com</a> Curated Home Decor, Bedroom Styling &amp; IKEA Hacks Hub. 100% Pinterest Policy Compliant.</p>
-      </div>
-      <div class="flex flex-wrap items-center gap-4">
-        <a href="https://stylesdays.com/sitemap_index.xml" target="_blank" rel="noopener" class="hover:text-stone-900 underline underline-offset-4">Sitemap Index XML</a>
-        <button onclick="document.getElementById('btnToggleSitemapModal').click()" class="hover:text-stone-900 underline underline-offset-4">Sitemap Sync Tool</button>
-        <button onclick="document.getElementById('btnToggleAudit').click()" class="hover:text-stone-900 underline underline-offset-4">Pinterest Audit (6/6)</button>
-        <button onclick="document.getElementById('btnToggleStudio').click()" class="hover:text-stone-900 underline underline-offset-4">Static HTML Exporter</button>
-      </div>
-    </div>
-  </footer>
-
-  <!-- NOTIFICATION TOAST -->
-  <div id="toastBanner" class="fixed bottom-6 right-6 bg-stone-900 text-white text-xs font-medium px-4 py-3 rounded-xl shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none flex items-center space-x-2 z-50">
-    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-    <span id="toastMessage">Action completed</span>
-  </div>
-
-  <!-- APPLICATION SCRIPT (stylesdays.com Sitemap Catalog, XML Parser, Safe Slug Routing & Static HTML Exporter) -->
+  <!-- APPLICATION SCRIPT (stylesdays.com Clean Path Slug Extraction, Automatic Prefixing & Static/404 Exporter) -->
   <script>
+    /**
+     * CANONICAL DESTINATION DOMAIN PREFIX
+     * Every extracted slug from https://<org-name>.github.io/<slug> automatically gets
+     * https://stylesdays.com/ prepended to form https://stylesdays.com/<slug>/
+     */
+    const STYLESDAYS_BASE_ORIGIN = 'https://stylesdays.com/';
+
+    /**
+     * Helper: Build canonical stylesdays.com URL from any clean slug
+     */
+    function buildStylesdaysUrlFromSlug(slug) {
+      const cleaned = String(slug || '')
+        .trim()
+        .replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '')
+        .replace(/\.html?$/i, '')
+        .replace(/^\/+|\/+$/g, '');
+      return `${STYLESDAYS_BASE_ORIGIN}${cleaned}/`;
+    }
+
     /**
      * STYLESDAYS.COM OFFICIAL CATEGORIES
      */
@@ -705,10 +808,37 @@
 
     /**
      * PRE-LOADED REAL STYLESDAYS.COM SITEMAP POST REGISTRY
-     * Every post corresponds to a real article from https://stylesdays.com/sitemap_index.xml
-     * with substantive standalone Home Decor & IKEA Hack takeaways.
+     * Includes 'moroccan-wool-runners' + 8 core stylesdays.com guides.
+     * Any other slug visited at https://<org-name>.github.io/<slug> is dynamically synthesized
+     * with https://stylesdays.com/<slug>/ and live-synced via WP REST / OpenGraph API!
      */
     const CURATED_REGISTRY = {
+      'moroccan-wool-runners': {
+        slug: 'moroccan-wool-runners',
+        targetUrl: 'https://stylesdays.com/moroccan-wool-runners/',
+        categoryUrl: 'https://stylesdays.com/category/home-decor/',
+        title: 'Moroccan Wool Runners: Handwoven Hallway & Kitchen Styling Guide',
+        category: 'Home Decor',
+        readTime: '6 min full read',
+        updatedDate: '2026 Artisan Textile Edition',
+        image: 'https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=1200&q=85',
+        summary: 'Handwoven Moroccan wool runners bring immediate architectural warmth, organic texture, and sound-softening comfort to narrow hallways, kitchens, and bedside zones. Explore how authentic Berber knots, muted olive green and blush pink geometric motifs, and braided fringe details elevate modern warm-minimalist homes.',
+        takeaways: [
+          'Olive Green, Terracotta & Blush Pink Palettes: Balance warm oak or tile floors with low-contrast geometric lozenge motifs dyed in muted botanical tones.',
+          'High-Pile Beni Ourain vs. Flatweave Kilim Runners: Choose plush hand-knotted wool for barefoot bedroom corridors and tighter Boujad or Azilal weaves for high-traffic kitchens.',
+          'The 4-Inch Floor Border Rule: Leave 4 to 6 inches of visible hardwood or tile on both sides of your runner so narrow hallways feel wider and intentionally framed.',
+          'Non-Slip Felt + Rubber Underlayment: Pair handwoven wool runners with a dense 1/4-inch eco-felt pad to protect knot tension and prevent creeping.'
+        ],
+        editorNote: 'A vintage or artisan-woven Moroccan wool runner is the fastest way to soften long architectural sightlines and add soulful texture to a modern neutral home.',
+        checklist: [
+          'Measure hallway width and subtract 8–10 inches for ideal runner width',
+          'Account for 3–4 inches of braided cotton or wool fringe at both ends',
+          'Trim a dual-surface felt/rubber rug pad 2 inches smaller than runner edges',
+          'Vacuum with suction-only (beater bar off) to preserve hand-knotted wool fibers'
+        ],
+        format: 'Textile & Room Styling Guide',
+        isSponsored: false
+      },
       'minimalist-bedroom-ideas-for-2026': {
         slug: 'minimalist-bedroom-ideas-for-2026',
         targetUrl: 'https://stylesdays.com/minimalist-bedroom-ideas-for-2026/',
@@ -919,47 +1049,99 @@
       }
     };
 
-    // Active application state
-    let currentArticleSlug = 'minimalist-bedroom-ideas-for-2026';
+    // Active application state (defaults to moroccan-wool-runners if at root /)
+    let currentArticleSlug = 'moroccan-wool-runners';
     let currentCategoryFilter = 'all';
 
     // Initialize on DOMContentLoaded
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('footerYear').textContent = new Date().getFullYear();
-      resolveSafeRoute();
+
+      // Detect actual hostname if hosted on *.github.io
+      if (window.location.hostname && window.location.hostname.endsWith('.github.io')) {
+        document.getElementById('ghOrgDomainInput').value = window.location.hostname;
+      }
+
+      resolveCleanPathRoute();
       bindUIEvents();
       renderCategoryPills();
       renderNavigationPills();
       renderActiveArticle();
       updateSitemapCounter();
+
+      // Handle browser Back/Forward navigation on clean paths
+      window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.slug) {
+          const ensured = ensureStylesdaysSlugExists(event.state.slug);
+          if (ensured) {
+            currentArticleSlug = ensured;
+            renderNavigationPills();
+            renderActiveArticle();
+          }
+        } else {
+          resolveCleanPathRoute();
+          renderNavigationPills();
+          renderActiveArticle();
+        }
+      });
     });
 
     /**
-     * SMART SLUG SYNTHESIZER FOR ANY STYLESDAYS.COM URL
-     * If a visitor or user loads ?post=any-slug-from-stylesdays-sitemap that isn't pre-cached yet,
-     * this automatically builds a rich, Pinterest-compliant stylesdays.com hub entry and triggers a background OG fetch.
+     * SMART SLUG SYNTHESIZER WITH AUTOMATIC `https://stylesdays.com/<slug>/` PREFIXING
+     * Whenever any slug is extracted from `https://<org-name>.github.io/<slug>`,
+     * this automatically prepends `https://stylesdays.com/` (`https://stylesdays.com/<slug>/`)
+     * and builds a rich editorial entry + triggers live WP/OpenGraph metadata resolution.
      */
-    function ensureStylesdaysSlugExists(rawSlug, fullUrlOptional) {
-      const cleanSlug = rawSlug
+    function ensureStylesdaysSlugExists(rawSlugInput) {
+      if (!rawSlugInput) return null;
+
+      // Strip protocol/domain if a full URL was passed, strip .html and slashes
+      let cleanSlug = String(rawSlugInput)
         .trim()
         .toLowerCase()
-        .replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '')
-        .replace(/^\/+|\/+$/g, '')
-        .replace(/[^a-z0-9-_]/g, '-')
-        .replace(/-+/g, '-');
+        .replace(/^https?:\/\/[^/]+\//i, '')
+        .replace(/\.html?$/i, '')
+        .replace(/^\/+|\/+$/g, '');
 
-      if (!cleanSlug || cleanSlug.startsWith('category') || cleanSlug.startsWith('tag') || cleanSlug.startsWith('wp-')) {
+      // If path has multiple segments (e.g. /repo-name/moroccan-wool-runners), take the final slug segment
+      if (cleanSlug.includes('/')) {
+        const parts = cleanSlug.split('/').filter(Boolean);
+        cleanSlug = parts[parts.length - 1] || '';
+      }
+
+      cleanSlug = cleanSlug.replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+
+      // Ignore system/empty segments
+      if (
+        !cleanSlug ||
+        cleanSlug === 'index' ||
+        cleanSlug === '404' ||
+        cleanSlug.startsWith('category') ||
+        cleanSlug.startsWith('tag') ||
+        cleanSlug.startsWith('wp-')
+      ) {
         return null;
       }
 
+      // Always guarantee targetUrl is https://stylesdays.com/<slug>/
+      const canonicalStylesdaysUrl = buildStylesdaysUrlFromSlug(cleanSlug);
+
       if (CURATED_REGISTRY[cleanSlug]) {
+        CURATED_REGISTRY[cleanSlug].targetUrl = canonicalStylesdaysUrl;
         return cleanSlug;
       }
 
-      // Humanize slug into editorial title
+      // Humanize slug into editorial headline
       const humanizedTitle = cleanSlug
         .split('-')
-        .map(w => w.toLowerCase() === 'ikea' ? 'IKEA' : w.toLowerCase() === 'pax' ? 'PAX' : w.toLowerCase() === 'hemnes' ? 'HEMNES' : w.charAt(0).toUpperCase() + w.slice(1))
+        .map(w => {
+          const lw = w.toLowerCase();
+          if (lw === 'ikea') return 'IKEA';
+          if (lw === 'pax') return 'PAX';
+          if (lw === 'hemnes') return 'HEMNES';
+          if (lw === 'diy') return 'DIY';
+          return w.charAt(0).toUpperCase() + w.slice(1);
+        })
         .join(' ');
 
       // Auto-detect category from slug keywords
@@ -969,32 +1151,28 @@
       else if (cleanSlug.includes('daybed') || cleanSlug.includes('guest')) detectedCategory = 'Guest Bedroom & Daybeds';
       else if (cleanSlug.includes('ikea') && cleanSlug.includes('bedroom')) detectedCategory = 'IKEA Bedroom';
 
-      const targetUrl = fullUrlOptional && fullUrlOptional.startsWith('https://stylesdays.com/')
-        ? fullUrlOptional
-        : `https://stylesdays.com/${cleanSlug}/`;
-
       CURATED_REGISTRY[cleanSlug] = {
         slug: cleanSlug,
-        targetUrl: targetUrl,
+        targetUrl: canonicalStylesdaysUrl,
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: humanizedTitle,
         category: detectedCategory,
         readTime: '6 min full read',
-        updatedDate: 'stylesdays.com Sitemap Feature',
+        updatedDate: 'stylesdays.com Editorial Feature',
         image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
-        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. This curated feature breaks down practical room styling ideas, space-saving furniture layouts, and budget-friendly DIY upgrades tailored for real-life homes.`,
+        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. Automatically mapped from /${cleanSlug} to ${canonicalStylesdaysUrl}, this curated feature breaks down room styling ideas, furniture layouts, and practical upgrades for real-life homes.`,
         takeaways: [
           `Balanced Room Proportions: Anchor your layout with clean-lined furniture and intentional traffic flow suited for everyday living.`,
-          `Layered Textures & Lighting: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
-          `Smart Customization & Hardware Upgrades: Elevate accessible base pieces with upgraded pulls, trim detailing, or modular organizers.`,
-          `Step-by-Step Visual Breakdown: Click through to stylesdays.com to browse all full-resolution room inspiration photos and sourcing tips.`
+          `Layered Textures & Warmth: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
+          `Smart Customization & Upgrades: Elevate accessible base pieces with upgraded hardware, trim detailing, or modular organizers.`,
+          `Full Illustrated Guide on stylesdays.com: Click through to ${canonicalStylesdaysUrl} to browse all high-resolution photos and step-by-step instructions.`
         ],
-        editorNote: `Featured from the stylesdays.com ${detectedCategory} archive for its practical, budget-conscious approach to elevating everyday spaces.`,
+        editorNote: `Curated from ${canonicalStylesdaysUrl} for its practical, budget-conscious approach to elevating everyday spaces.`,
         checklist: [
           'Measure your available floor and wall dimensions before starting',
           'Select a cohesive 3-color palette anchored by warm neutrals',
           'Combine concealed storage with 1–2 curated open display surfaces',
-          'Bookmark the full stylesdays.com guide for photo reference'
+          `Open ${canonicalStylesdaysUrl} for full room photo references`
         ],
         format: `${detectedCategory} Guide`,
         isSponsored: false,
@@ -1005,35 +1183,49 @@
     }
 
     /**
-     * SAFE SLUG ROUTING & ANTI-SPAM QUERY PARAMETER GUARD
-     * - Supports ?post=slug or ?slug=slug
-     * - If someone passes ?url=https://stylesdays.com/my-post/, safely normalizes it to ?post=my-post
-     * - If someone passes an external non-stylesdays URL (?url=https://spam.com), blocks it and shows a safety warning.
+     * CLEAN PATH-BASED SLUG EXTRACTION (`window.location.pathname`)
+     * Priority order:
+     * 1. Extracts slug directly from `window.location.pathname` (e.g., `https://<org-name>.github.io/moroccan-wool-runners` -> `moroccan-wool-runners`).
+     * 2. Supports `sessionStorage.redirect` or `?p=/slug` from GitHub Pages `404.html` routing.
+     * 3. If a legacy `?post=slug` or `?url=https://stylesdays.com/slug` is encountered, extracts the slug AND immediately rewrites the browser URL bar to the clean path `/<slug>` (removing the query string).
      */
-    function resolveSafeRoute() {
-      const params = new URLSearchParams(window.location.search);
+    function resolveCleanPathRoute() {
+      let extractedSlug = null;
 
-      // Check if ?url= or ?target= was passed
+      // 1. Check sessionStorage redirect (if set by a lightweight 404 redirector)
+      try {
+        const storedRedirect = sessionStorage.getItem('gh_pages_clean_path');
+        if (storedRedirect) {
+          sessionStorage.removeItem('gh_pages_clean_path');
+          extractedSlug = ensureStylesdaysSlugExists(storedRedirect);
+        }
+      } catch (_) {}
+
+      // 2. Inspect `window.location.pathname` directly (Primary Method: https://<org-name>.github.io/moroccan-wool-runners)
+      if (!extractedSlug && window.location.pathname && window.location.pathname !== '/') {
+        const pathSegments = window.location.pathname
+          .split('/')
+          .map(s => s.trim().replace(/\.html?$/i, ''))
+          .filter(Boolean);
+
+        if (pathSegments.length > 0) {
+          const lastSegment = pathSegments[pathSegments.length - 1];
+          if (lastSegment && lastSegment !== 'index' && lastSegment !== '404') {
+            extractedSlug = ensureStylesdaysSlugExists(lastSegment);
+          }
+        }
+      }
+
+      // 3. Check if legacy query params (?post= or ?p= or ?url=) were passed, and convert them to a clean `/<slug>` path!
+      const params = new URLSearchParams(window.location.search);
       const rawUrlParam = params.get('url') || params.get('target') || params.get('dest');
-      if (rawUrlParam) {
+      if (!extractedSlug && rawUrlParam) {
         try {
           const parsed = new URL(rawUrlParam);
           const host = parsed.hostname.replace(/^www\./i, '').toLowerCase();
           if (host === 'stylesdays.com') {
-            // Safely extract the stylesdays slug and convert to safe ?post= route
-            const pathSlug = parsed.pathname.replace(/^\/+|\/+$/g, '').split('/').pop();
-            const ensured = ensureStylesdaysSlugExists(pathSlug, rawUrlParam);
-            if (ensured) {
-              currentArticleSlug = ensured;
-              try {
-                window.history.replaceState({ post: ensured }, '', `${window.location.pathname}?post=${encodeURIComponent(ensured)}`);
-              } catch (_) {}
-              // Trigger live OG fetch so title/image match the exact stylesdays URL immediately
-              fetchLiveOgForSlug(ensured, false);
-              return;
-            }
+            extractedSlug = ensureStylesdaysSlugExists(parsed.pathname);
           } else {
-            // Block arbitrary third-party open redirect attempt
             const alertBox = document.getElementById('rawUrlSanitizedAlert');
             const auditDrawer = document.getElementById('complianceAuditDrawer');
             if (alertBox && auditDrawer) {
@@ -1042,65 +1234,464 @@
             }
           }
         } catch (_) {
-          // If someone passed a slug inside ?url=gorgeous-ikea-nightstand-hacks
-          const ensured = ensureStylesdaysSlugExists(rawUrlParam);
-          if (ensured) currentArticleSlug = ensured;
+          extractedSlug = ensureStylesdaysSlugExists(rawUrlParam);
         }
       }
 
-      // Check standard ?post=slug or #slug
-      const requestedSlug = params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
-      if (requestedSlug) {
-        const ensured = ensureStylesdaysSlugExists(requestedSlug);
-        if (ensured) {
-          currentArticleSlug = ensured;
-          if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
-            fetchLiveOgForSlug(ensured, false);
-          }
+      if (!extractedSlug) {
+        const querySlug = params.get('p') || params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
+        if (querySlug) {
+          extractedSlug = ensureStylesdaysSlugExists(querySlug);
         }
+      }
+
+      // Set active slug (or default to moroccan-wool-runners)
+      if (extractedSlug) {
+        currentArticleSlug = extractedSlug;
+      }
+
+      // Clean the browser URL bar so it displays `/<slug>` with ZERO query parameters
+      updateBrowserCleanPathUrl(currentArticleSlug, true);
+
+      // Fetch live metadata from https://stylesdays.com/<slug>/ if newly synthesized
+      if (CURATED_REGISTRY[currentArticleSlug] && CURATED_REGISTRY[currentArticleSlug].needsLiveOgSync) {
+        fetchLiveOgForSlug(currentArticleSlug, false);
       }
     }
 
     /**
-     * Fetch live OpenGraph title, description & image from stylesdays.com for a slug via Microlink API
+     * Programmatically navigate to a clean slug `/<slug>` and prepend `https://stylesdays.com/<slug>/`
+     */
+    function navigateToCleanSlug(rawSlugInput, showToastMsg = false) {
+      const ensured = ensureStylesdaysSlugExists(rawSlugInput);
+      if (!ensured) {
+        showToast('Please enter a valid article slug (e.g. moroccan-wool-runners)');
+        return;
+      }
+
+      currentArticleSlug = ensured;
+      updateBrowserCleanPathUrl(ensured, false);
+      updateSitemapCounter();
+      renderNavigationPills();
+      renderActiveArticle();
+
+      if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
+        fetchLiveOgForSlug(ensured, true);
+      } else if (showToastMsg) {
+        showToast(`Path: /${ensured} → https://stylesdays.com/${ensured}/`);
+      }
+    }
+
+    /**
+     * Safely update `window.history` to show the clean `/<slug>` path without query strings
+     */
+    function updateBrowserCleanPathUrl(slug, replace = false) {
+      try {
+        const cleanPath = `/${encodeURIComponent(slug)}`;
+        if (replace) {
+          window.history.replaceState({ slug }, '', cleanPath);
+        } else if (window.location.pathname !== cleanPath) {
+          window.history.pushState({ slug }, '', cleanPath);
+        }
+      } catch (_) {
+        // Fallback if running inside a restricted sandboxed iframe origin
+      }
+    }
+
+    /**
+     * Fetch live WordPress REST API & OpenGraph metadata from `https://stylesdays.com/<slug>/`
      */
     async function fetchLiveOgForSlug(slug, showNotification = true) {
       const item = CURATED_REGISTRY[slug];
       if (!item) return;
 
+      // Ensure canonical https://stylesdays.com/<slug>/ target
+      item.targetUrl = buildStylesdaysUrlFromSlug(slug);
+
       const cardSpinner = document.getElementById('cardOgSpinner');
       if (cardSpinner) cardSpinner.classList.remove('hidden');
 
+      let updated = false;
+
+      // Step 1: Try WordPress REST API by slug (`https://stylesdays.com/wp-json/wp/v2/posts?slug=<slug>&_embed`)
       try {
-        const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
-        const json = await res.json();
-        if (json.status === 'success' && json.data) {
-          const { title, description, image } = json.data;
-          if (title) {
-            item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
+        const wpApiUrl = `https://stylesdays.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
+        const proxyRes = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(wpApiUrl)}`);
+        const proxyJson = await proxyRes.json();
+        if (proxyJson && proxyJson.contents) {
+          const posts = JSON.parse(proxyJson.contents);
+          if (Array.isArray(posts) && posts.length > 0) {
+            const post = posts[0];
+            const tmp = document.createElement('div');
+            if (post.title && post.title.rendered) {
+              tmp.innerHTML = post.title.rendered;
+              item.title = tmp.textContent.trim() || item.title;
+            }
+            if (post.excerpt && post.excerpt.rendered) {
+              tmp.innerHTML = post.excerpt.rendered;
+              const cleanDesc = tmp.textContent.trim();
+              if (cleanDesc.length > 30) item.summary = cleanDesc;
+            }
+            const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
+            if (media && media.source_url) {
+              item.image = media.source_url;
+            }
+            updated = true;
           }
-          if (description && description.length > 40) {
-            item.summary = description;
+        }
+      } catch (_) {}
+
+      // Step 2: Try Microlink OpenGraph API for `https://stylesdays.com/<slug>/`
+      if (!updated) {
+        try {
+          const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
+          const json = await res.json();
+          if (json.status === 'success' && json.data) {
+            const { title, description, image } = json.data;
+            if (title && !title.toLowerCase().includes('page not found')) {
+              item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
+            }
+            if (description && description.length > 40) {
+              item.summary = description;
+            }
+            if (image && image.url) {
+              item.image = image.url;
+            }
+            updated = true;
           }
-          if (image && image.url) {
-            item.image = image.url;
-          }
-          item.needsLiveOgSync = false;
-          if (currentArticleSlug === slug) {
+        } catch (_) {}
+      }
+
+      item.needsLiveOgSync = false;
+      if (cardSpinner) cardSpinner.classList.add('hidden');
+
+      if (currentArticleSlug === slug) {
+        renderActiveArticle();
+      }
+      if (showNotification) {
+        showToast(updated
+          ? `Synced live metadata from https://stylesdays.com/${slug}/`
+          : `Mapped /${slug} → https://stylesdays.com/${slug}/`
+        );
+      }
+    }
+
+    /**
+     * Get the configured GitHub Pages clean URL (`https://<org-name>.github.io/<slug>`)
+     */
+    function getCleanGhPagesPinUrl(slug) {
+      const orgDomainInput = document.getElementById('ghOrgDomainInput');
+      const host = (orgDomainInput && orgDomainInput.value.trim())
+        ? orgDomainInput.value.trim().replace(/^https?:\/\//i, '').replace(/\/+$/g, '')
+        : (window.location.hostname && window.location.hostname.endsWith('.github.io')
+            ? window.location.hostname
+            : 'stylesdays-hub.github.io');
+      return `https://${host}/${encodeURIComponent(slug)}`;
+    }
+
+    // Active application state
+    let currentArticleSlug = 'moroccan-wool-runners';
+    let currentCategoryFilter = 'all';
+
+    // Initialize on DOMContentLoaded
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+      // Detect actual hostname if hosted on *.github.io
+      if (window.location.hostname && window.location.hostname.endsWith('.github.io')) {
+        document.getElementById('ghOrgDomainInput').value = window.location.hostname;
+      }
+
+      resolveCleanPathRoute();
+      bindUIEvents();
+      renderCategoryPills();
+      renderNavigationPills();
+      renderActiveArticle();
+      updateSitemapCounter();
+
+      // Handle browser Back/Forward navigation on clean paths
+      window.addEventListener('popstate', (event) => {
+        if (event.state && event.state.slug) {
+          const ensured = ensureStylesdaysSlugExists(event.state.slug);
+          if (ensured) {
+            currentArticleSlug = ensured;
+            renderNavigationPills();
             renderActiveArticle();
           }
-          if (showNotification) {
-            showToast(`Synced live OpenGraph metadata from stylesdays.com/${slug}/`);
+        } else {
+          resolveCleanPathRoute();
+          renderNavigationPills();
+          renderActiveArticle();
+        }
+      });
+    });
+
+    /**
+     * SMART SLUG SYNTHESIZER WITH AUTOMATIC `https://stylesdays.com/<slug>/` PREFIXING
+     * Whenever any slug is extracted from `https://<org-name>.github.io/<slug>`,
+     * this automatically prepends `https://stylesdays.com/` (`https://stylesdays.com/<slug>/`)
+     * and builds a rich editorial entry + triggers live WP/OpenGraph metadata resolution.
+     */
+    function ensureStylesdaysSlugExists(rawSlugInput) {
+      if (!rawSlugInput) return null;
+
+      let cleanSlug = String(rawSlugInput)
+        .trim()
+        .toLowerCase()
+        .replace(/^https?:\/\/[^/]+\//i, '')
+        .replace(/\.html?$/i, '')
+        .replace(/^\/+|\/+$/g, '');
+
+      if (cleanSlug.includes('/')) {
+        const parts = cleanSlug.split('/').filter(Boolean);
+        cleanSlug = parts[parts.length - 1] || '';
+      }
+
+      cleanSlug = cleanSlug.replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+
+      if (
+        !cleanSlug ||
+        cleanSlug === 'index' ||
+        cleanSlug === '404' ||
+        cleanSlug.startsWith('category') ||
+        cleanSlug.startsWith('tag') ||
+        cleanSlug.startsWith('wp-')
+      ) {
+        return null;
+      }
+
+      const canonicalStylesdaysUrl = buildStylesdaysUrlFromSlug(cleanSlug);
+
+      if (CURATED_REGISTRY[cleanSlug]) {
+        CURATED_REGISTRY[cleanSlug].targetUrl = canonicalStylesdaysUrl;
+        return cleanSlug;
+      }
+
+      const humanizedTitle = cleanSlug
+        .split('-')
+        .map(w => {
+          const lw = w.toLowerCase();
+          if (lw === 'ikea') return 'IKEA';
+          if (lw === 'pax') return 'PAX';
+          if (lw === 'hemnes') return 'HEMNES';
+          if (lw === 'diy') return 'DIY';
+          return w.charAt(0).toUpperCase() + w.slice(1);
+        })
+        .join(' ');
+
+      let detectedCategory = 'Home Decor';
+      if (cleanSlug.includes('hack')) detectedCategory = 'IKEA Hacks';
+      else if (cleanSlug.includes('storage') || cleanSlug.includes('pax') || cleanSlug.includes('closet') || cleanSlug.includes('organization')) detectedCategory = 'IKEA Storage';
+      else if (cleanSlug.includes('daybed') || cleanSlug.includes('guest')) detectedCategory = 'Guest Bedroom & Daybeds';
+      else if (cleanSlug.includes('ikea') && cleanSlug.includes('bedroom')) detectedCategory = 'IKEA Bedroom';
+
+      CURATED_REGISTRY[cleanSlug] = {
+        slug: cleanSlug,
+        targetUrl: canonicalStylesdaysUrl,
+        categoryUrl: 'https://stylesdays.com/category/home-decor/',
+        title: humanizedTitle,
+        category: detectedCategory,
+        readTime: '6 min full read',
+        updatedDate: 'stylesdays.com Editorial Feature',
+        image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
+        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. Automatically mapped from /${cleanSlug} to ${canonicalStylesdaysUrl}, this curated feature breaks down room styling ideas, furniture layouts, and practical upgrades for real-life homes.`,
+        takeaways: [
+          `Balanced Room Proportions: Anchor your layout with clean-lined furniture and intentional traffic flow suited for everyday living.`,
+          `Layered Textures & Warmth: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
+          `Smart Customization & Upgrades: Elevate accessible base pieces with upgraded hardware, trim detailing, or modular organizers.`,
+          `Full Illustrated Guide on stylesdays.com: Click through to ${canonicalStylesdaysUrl} to browse all high-resolution photos and step-by-step instructions.`
+        ],
+        editorNote: `Curated from ${canonicalStylesdaysUrl} for its practical, budget-conscious approach to elevating everyday spaces.`,
+        checklist: [
+          'Measure your available floor and wall dimensions before starting',
+          'Select a cohesive 3-color palette anchored by warm neutrals',
+          'Combine concealed storage with 1–2 curated open display surfaces',
+          `Open ${canonicalStylesdaysUrl} for full room photo references`
+        ],
+        format: `${detectedCategory} Guide`,
+        isSponsored: false,
+        needsLiveOgSync: true
+      };
+
+      return cleanSlug;
+    }
+
+    /**
+     * CLEAN PATH-BASED SLUG EXTRACTION (`window.location.pathname`)
+     */
+    function resolveCleanPathRoute() {
+      let extractedSlug = null;
+
+      try {
+        const storedRedirect = sessionStorage.getItem('gh_pages_clean_path');
+        if (storedRedirect) {
+          sessionStorage.removeItem('gh_pages_clean_path');
+          extractedSlug = ensureStylesdaysSlugExists(storedRedirect);
+        }
+      } catch (_) {}
+
+      if (!extractedSlug && window.location.pathname && window.location.pathname !== '/') {
+        const pathSegments = window.location.pathname
+          .split('/')
+          .map(s => s.trim().replace(/\.html?$/i, ''))
+          .filter(Boolean);
+
+        if (pathSegments.length > 0) {
+          const lastSegment = pathSegments[pathSegments.length - 1];
+          if (lastSegment && lastSegment !== 'index' && lastSegment !== '404') {
+            extractedSlug = ensureStylesdaysSlugExists(lastSegment);
           }
-        } else if (showNotification) {
-          showToast('Using cached stylesdays editorial metadata.');
         }
-      } catch (_) {
-        if (showNotification) {
-          showToast('Using pre-loaded stylesdays metadata.');
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const rawUrlParam = params.get('url') || params.get('target') || params.get('dest');
+      if (!extractedSlug && rawUrlParam) {
+        try {
+          const parsed = new URL(rawUrlParam);
+          const host = parsed.hostname.replace(/^www\./i, '').toLowerCase();
+          if (host === 'stylesdays.com') {
+            extractedSlug = ensureStylesdaysSlugExists(parsed.pathname);
+          } else {
+            const alertBox = document.getElementById('rawUrlSanitizedAlert');
+            const auditDrawer = document.getElementById('complianceAuditDrawer');
+            if (alertBox && auditDrawer) {
+              alertBox.classList.remove('hidden');
+              auditDrawer.classList.remove('hidden');
+            }
+          }
+        } catch (_) {
+          extractedSlug = ensureStylesdaysSlugExists(rawUrlParam);
         }
-      } finally {
-        if (cardSpinner) cardSpinner.classList.add('hidden');
+      }
+
+      if (!extractedSlug) {
+        const querySlug = params.get('p') || params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
+        if (querySlug) {
+          extractedSlug = ensureStylesdaysSlugExists(querySlug);
+        }
+      }
+
+      if (extractedSlug) {
+        currentArticleSlug = extractedSlug;
+      }
+
+      updateBrowserCleanPathUrl(currentArticleSlug, true);
+
+      if (CURATED_REGISTRY[currentArticleSlug] && CURATED_REGISTRY[currentArticleSlug].needsLiveOgSync) {
+        fetchLiveOgForSlug(currentArticleSlug, false);
+      }
+    }
+
+    /**
+     * Programmatically navigate to a clean slug `/<slug>` and prepend `https://stylesdays.com/<slug>/`
+     */
+    function navigateToCleanSlug(rawSlugInput, showToastMsg = false) {
+      const ensured = ensureStylesdaysSlugExists(rawSlugInput);
+      if (!ensured) {
+        showToast('Please enter a valid article slug (e.g. moroccan-wool-runners)');
+        return;
+      }
+
+      currentArticleSlug = ensured;
+      updateBrowserCleanPathUrl(ensured, false);
+      updateSitemapCounter();
+      renderNavigationPills();
+      renderActiveArticle();
+
+      if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
+        fetchLiveOgForSlug(ensured, true);
+      } else if (showToastMsg) {
+        showToast(`Path: /${ensured} → https://stylesdays.com/${ensured}/`);
+      }
+    }
+
+    /**
+     * Safely update `window.history` to show the clean `/<slug>` path without query strings
+     */
+    function updateBrowserCleanPathUrl(slug, replace = false) {
+      try {
+        const cleanPath = `/${encodeURIComponent(slug)}`;
+        if (replace) {
+          window.history.replaceState({ slug }, '', cleanPath);
+        } else if (window.location.pathname !== cleanPath) {
+          window.history.pushState({ slug }, '', cleanPath);
+        }
+      } catch (_) {}
+    }
+
+    /**
+     * Fetch live WordPress REST API & OpenGraph metadata from `https://stylesdays.com/<slug>/`
+     */
+    async function fetchLiveOgForSlug(slug, showNotification = true) {
+      const item = CURATED_REGISTRY[slug];
+      if (!item) return;
+
+      item.targetUrl = buildStylesdaysUrlFromSlug(slug);
+
+      const cardSpinner = document.getElementById('cardOgSpinner');
+      if (cardSpinner) cardSpinner.classList.remove('hidden');
+
+      let updated = false;
+
+      try {
+        const wpApiUrl = `https://stylesdays.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
+        const proxyRes = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(wpApiUrl)}`);
+        const proxyJson = await proxyRes.json();
+        if (proxyJson && proxyJson.contents) {
+          const posts = JSON.parse(proxyJson.contents);
+          if (Array.isArray(posts) && posts.length > 0) {
+            const post = posts[0];
+            const tmp = document.createElement('div');
+            if (post.title && post.title.rendered) {
+              tmp.innerHTML = post.title.rendered;
+              item.title = tmp.textContent.trim() || item.title;
+            }
+            if (post.excerpt && post.excerpt.rendered) {
+              tmp.innerHTML = post.excerpt.rendered;
+              const cleanDesc = tmp.textContent.trim();
+              if (cleanDesc.length > 30) item.summary = cleanDesc;
+            }
+            const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
+            if (media && media.source_url) {
+              item.image = media.source_url;
+            }
+            updated = true;
+          }
+        }
+      } catch (_) {}
+
+      if (!updated) {
+        try {
+          const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
+          const json = await res.json();
+          if (json.status === 'success' && json.data) {
+            const { title, description, image } = json.data;
+            if (title && !title.toLowerCase().includes('page not found')) {
+              item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
+            }
+            if (description && description.length > 40) {
+              item.summary = description;
+            }
+            if (image && image.url) {
+              item.image = image.url;
+            }
+            updated = true;
+          }
+        } catch (_) {}
+      }
+
+      item.needsLiveOgSync = false;
+      if (cardSpinner) cardSpinner.classList.add('hidden');
+
+      if (currentArticleSlug === slug) {
+        renderActiveArticle();
+      }
+      if (showNotification) {
+        showToast(updated
+          ? `Synced live metadata from https://stylesdays.com/${slug}/`
+          : `Mapped /${slug} → https://stylesdays.com/${slug}/`
+        );
       }
     }
 
@@ -1133,7 +1724,6 @@
         btn.textContent = cat.name;
         btn.onclick = () => {
           currentCategoryFilter = cat.id;
-          // Select first matching post in that category if current doesn't match
           const matching = Object.values(CURATED_REGISTRY).filter(
             p => cat.id === 'all' || p.category.toLowerCase() === cat.id.toLowerCase()
           );
@@ -1153,6 +1743,7 @@
      */
     function renderNavigationPills() {
       const container = document.getElementById('curatedNavPills');
+      if (!container) return;
       container.innerHTML = '';
 
       const posts = Object.values(CURATED_REGISTRY).filter(
@@ -1165,17 +1756,10 @@
         btn.className = isActive
           ? 'px-3 py-1 rounded-lg text-xs font-semibold bg-stone-900 text-white transition shrink-0'
           : 'px-3 py-1 rounded-lg text-xs font-medium bg-stone-100 hover:bg-stone-200 text-stone-700 transition shrink-0';
-        // Concise pill label
         const shortTitle = item.title.length > 34 ? item.title.slice(0, 32) + '…' : item.title;
         btn.textContent = shortTitle;
         btn.onclick = () => {
-          currentArticleSlug = item.slug;
-          try {
-            const newUrl = `${window.location.pathname}?post=${encodeURIComponent(item.slug)}`;
-            window.history.pushState({ post: item.slug }, '', newUrl);
-          } catch (_) {}
-          renderNavigationPills();
-          renderActiveArticle();
+          navigateToCleanSlug(item.slug, false);
         };
         container.appendChild(btn);
       });
@@ -1192,25 +1776,46 @@
     }
 
     /**
-     * Render the currently selected stylesdays.com article & related articles grid
+     * Render the currently selected stylesdays.com article
      */
     function renderActiveArticle() {
-      const item = CURATED_REGISTRY[currentArticleSlug] || CURATED_REGISTRY['minimalist-bedroom-ideas-for-2026'];
+      const item = CURATED_REGISTRY[currentArticleSlug] || CURATED_REGISTRY['moroccan-wool-runners'];
+      item.targetUrl = buildStylesdaysUrlFromSlug(item.slug);
       const domain = extractHostname(item.targetUrl);
 
-      // Update Document & OpenGraph meta tags
       document.title = `${item.title} | stylesdays Editorial Hub`;
       document.getElementById('ogTitle').setAttribute('content', item.title);
       document.getElementById('ogDesc').setAttribute('content', item.summary);
       document.getElementById('ogImage').setAttribute('content', item.image);
 
-      // Update Route Indicator & Sidebar Pin Box
-      const safePinUrl = `${window.location.origin}${window.location.pathname}?post=${encodeURIComponent(item.slug)}`;
-      document.getElementById('activeRouteIndicator').textContent = `Route: ?post=${item.slug}`;
-      const pinBox = document.getElementById('sidebarPinSlugUrlBox');
-      if (pinBox) pinBox.textContent = safePinUrl;
+      const brandSubSlug = document.getElementById('brandSubSlugText');
+      if (brandSubSlug) brandSubSlug.textContent = item.slug;
 
-      // Commercial / Sponsored Disclosure Toggle
+      const livePathInput = document.getElementById('livePathSlugInput');
+      if (livePathInput && document.activeElement !== livePathInput) {
+        livePathInput.value = item.slug;
+      }
+
+      const liveMappedLink = document.getElementById('liveMappedStylesdaysUrl');
+      if (liveMappedLink) {
+        liveMappedLink.textContent = item.targetUrl;
+        liveMappedLink.href = item.targetUrl;
+      }
+
+      const cleanPinUrl = getCleanGhPagesPinUrl(item.slug);
+      document.getElementById('activeRouteIndicator').textContent = `Path: /${item.slug} → stylesdays.com/${item.slug}/`;
+      const pinBox = document.getElementById('sidebarPinSlugUrlBox');
+      if (pinBox) pinBox.textContent = cleanPinUrl;
+
+      const sidebarSlugCode = document.getElementById('sidebarSlugCodeBadge');
+      if (sidebarSlugCode) sidebarSlugCode.textContent = `/${item.slug}`;
+
+      const sidebarTargetPreview = document.getElementById('sidebarTargetUrlPreview');
+      if (sidebarTargetPreview) sidebarTargetPreview.textContent = item.targetUrl;
+
+      const ghModalBtnLabel = document.getElementById('ghModalStaticBtnLabel');
+      if (ghModalBtnLabel) ghModalBtnLabel.textContent = `Download Static ${item.slug}.html`;
+
       const sponsoredBadge = document.getElementById('sponsoredHashtagBadge');
       const relValue = item.isSponsored ? 'noopener sponsored' : 'noopener';
       if (item.isSponsored) {
@@ -1219,7 +1824,6 @@
         sponsoredBadge.classList.add('hidden');
       }
 
-      // Hero Image & Badges
       const heroImg = document.getElementById('articleHeroImage');
       if (heroImg.src !== item.image) {
         document.getElementById('heroSkeleton').style.display = 'block';
@@ -1228,13 +1832,11 @@
       document.getElementById('articleCategoryBadge').textContent = item.category;
       document.getElementById('heroDomainBadge').textContent = domain;
 
-      // Headline & Meta
       document.getElementById('articleReadTime').textContent = item.readTime;
       document.getElementById('articleUpdatedDate').textContent = item.updatedDate;
       document.getElementById('articleHeadline').textContent = item.title;
       document.getElementById('articleSummaryText').textContent = item.summary;
 
-      // Explicit User-Initiated HTML Anchor Links (<a href="https://stylesdays.com/...">)
       const primaryCta = document.getElementById('primaryAnchorCta');
       const secondaryCta = document.getElementById('secondaryAnchorCta');
       primaryCta.href = item.targetUrl;
@@ -1246,14 +1848,12 @@
       document.getElementById('primaryCtaLabel').textContent = `Read Full Guide on ${domain}`;
       document.getElementById('bottomFullUrlText').textContent = item.targetUrl;
 
-      // Category Spec Link
       const specCatLink = document.getElementById('specCategoryLink');
       if (specCatLink) {
         specCatLink.textContent = `${item.category} →`;
         specCatLink.href = item.categoryUrl || 'https://stylesdays.com/category/home-decor/';
       }
 
-      // Key Takeaways Cards
       const takeawaysContainer = document.getElementById('articleTakeawaysList');
       takeawaysContainer.innerHTML = '';
       item.takeaways.forEach((point, idx) => {
@@ -1266,13 +1866,11 @@
         takeawaysContainer.appendChild(card);
       });
 
-      // Editor Note & Specs
       document.getElementById('articleEditorNote').textContent = `"${item.editorNote}"`;
       document.getElementById('specDomain').textContent = domain;
       document.getElementById('specFormat').textContent = item.format || 'Room Styling Guide';
       document.getElementById('sidebarDomainName').textContent = domain;
 
-      // Sidebar Evaluation Checklist
       const checklistContainer = document.getElementById('sidebarChecklistItems');
       checklistContainer.innerHTML = '';
       (item.checklist || []).forEach((check) => {
@@ -1285,18 +1883,16 @@
         checklistContainer.appendChild(row);
       });
 
-      // Related Curated Guides Grid
       renderRelatedGrid();
-
-      // Sync Studio Inputs with current item
       syncStudioForm(item);
     }
 
     /**
-     * Render Related stylesdays.com Guides at the bottom of the hub
+     * Render Related Curated Guides Grid
      */
     function renderRelatedGrid() {
       const grid = document.getElementById('relatedGuidesGrid');
+      if (!grid) return;
       grid.innerHTML = '';
 
       Object.values(CURATED_REGISTRY)
@@ -1307,13 +1903,8 @@
           const card = document.createElement('div');
           card.className = 'bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between cursor-pointer group';
           card.onclick = () => {
-            currentArticleSlug = entry.slug;
-            try {
-              window.history.pushState({ post: entry.slug }, '', `${window.location.pathname}?post=${encodeURIComponent(entry.slug)}`);
-            } catch (_) {}
+            navigateToCleanSlug(entry.slug, false);
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            renderNavigationPills();
-            renderActiveArticle();
           };
           card.innerHTML = `
             <div>
@@ -1324,6 +1915,7 @@
                 </span>
               </div>
               <div class="p-5">
+                <div class="text-[11px] font-mono text-stone-400 mb-1">/${escapeHtml(entry.slug)}</div>
                 <h3 class="font-serif-editorial text-lg font-bold text-stone-900 group-hover:text-[#E60023] transition leading-snug mb-2">
                   ${escapeHtml(entry.title)}
                 </h3>
@@ -1334,7 +1926,7 @@
             </div>
             <div class="px-5 py-3 bg-stone-50 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500 font-medium">
               <span><strong class="text-stone-700">${escapeHtml(domain)}</strong> • ${escapeHtml(entry.readTime)}</span>
-              <span class="text-[#E60023] font-bold">Preview Guide →</span>
+              <span class="text-[#E60023] font-bold">Preview /${escapeHtml(entry.slug)} →</span>
             </div>
           `;
           grid.appendChild(card);
@@ -1342,7 +1934,7 @@
     }
 
     /**
-     * Synchronize the Editorial Builder Studio form fields with the active article
+     * Synchronize Studio Form
      */
     function syncStudioForm(item) {
       document.getElementById('studioTargetUrl').value = item.targetUrl;
@@ -1363,15 +1955,16 @@
     }
 
     /**
-     * Read current values from the Studio form and build an article object
+     * Get Article Object from Studio Form
      */
     function getStudioArticleObject() {
-      const rawUrl = document.getElementById('studioTargetUrl').value.trim();
       const rawSlug = document.getElementById('studioSlug').value.trim()
         .toLowerCase()
+        .replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '')
+        .replace(/\.html?$/i, '')
         .replace(/[^a-z0-9-_]/g, '-')
         .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '') || 'stylesdays-guide';
+        .replace(/^-|-$/g, '') || 'moroccan-wool-runners';
 
       const takeawaysRaw = document.getElementById('studioTakeaways').value
         .split('\n')
@@ -1380,7 +1973,7 @@
 
       return {
         slug: rawSlug,
-        targetUrl: isValidHttpUrl(rawUrl) ? rawUrl : `https://stylesdays.com/${rawSlug}/`,
+        targetUrl: buildStylesdaysUrlFromSlug(rawSlug),
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: document.getElementById('studioTitle').value.trim() || 'stylesdays Home Decor & Styling Guide',
         category: document.getElementById('studioCategory').value.trim() || 'Home Decor',
@@ -1405,7 +1998,7 @@
     }
 
     /**
-     * PARSE SITEMAP XML SNIPPET OR FULL POST-SITEMAP.XML FROM STYLESDAYS.COM
+     * Parse Sitemap XML Snippet
      */
     function parseStylesdaysSitemapXml(xmlString) {
       const locRegex = /<loc>\s*(https?:\/\/(?:www\.)?stylesdays\.com\/([^<\s]+))\s*<\/loc>/gi;
@@ -1417,7 +2010,6 @@
         const fullUrl = match[1].trim();
         const pathPart = match[2].replace(/^\/+|\/+$/g, '');
 
-        // Skip sub-sitemaps (.xml), categories, tags, author archives, or root homepage
         if (
           !pathPart ||
           pathPart.endsWith('.xml') ||
@@ -1443,14 +2035,68 @@
     }
 
     /**
-     * Bind UI Buttons (Sitemap XML Sync, Audit Drawer, Builder Studio, OG Fetcher, Static HTML Exporter)
+     * Bind UI Event Listeners
      */
     function bindUIEvents() {
       const auditDrawer = document.getElementById('complianceAuditDrawer');
       const studioDrawer = document.getElementById('publisherStudioDrawer');
       const sitemapDrawer = document.getElementById('sitemapSyncDrawer');
+      const ghPagesDrawer = document.getElementById('ghPagesSetupDrawer');
 
-      // Toggle Sitemap Sync Drawer
+      document.getElementById('btnToggleGhPagesModal').addEventListener('click', () => {
+        ghPagesDrawer.classList.toggle('hidden');
+      });
+      document.getElementById('btnCloseGhPagesModal').addEventListener('click', () => {
+        ghPagesDrawer.classList.add('hidden');
+      });
+
+      const triggerTopPathSlugLoad = () => {
+        const val = document.getElementById('livePathSlugInput').value.trim();
+        if (!val) {
+          showToast('Type a path slug like moroccan-wool-runners');
+          return;
+        }
+        navigateToCleanSlug(val, true);
+      };
+
+      document.getElementById('btnLoadPathSlug').addEventListener('click', triggerTopPathSlugLoad);
+      document.getElementById('livePathSlugInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          triggerTopPathSlugLoad();
+        }
+      });
+
+      document.getElementById('ghOrgDomainInput').addEventListener('input', () => {
+        renderActiveArticle();
+      });
+
+      document.getElementById('btnTopCopyCleanPinUrl').addEventListener('click', () => {
+        const cleanUrl = getCleanGhPagesPinUrl(currentArticleSlug);
+        copyToClipboard(cleanUrl);
+      });
+
+      const downloadFullAppAs = (filename) => {
+        const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast(`Downloaded ${filename} — Upload to your <org-name>.github.io repo root!`);
+      };
+
+      document.getElementById('btnDownloadCatchAll404').addEventListener('click', () => {
+        downloadFullAppAs('404.html');
+      });
+      document.getElementById('btnDownloadRootIndex').addEventListener('click', () => {
+        downloadFullAppAs('index.html');
+      });
+
       document.getElementById('btnToggleSitemapModal').addEventListener('click', () => {
         sitemapDrawer.classList.toggle('hidden');
       });
@@ -1458,7 +2104,6 @@
         sitemapDrawer.classList.add('hidden');
       });
 
-      // Toggle Compliance Audit Drawer
       document.getElementById('btnToggleAudit').addEventListener('click', () => {
         auditDrawer.classList.toggle('hidden');
       });
@@ -1466,7 +2111,6 @@
         auditDrawer.classList.add('hidden');
       });
 
-      // Toggle Publisher Studio Drawer
       document.getElementById('btnToggleStudio').addEventListener('click', () => {
         studioDrawer.classList.toggle('hidden');
       });
@@ -1474,18 +2118,15 @@
         studioDrawer.classList.add('hidden');
       });
 
-      // Refresh Live OG on Article Card
       document.getElementById('btnRefreshLiveOgOnCard').addEventListener('click', () => {
         fetchLiveOgForSlug(currentArticleSlug, true);
       });
 
-      // Sidebar Copy Pin Link
       document.getElementById('btnSidebarCopyPinUrl').addEventListener('click', () => {
-        const url = `${window.location.origin}${window.location.pathname}?post=${encodeURIComponent(currentArticleSlug)}`;
-        copyToClipboard(url);
+        const cleanUrl = getCleanGhPagesPinUrl(currentArticleSlug);
+        copyToClipboard(cleanUrl);
       });
 
-      // 1. Live Sync with stylesdays.com WP REST API / post-sitemap.xml
       document.getElementById('btnFetchLiveSitemap').addEventListener('click', async () => {
         const spinner = document.getElementById('sitemapSyncSpinner');
         const statusEl = document.getElementById('sitemapFetchStatus');
@@ -1496,7 +2137,6 @@
         let added = 0;
 
         try {
-          // Attempt 1: WordPress REST API (provides title, slug, link, excerpt, and featured media)
           const wpEndpoint = 'https://stylesdays.com/wp-json/wp/v2/posts?_embed&per_page=15';
           const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(wpEndpoint)}`;
           const res = await fetch(proxyUrl);
@@ -1510,7 +2150,6 @@
                 const link = post.link || `https://stylesdays.com/${slug}/`;
                 const ensured = ensureStylesdaysSlugExists(slug, link);
                 if (ensured && CURATED_REGISTRY[ensured]) {
-                  // Decode HTML entities in WP title
                   const tempDiv = document.createElement('div');
                   tempDiv.innerHTML = (post.title && post.title.rendered) || CURATED_REGISTRY[ensured].title;
                   CURATED_REGISTRY[ensured].title = tempDiv.textContent.trim();
@@ -1523,7 +2162,6 @@
                     }
                   }
 
-                  // Check embedded WP featured media
                   const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
                   if (media && media.source_url) {
                     CURATED_REGISTRY[ensured].image = media.source_url;
@@ -1534,7 +2172,6 @@
             }
           }
         } catch (_) {
-          // Fallback Attempt 2: Fetch post-sitemap.xml via proxy
           try {
             const xmlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent('https://stylesdays.com/post-sitemap.xml')}`;
             const xmlRes = await fetch(xmlProxy);
@@ -1543,7 +2180,7 @@
               const result = parseStylesdaysSitemapXml(xmlJson.contents);
               added += result.importedCount;
             }
-          } catch (e2) {}
+          } catch (_) {}
         } finally {
           spinner.classList.add('hidden');
           updateSitemapCounter();
@@ -1553,36 +2190,32 @@
             statusEl.textContent = `✓ Successfully synced ${added} articles from stylesdays.com! Total catalog: ${Object.keys(CURATED_REGISTRY).length} guides.`;
             showToast(`Synced ${added} posts from stylesdays.com!`);
           } else {
-            statusEl.textContent = `✓ All 8 core stylesdays.com sitemap guides are active and ready! Paste additional XML on the right anytime.`;
+            statusEl.textContent = `✓ All core stylesdays.com sitemap guides are active and ready!`;
             showToast('stylesdays.com Sitemap Catalog verified!');
           }
         }
       });
 
-      // 2. Single stylesdays URL Resolver
       document.getElementById('btnResolveSingleStylesdaysUrl').addEventListener('click', () => {
         const input = document.getElementById('quickStylesdaysUrlInput').value.trim();
         if (!input) {
-          showToast('Paste a stylesdays.com post URL first');
+          showToast('Enter a slug like /moroccan-wool-runners or a stylesdays.com URL');
           return;
         }
-        const slug = ensureStylesdaysSlugExists(input, input);
+        const slug = ensureStylesdaysSlugExists(input);
         if (slug) {
-          currentArticleSlug = slug;
-          updateSitemapCounter();
-          renderNavigationPills();
-          renderActiveArticle();
+          navigateToCleanSlug(slug, false);
           fetchLiveOgForSlug(slug, true);
-          showToast(`Activated stylesdays post: ?post=${slug}`);
+          showToast(`Resolved /${slug} → https://stylesdays.com/${slug}/`);
         } else {
-          showToast('Please enter a valid stylesdays.com article URL');
+          showToast('Please enter a valid slug or stylesdays.com article URL');
         }
       });
 
-      // 3. Load Sample XML from stylesdays.com/post-sitemap.xml
       document.getElementById('btnLoadSampleSitemapXml').addEventListener('click', () => {
         document.getElementById('rawSitemapXmlInput').value = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://stylesdays.com/moroccan-wool-runners/</loc></url>
   <url><loc>https://stylesdays.com/minimalist-bedroom-ideas-for-2026/</loc></url>
   <url><loc>https://stylesdays.com/stylish-home-decor-ideas-for-real-life-homes/</loc></url>
   <url><loc>https://stylesdays.com/gorgeous-ikea-nightstand-hacks/</loc></url>
@@ -1591,13 +2224,10 @@
   <url><loc>https://stylesdays.com/ikea-headboard-hacks/</loc></url>
   <url><loc>https://stylesdays.com/creative-ikea-pax-organization-dream-closets/</loc></url>
   <url><loc>https://stylesdays.com/serene-blue-grey-bedroom-ideas-2/</loc></url>
-  <url><loc>https://stylesdays.com/cozy-guest-bedroom-daybed-styling-ideas/</loc></url>
-  <url><loc>https://stylesdays.com/ikea-billy-bookcase-built-in-living-room-hacks/</loc></url>
 </urlset>`;
         showToast('Loaded stylesdays.com XML sample — click Parse XML to import!');
       });
 
-      // 4. Parse Raw XML Button
       document.getElementById('btnParseRawSitemapXml').addEventListener('click', () => {
         const xmlText = document.getElementById('rawSitemapXmlInput').value.trim();
         if (!xmlText) {
@@ -1606,17 +2236,19 @@
         }
         const { importedCount, firstImportedSlug } = parseStylesdaysSitemapXml(xmlText);
         if (importedCount > 0) {
-          if (firstImportedSlug) currentArticleSlug = firstImportedSlug;
-          updateSitemapCounter();
-          renderNavigationPills();
-          renderActiveArticle();
-          showToast(`Parsed & indexed ${importedCount} stylesdays.com URLs from XML!`);
+          if (firstImportedSlug) {
+            navigateToCleanSlug(firstImportedSlug, false);
+          } else {
+            updateSitemapCounter();
+            renderNavigationPills();
+            renderActiveArticle();
+          }
+          showToast(`Parsed & indexed ${importedCount} clean path slugs from XML!`);
         } else {
           showToast('No valid <loc>https://stylesdays.com/...</loc> article URLs found in snippet.');
         }
       });
 
-      // Auto-update slug when URL or slug input changes in Studio
       document.getElementById('studioTargetUrl').addEventListener('input', (e) => {
         const val = e.target.value.trim();
         if (val.includes('stylesdays.com/')) {
@@ -1629,11 +2261,13 @@
       });
 
       document.getElementById('studioSlug').addEventListener('input', (e) => {
-        const clean = e.target.value.trim().toLowerCase().replace(/[^a-z0-9-_]/g, '-');
+        const clean = e.target.value.trim().toLowerCase().replace(/^\/+|\/+$/g, '').replace(/[^a-z0-9-_]/g, '-');
+        if (clean) {
+          document.getElementById('studioTargetUrl').value = buildStylesdaysUrlFromSlug(clean);
+        }
         document.getElementById('downloadBtnText').textContent = `Download Static ${clean || 'guide'}.html`;
       });
 
-      // Authoring-Time OpenGraph Fetcher via Microlink API
       document.getElementById('btnStudioFetchOg').addEventListener('click', async () => {
         const targetUrl = document.getElementById('studioTargetUrl').value.trim();
         if (!isValidHttpUrl(targetUrl)) {
@@ -1663,39 +2297,29 @@
           } else {
             showToast('Could not auto-extract metadata; please customize fields manually.');
           }
-        } catch (err) {
+        } catch (_) {
           showToast('Metadata lookup blocked by CORS; fill fields manually.');
         } finally {
           spinner.classList.add('hidden');
         }
       });
 
-      // Preview & Save to Session Registry
       document.getElementById('btnStudioApplyLive').addEventListener('click', () => {
         const updated = getStudioArticleObject();
         CURATED_REGISTRY[updated.slug] = updated;
-        currentArticleSlug = updated.slug;
-        updateSitemapCounter();
-        renderNavigationPills();
-        renderActiveArticle();
-        showToast(`Saved "${updated.slug}" to stylesdays catalog!`);
+        navigateToCleanSlug(updated.slug, false);
+        showToast(`Active Clean Path: /${updated.slug} → ${updated.targetUrl}`);
       });
 
-      // Copy Safe Slug Link (?post=slug)
       document.getElementById('btnCopySafeSlugUrl').addEventListener('click', () => {
         const updated = getStudioArticleObject();
         CURATED_REGISTRY[updated.slug] = updated;
-        currentArticleSlug = updated.slug;
-        updateSitemapCounter();
-        renderNavigationPills();
-        renderActiveArticle();
+        navigateToCleanSlug(updated.slug, false);
 
-        const base = window.location.origin + window.location.pathname;
-        const safeUrl = `${base}?post=${encodeURIComponent(updated.slug)}`;
-        copyToClipboard(safeUrl);
+        const cleanUrl = getCleanGhPagesPinUrl(updated.slug);
+        copyToClipboard(cleanUrl);
       });
 
-      // Download 100% Standalone Static Compliant HTML File for GitHub Pages
       document.getElementById('btnDownloadStaticHtml').addEventListener('click', () => {
         const article = getStudioArticleObject();
         const staticHtmlContent = generateStandaloneStaticHtmlFile(article);
@@ -1715,9 +2339,7 @@
     }
 
     /**
-     * GENERATE 100% STATIC STANDALONE COMPLIANT HTML FILE FOR STYLESDAYS.COM
-     * Creates a pure, hardcoded HTML file with baked-in OpenGraph tags, substantive editorial content,
-     * and standard <a href="https://stylesdays.com/..."> links.
+     * Generate Standalone Static HTML File
      */
     function generateStandaloneStaticHtmlFile(item) {
       const domain = extractHostname(item.targetUrl);
@@ -1790,9 +2412,6 @@
 </html>`;
     }
 
-    /**
-     * Validate HTTP/HTTPS URL
-     */
     function isValidHttpUrl(str) {
       try {
         const u = new URL(str);
@@ -1802,9 +2421,6 @@
       }
     }
 
-    /**
-     * Escape HTML entities to prevent XSS
-     */
     function escapeHtml(str) {
       return String(str || '')
         .replace(/&/g, '&amp;')
@@ -1814,9 +2430,6 @@
         .replace(/'/g, '&#039;');
     }
 
-    /**
-     * Clipboard Helper
-     */
     function copyToClipboard(text) {
       const textarea = document.createElement('textarea');
       textarea.value = text;
@@ -1834,9 +2447,6 @@
       }
     }
 
-    /**
-     * Toast Notification Helper
-     */
     function showToast(msg) {
       const toast = document.getElementById('toastBanner');
       document.getElementById('toastMessage').textContent = msg;
