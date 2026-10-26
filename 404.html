@@ -1388,125 +1388,84 @@
             : 'stylesdays-hub.github.io');
       return `https://${host}/${encodeURIComponent(slug)}`;
     }
+    };
 
     // Active application state
-    let currentArticleSlug = 'moroccan-wool-runners';
+    let currentArticleSlug = 'minimalist-bedroom-ideas-for-2026';
     let currentCategoryFilter = 'all';
 
     // Initialize on DOMContentLoaded
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('footerYear').textContent = new Date().getFullYear();
-
-      // Detect actual hostname if hosted on *.github.io
-      if (window.location.hostname && window.location.hostname.endsWith('.github.io')) {
-        document.getElementById('ghOrgDomainInput').value = window.location.hostname;
-      }
-
-      resolveCleanPathRoute();
+      resolveSafeRoute();
       bindUIEvents();
       renderCategoryPills();
       renderNavigationPills();
       renderActiveArticle();
       updateSitemapCounter();
-
-      // Handle browser Back/Forward navigation on clean paths
-      window.addEventListener('popstate', (event) => {
-        if (event.state && event.state.slug) {
-          const ensured = ensureStylesdaysSlugExists(event.state.slug);
-          if (ensured) {
-            currentArticleSlug = ensured;
-            renderNavigationPills();
-            renderActiveArticle();
-          }
-        } else {
-          resolveCleanPathRoute();
-          renderNavigationPills();
-          renderActiveArticle();
-        }
-      });
     });
 
     /**
-     * SMART SLUG SYNTHESIZER WITH AUTOMATIC `https://stylesdays.com/<slug>/` PREFIXING
-     * Whenever any slug is extracted from `https://<org-name>.github.io/<slug>`,
-     * this automatically prepends `https://stylesdays.com/` (`https://stylesdays.com/<slug>/`)
-     * and builds a rich editorial entry + triggers live WP/OpenGraph metadata resolution.
+     * SMART SLUG SYNTHESIZER FOR ANY STYLESDAYS.COM URL
+     * If a visitor or user loads ?post=any-slug-from-stylesdays-sitemap that isn't pre-cached yet,
+     * this automatically builds a rich, Pinterest-compliant stylesdays.com hub entry and triggers a background OG fetch.
      */
-    function ensureStylesdaysSlugExists(rawSlugInput) {
-      if (!rawSlugInput) return null;
-
-      let cleanSlug = String(rawSlugInput)
+    function ensureStylesdaysSlugExists(rawSlug, fullUrlOptional) {
+      const cleanSlug = rawSlug
         .trim()
         .toLowerCase()
-        .replace(/^https?:\/\/[^/]+\//i, '')
-        .replace(/\.html?$/i, '')
-        .replace(/^\/+|\/+$/g, '');
+        .replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '')
+        .replace(/^\/+|\/+$/g, '')
+        .replace(/[^a-z0-9-_]/g, '-')
+        .replace(/-+/g, '-');
 
-      if (cleanSlug.includes('/')) {
-        const parts = cleanSlug.split('/').filter(Boolean);
-        cleanSlug = parts[parts.length - 1] || '';
-      }
-
-      cleanSlug = cleanSlug.replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
-
-      if (
-        !cleanSlug ||
-        cleanSlug === 'index' ||
-        cleanSlug === '404' ||
-        cleanSlug.startsWith('category') ||
-        cleanSlug.startsWith('tag') ||
-        cleanSlug.startsWith('wp-')
-      ) {
+      if (!cleanSlug || cleanSlug.startsWith('category') || cleanSlug.startsWith('tag') || cleanSlug.startsWith('wp-')) {
         return null;
       }
 
-      const canonicalStylesdaysUrl = buildStylesdaysUrlFromSlug(cleanSlug);
-
       if (CURATED_REGISTRY[cleanSlug]) {
-        CURATED_REGISTRY[cleanSlug].targetUrl = canonicalStylesdaysUrl;
         return cleanSlug;
       }
 
+      // Humanize slug into editorial title
       const humanizedTitle = cleanSlug
         .split('-')
-        .map(w => {
-          const lw = w.toLowerCase();
-          if (lw === 'ikea') return 'IKEA';
-          if (lw === 'pax') return 'PAX';
-          if (lw === 'hemnes') return 'HEMNES';
-          if (lw === 'diy') return 'DIY';
-          return w.charAt(0).toUpperCase() + w.slice(1);
-        })
+        .map(w => w.toLowerCase() === 'ikea' ? 'IKEA' : w.toLowerCase() === 'pax' ? 'PAX' : w.toLowerCase() === 'hemnes' ? 'HEMNES' : w.charAt(0).toUpperCase() + w.slice(1))
         .join(' ');
 
+      // Auto-detect category from slug keywords
       let detectedCategory = 'Home Decor';
       if (cleanSlug.includes('hack')) detectedCategory = 'IKEA Hacks';
       else if (cleanSlug.includes('storage') || cleanSlug.includes('pax') || cleanSlug.includes('closet') || cleanSlug.includes('organization')) detectedCategory = 'IKEA Storage';
       else if (cleanSlug.includes('daybed') || cleanSlug.includes('guest')) detectedCategory = 'Guest Bedroom & Daybeds';
       else if (cleanSlug.includes('ikea') && cleanSlug.includes('bedroom')) detectedCategory = 'IKEA Bedroom';
 
+      const targetUrl = fullUrlOptional && fullUrlOptional.startsWith('https://stylesdays.com/')
+        ? fullUrlOptional
+        : `https://stylesdays.com/${cleanSlug}/`;
+
       CURATED_REGISTRY[cleanSlug] = {
         slug: cleanSlug,
-        targetUrl: canonicalStylesdaysUrl,
+        targetUrl: targetUrl,
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: humanizedTitle,
         category: detectedCategory,
         readTime: '6 min full read',
-        updatedDate: 'stylesdays.com Editorial Feature',
+        updatedDate: 'stylesdays.com Sitemap Feature',
         image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
-        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. Automatically mapped from /${cleanSlug} to ${canonicalStylesdaysUrl}, this curated feature breaks down room styling ideas, furniture layouts, and practical upgrades for real-life homes.`,
+        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. This curated feature breaks down practical room styling ideas, space-saving furniture layouts, and budget-friendly DIY upgrades tailored for real-life homes.`,
         takeaways: [
           `Balanced Room Proportions: Anchor your layout with clean-lined furniture and intentional traffic flow suited for everyday living.`,
-          `Layered Textures & Warmth: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
-          `Smart Customization & Upgrades: Elevate accessible base pieces with upgraded hardware, trim detailing, or modular organizers.`,
-          `Full Illustrated Guide on stylesdays.com: Click through to ${canonicalStylesdaysUrl} to browse all high-resolution photos and step-by-step instructions.`
+          `Layered Textures & Lighting: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
+          `Smart Customization & Hardware Upgrades: Elevate accessible base pieces with upgraded pulls, trim detailing, or modular organizers.`,
+          `Step-by-Step Visual Breakdown: Click through to stylesdays.com to browse all full-resolution room inspiration photos and sourcing tips.`
         ],
-        editorNote: `Curated from ${canonicalStylesdaysUrl} for its practical, budget-conscious approach to elevating everyday spaces.`,
+        editorNote: `Featured from the stylesdays.com ${detectedCategory} archive for its practical, budget-conscious approach to elevating everyday spaces.`,
         checklist: [
           'Measure your available floor and wall dimensions before starting',
           'Select a cohesive 3-color palette anchored by warm neutrals',
           'Combine concealed storage with 1–2 curated open display surfaces',
-          `Open ${canonicalStylesdaysUrl} for full room photo references`
+          'Bookmark the full stylesdays.com guide for photo reference'
         ],
         format: `${detectedCategory} Guide`,
         isSponsored: false,
@@ -1517,42 +1476,35 @@
     }
 
     /**
-     * CLEAN PATH-BASED SLUG EXTRACTION (`window.location.pathname`)
+     * SAFE SLUG ROUTING & ANTI-SPAM QUERY PARAMETER GUARD
+     * - Supports ?post=slug or ?slug=slug
+     * - If someone passes ?url=https://stylesdays.com/my-post/, safely normalizes it to ?post=my-post
+     * - If someone passes an external non-stylesdays URL (?url=https://spam.com), blocks it and shows a safety warning.
      */
-    function resolveCleanPathRoute() {
-      let extractedSlug = null;
-
-      try {
-        const storedRedirect = sessionStorage.getItem('gh_pages_clean_path');
-        if (storedRedirect) {
-          sessionStorage.removeItem('gh_pages_clean_path');
-          extractedSlug = ensureStylesdaysSlugExists(storedRedirect);
-        }
-      } catch (_) {}
-
-      if (!extractedSlug && window.location.pathname && window.location.pathname !== '/') {
-        const pathSegments = window.location.pathname
-          .split('/')
-          .map(s => s.trim().replace(/\.html?$/i, ''))
-          .filter(Boolean);
-
-        if (pathSegments.length > 0) {
-          const lastSegment = pathSegments[pathSegments.length - 1];
-          if (lastSegment && lastSegment !== 'index' && lastSegment !== '404') {
-            extractedSlug = ensureStylesdaysSlugExists(lastSegment);
-          }
-        }
-      }
-
+    function resolveSafeRoute() {
       const params = new URLSearchParams(window.location.search);
+
+      // Check if ?url= or ?target= was passed
       const rawUrlParam = params.get('url') || params.get('target') || params.get('dest');
-      if (!extractedSlug && rawUrlParam) {
+      if (rawUrlParam) {
         try {
           const parsed = new URL(rawUrlParam);
           const host = parsed.hostname.replace(/^www\./i, '').toLowerCase();
           if (host === 'stylesdays.com') {
-            extractedSlug = ensureStylesdaysSlugExists(parsed.pathname);
+            // Safely extract the stylesdays slug and convert to safe ?post= route
+            const pathSlug = parsed.pathname.replace(/^\/+|\/+$/g, '').split('/').pop();
+            const ensured = ensureStylesdaysSlugExists(pathSlug, rawUrlParam);
+            if (ensured) {
+              currentArticleSlug = ensured;
+              try {
+                window.history.replaceState({ post: ensured }, '', `${window.location.pathname}?post=${encodeURIComponent(ensured)}`);
+              } catch (_) {}
+              // Trigger live OG fetch so title/image match the exact stylesdays URL immediately
+              fetchLiveOgForSlug(ensured, false);
+              return;
+            }
           } else {
+            // Block arbitrary third-party open redirect attempt
             const alertBox = document.getElementById('rawUrlSanitizedAlert');
             const auditDrawer = document.getElementById('complianceAuditDrawer');
             if (alertBox && auditDrawer) {
@@ -1561,137 +1513,65 @@
             }
           }
         } catch (_) {
-          extractedSlug = ensureStylesdaysSlugExists(rawUrlParam);
+          // If someone passed a slug inside ?url=gorgeous-ikea-nightstand-hacks
+          const ensured = ensureStylesdaysSlugExists(rawUrlParam);
+          if (ensured) currentArticleSlug = ensured;
         }
       }
 
-      if (!extractedSlug) {
-        const querySlug = params.get('p') || params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
-        if (querySlug) {
-          extractedSlug = ensureStylesdaysSlugExists(querySlug);
+      // Check standard ?post=slug or #slug
+      const requestedSlug = params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
+      if (requestedSlug) {
+        const ensured = ensureStylesdaysSlugExists(requestedSlug);
+        if (ensured) {
+          currentArticleSlug = ensured;
+          if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
+            fetchLiveOgForSlug(ensured, false);
+          }
         }
-      }
-
-      if (extractedSlug) {
-        currentArticleSlug = extractedSlug;
-      }
-
-      updateBrowserCleanPathUrl(currentArticleSlug, true);
-
-      if (CURATED_REGISTRY[currentArticleSlug] && CURATED_REGISTRY[currentArticleSlug].needsLiveOgSync) {
-        fetchLiveOgForSlug(currentArticleSlug, false);
       }
     }
 
     /**
-     * Programmatically navigate to a clean slug `/<slug>` and prepend `https://stylesdays.com/<slug>/`
-     */
-    function navigateToCleanSlug(rawSlugInput, showToastMsg = false) {
-      const ensured = ensureStylesdaysSlugExists(rawSlugInput);
-      if (!ensured) {
-        showToast('Please enter a valid article slug (e.g. moroccan-wool-runners)');
-        return;
-      }
-
-      currentArticleSlug = ensured;
-      updateBrowserCleanPathUrl(ensured, false);
-      updateSitemapCounter();
-      renderNavigationPills();
-      renderActiveArticle();
-
-      if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
-        fetchLiveOgForSlug(ensured, true);
-      } else if (showToastMsg) {
-        showToast(`Path: /${ensured} → https://stylesdays.com/${ensured}/`);
-      }
-    }
-
-    /**
-     * Safely update `window.history` to show the clean `/<slug>` path without query strings
-     */
-    function updateBrowserCleanPathUrl(slug, replace = false) {
-      try {
-        const cleanPath = `/${encodeURIComponent(slug)}`;
-        if (replace) {
-          window.history.replaceState({ slug }, '', cleanPath);
-        } else if (window.location.pathname !== cleanPath) {
-          window.history.pushState({ slug }, '', cleanPath);
-        }
-      } catch (_) {}
-    }
-
-    /**
-     * Fetch live WordPress REST API & OpenGraph metadata from `https://stylesdays.com/<slug>/`
+     * Fetch live OpenGraph title, description & image from stylesdays.com for a slug via Microlink API
      */
     async function fetchLiveOgForSlug(slug, showNotification = true) {
       const item = CURATED_REGISTRY[slug];
       if (!item) return;
 
-      item.targetUrl = buildStylesdaysUrlFromSlug(slug);
-
       const cardSpinner = document.getElementById('cardOgSpinner');
       if (cardSpinner) cardSpinner.classList.remove('hidden');
 
-      let updated = false;
-
       try {
-        const wpApiUrl = `https://stylesdays.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
-        const proxyRes = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(wpApiUrl)}`);
-        const proxyJson = await proxyRes.json();
-        if (proxyJson && proxyJson.contents) {
-          const posts = JSON.parse(proxyJson.contents);
-          if (Array.isArray(posts) && posts.length > 0) {
-            const post = posts[0];
-            const tmp = document.createElement('div');
-            if (post.title && post.title.rendered) {
-              tmp.innerHTML = post.title.rendered;
-              item.title = tmp.textContent.trim() || item.title;
-            }
-            if (post.excerpt && post.excerpt.rendered) {
-              tmp.innerHTML = post.excerpt.rendered;
-              const cleanDesc = tmp.textContent.trim();
-              if (cleanDesc.length > 30) item.summary = cleanDesc;
-            }
-            const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
-            if (media && media.source_url) {
-              item.image = media.source_url;
-            }
-            updated = true;
+        const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
+        const json = await res.json();
+        if (json.status === 'success' && json.data) {
+          const { title, description, image } = json.data;
+          if (title) {
+            item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
           }
+          if (description && description.length > 40) {
+            item.summary = description;
+          }
+          if (image && image.url) {
+            item.image = image.url;
+          }
+          item.needsLiveOgSync = false;
+          if (currentArticleSlug === slug) {
+            renderActiveArticle();
+          }
+          if (showNotification) {
+            showToast(`Synced live OpenGraph metadata from stylesdays.com/${slug}/`);
+          }
+        } else if (showNotification) {
+          showToast('Using cached stylesdays editorial metadata.');
         }
-      } catch (_) {}
-
-      if (!updated) {
-        try {
-          const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
-          const json = await res.json();
-          if (json.status === 'success' && json.data) {
-            const { title, description, image } = json.data;
-            if (title && !title.toLowerCase().includes('page not found')) {
-              item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
-            }
-            if (description && description.length > 40) {
-              item.summary = description;
-            }
-            if (image && image.url) {
-              item.image = image.url;
-            }
-            updated = true;
-          }
-        } catch (_) {}
-      }
-
-      item.needsLiveOgSync = false;
-      if (cardSpinner) cardSpinner.classList.add('hidden');
-
-      if (currentArticleSlug === slug) {
-        renderActiveArticle();
-      }
-      if (showNotification) {
-        showToast(updated
-          ? `Synced live metadata from https://stylesdays.com/${slug}/`
-          : `Mapped /${slug} → https://stylesdays.com/${slug}/`
-        );
+      } catch (_) {
+        if (showNotification) {
+          showToast('Using pre-loaded stylesdays metadata.');
+        }
+      } finally {
+        if (cardSpinner) cardSpinner.classList.add('hidden');
       }
     }
 
@@ -1724,6 +1604,7 @@
         btn.textContent = cat.name;
         btn.onclick = () => {
           currentCategoryFilter = cat.id;
+          // Select first matching post in that category if current doesn't match
           const matching = Object.values(CURATED_REGISTRY).filter(
             p => cat.id === 'all' || p.category.toLowerCase() === cat.id.toLowerCase()
           );
@@ -1743,7 +1624,6 @@
      */
     function renderNavigationPills() {
       const container = document.getElementById('curatedNavPills');
-      if (!container) return;
       container.innerHTML = '';
 
       const posts = Object.values(CURATED_REGISTRY).filter(
@@ -1776,18 +1656,21 @@
     }
 
     /**
-     * Render the currently selected stylesdays.com article
+     * Render the currently selected stylesdays.com article & related articles grid
      */
     function renderActiveArticle() {
       const item = CURATED_REGISTRY[currentArticleSlug] || CURATED_REGISTRY['moroccan-wool-runners'];
+      // Guarantee targetUrl always has https://stylesdays.com/ prepended before the slug
       item.targetUrl = buildStylesdaysUrlFromSlug(item.slug);
       const domain = extractHostname(item.targetUrl);
 
+      // Update Document & OpenGraph meta tags
       document.title = `${item.title} | stylesdays Editorial Hub`;
       document.getElementById('ogTitle').setAttribute('content', item.title);
       document.getElementById('ogDesc').setAttribute('content', item.summary);
       document.getElementById('ogImage').setAttribute('content', item.image);
 
+      // Update Brand sub-slug & Top Clean Path Simulator Bar
       const brandSubSlug = document.getElementById('brandSubSlugText');
       if (brandSubSlug) brandSubSlug.textContent = item.slug;
 
@@ -1802,6 +1685,7 @@
         liveMappedLink.href = item.targetUrl;
       }
 
+      // Update Route Indicator & Sidebar Clean Pin Box (https://<org-name>.github.io/<slug>)
       const cleanPinUrl = getCleanGhPagesPinUrl(item.slug);
       document.getElementById('activeRouteIndicator').textContent = `Path: /${item.slug} → stylesdays.com/${item.slug}/`;
       const pinBox = document.getElementById('sidebarPinSlugUrlBox');
@@ -1816,6 +1700,7 @@
       const ghModalBtnLabel = document.getElementById('ghModalStaticBtnLabel');
       if (ghModalBtnLabel) ghModalBtnLabel.textContent = `Download Static ${item.slug}.html`;
 
+      // Commercial / Sponsored Disclosure Toggle
       const sponsoredBadge = document.getElementById('sponsoredHashtagBadge');
       const relValue = item.isSponsored ? 'noopener sponsored' : 'noopener';
       if (item.isSponsored) {
@@ -1824,6 +1709,7 @@
         sponsoredBadge.classList.add('hidden');
       }
 
+      // Hero Image & Badges
       const heroImg = document.getElementById('articleHeroImage');
       if (heroImg.src !== item.image) {
         document.getElementById('heroSkeleton').style.display = 'block';
@@ -1832,11 +1718,13 @@
       document.getElementById('articleCategoryBadge').textContent = item.category;
       document.getElementById('heroDomainBadge').textContent = domain;
 
+      // Headline & Meta
       document.getElementById('articleReadTime').textContent = item.readTime;
       document.getElementById('articleUpdatedDate').textContent = item.updatedDate;
       document.getElementById('articleHeadline').textContent = item.title;
       document.getElementById('articleSummaryText').textContent = item.summary;
 
+      // Explicit User-Initiated HTML Anchor Links (<a href="https://stylesdays.com/...">)
       const primaryCta = document.getElementById('primaryAnchorCta');
       const secondaryCta = document.getElementById('secondaryAnchorCta');
       primaryCta.href = item.targetUrl;
@@ -1848,12 +1736,14 @@
       document.getElementById('primaryCtaLabel').textContent = `Read Full Guide on ${domain}`;
       document.getElementById('bottomFullUrlText').textContent = item.targetUrl;
 
+      // Category Spec Link
       const specCatLink = document.getElementById('specCategoryLink');
       if (specCatLink) {
         specCatLink.textContent = `${item.category} →`;
         specCatLink.href = item.categoryUrl || 'https://stylesdays.com/category/home-decor/';
       }
 
+      // Key Takeaways Cards
       const takeawaysContainer = document.getElementById('articleTakeawaysList');
       takeawaysContainer.innerHTML = '';
       item.takeaways.forEach((point, idx) => {
@@ -1866,11 +1756,13 @@
         takeawaysContainer.appendChild(card);
       });
 
+      // Editor Note & Specs
       document.getElementById('articleEditorNote').textContent = `"${item.editorNote}"`;
       document.getElementById('specDomain').textContent = domain;
       document.getElementById('specFormat').textContent = item.format || 'Room Styling Guide';
       document.getElementById('sidebarDomainName').textContent = domain;
 
+      // Sidebar Evaluation Checklist
       const checklistContainer = document.getElementById('sidebarChecklistItems');
       checklistContainer.innerHTML = '';
       (item.checklist || []).forEach((check) => {
@@ -1883,16 +1775,18 @@
         checklistContainer.appendChild(row);
       });
 
+      // Related Curated Guides Grid
       renderRelatedGrid();
+
+      // Sync Studio Inputs with current item
       syncStudioForm(item);
     }
 
     /**
-     * Render Related Curated Guides Grid
+     * Render Related stylesdays.com Guides at the bottom of the hub
      */
     function renderRelatedGrid() {
       const grid = document.getElementById('relatedGuidesGrid');
-      if (!grid) return;
       grid.innerHTML = '';
 
       Object.values(CURATED_REGISTRY)
@@ -1934,7 +1828,7 @@
     }
 
     /**
-     * Synchronize Studio Form
+     * Synchronize the Editorial Builder Studio form fields with the active article
      */
     function syncStudioForm(item) {
       document.getElementById('studioTargetUrl').value = item.targetUrl;
@@ -1955,7 +1849,7 @@
     }
 
     /**
-     * Get Article Object from Studio Form
+     * Read current values from the Studio form and build an article object
      */
     function getStudioArticleObject() {
       const rawSlug = document.getElementById('studioSlug').value.trim()
@@ -1998,7 +1892,7 @@
     }
 
     /**
-     * Parse Sitemap XML Snippet
+     * PARSE SITEMAP XML SNIPPET OR FULL POST-SITEMAP.XML FROM STYLESDAYS.COM
      */
     function parseStylesdaysSitemapXml(xmlString) {
       const locRegex = /<loc>\s*(https?:\/\/(?:www\.)?stylesdays\.com\/([^<\s]+))\s*<\/loc>/gi;
@@ -2010,6 +1904,7 @@
         const fullUrl = match[1].trim();
         const pathPart = match[2].replace(/^\/+|\/+$/g, '');
 
+        // Skip sub-sitemaps (.xml), categories, tags, author archives, or root homepage
         if (
           !pathPart ||
           pathPart.endsWith('.xml') ||
@@ -2035,7 +1930,7 @@
     }
 
     /**
-     * Bind UI Event Listeners
+     * Bind UI Buttons (Clean Path Bar, GitHub Pages 404 Router Drawer, Sitemap XML Sync, Audit Drawer, Builder Studio, Static Exporter)
      */
     function bindUIEvents() {
       const auditDrawer = document.getElementById('complianceAuditDrawer');
@@ -2043,6 +1938,7 @@
       const sitemapDrawer = document.getElementById('sitemapSyncDrawer');
       const ghPagesDrawer = document.getElementById('ghPagesSetupDrawer');
 
+      // Toggle GitHub Pages Clean URL Setup Drawer
       document.getElementById('btnToggleGhPagesModal').addEventListener('click', () => {
         ghPagesDrawer.classList.toggle('hidden');
       });
@@ -2050,6 +1946,7 @@
         ghPagesDrawer.classList.add('hidden');
       });
 
+      // Top Interactive Clean Path Bar: Load any slug & prepend https://stylesdays.com/
       const triggerTopPathSlugLoad = () => {
         const val = document.getElementById('livePathSlugInput').value.trim();
         if (!val) {
@@ -2067,15 +1964,18 @@
         }
       });
 
+      // Update displayed Pin URL when GitHub Org Domain input changes
       document.getElementById('ghOrgDomainInput').addEventListener('input', () => {
         renderActiveArticle();
       });
 
+      // Top Bar: Copy Clean Pin URL (https://<org-name>.github.io/<slug>)
       document.getElementById('btnTopCopyCleanPinUrl').addEventListener('click', () => {
         const cleanUrl = getCleanGhPagesPinUrl(currentArticleSlug);
         copyToClipboard(cleanUrl);
       });
 
+      // Download Universal 404.html Catch-All Router (exact copy of this app for GitHub Pages clean path routing)
       const downloadFullAppAs = (filename) => {
         const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
         const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
@@ -2097,6 +1997,7 @@
         downloadFullAppAs('index.html');
       });
 
+      // Toggle Sitemap Sync Drawer
       document.getElementById('btnToggleSitemapModal').addEventListener('click', () => {
         sitemapDrawer.classList.toggle('hidden');
       });
@@ -2104,6 +2005,7 @@
         sitemapDrawer.classList.add('hidden');
       });
 
+      // Toggle Compliance Audit Drawer
       document.getElementById('btnToggleAudit').addEventListener('click', () => {
         auditDrawer.classList.toggle('hidden');
       });
@@ -2111,6 +2013,7 @@
         auditDrawer.classList.add('hidden');
       });
 
+      // Toggle Publisher Studio Drawer
       document.getElementById('btnToggleStudio').addEventListener('click', () => {
         studioDrawer.classList.toggle('hidden');
       });
@@ -2118,15 +2021,48 @@
         studioDrawer.classList.add('hidden');
       });
 
+      // Refresh Live OG on Article Card
       document.getElementById('btnRefreshLiveOgOnCard').addEventListener('click', () => {
         fetchLiveOgForSlug(currentArticleSlug, true);
       });
 
+      // Sidebar Copy Clean Pin Link (https://<org-name>.github.io/<slug>)
       document.getElementById('btnSidebarCopyPinUrl').addEventListener('click', () => {
         const cleanUrl = getCleanGhPagesPinUrl(currentArticleSlug);
         copyToClipboard(cleanUrl);
       });
+      document.getElementById('btnCloseSitemapDrawer').addEventListener('click', () => {
+        sitemapDrawer.classList.add('hidden');
+      });
 
+      // Toggle Compliance Audit Drawer
+      document.getElementById('btnToggleAudit').addEventListener('click', () => {
+        auditDrawer.classList.toggle('hidden');
+      });
+      document.getElementById('btnCloseAudit').addEventListener('click', () => {
+        auditDrawer.classList.add('hidden');
+      });
+
+      // Toggle Publisher Studio Drawer
+      document.getElementById('btnToggleStudio').addEventListener('click', () => {
+        studioDrawer.classList.toggle('hidden');
+      });
+      document.getElementById('btnCloseStudio').addEventListener('click', () => {
+        studioDrawer.classList.add('hidden');
+      });
+
+      // Refresh Live OG on Article Card
+      document.getElementById('btnRefreshLiveOgOnCard').addEventListener('click', () => {
+        fetchLiveOgForSlug(currentArticleSlug, true);
+      });
+
+      // Sidebar Copy Pin Link
+      document.getElementById('btnSidebarCopyPinUrl').addEventListener('click', () => {
+        const url = `${window.location.origin}${window.location.pathname}?post=${encodeURIComponent(currentArticleSlug)}`;
+        copyToClipboard(url);
+      });
+
+      // 1. Live Sync with stylesdays.com WP REST API / post-sitemap.xml
       document.getElementById('btnFetchLiveSitemap').addEventListener('click', async () => {
         const spinner = document.getElementById('sitemapSyncSpinner');
         const statusEl = document.getElementById('sitemapFetchStatus');
@@ -2137,6 +2073,7 @@
         let added = 0;
 
         try {
+          // Attempt 1: WordPress REST API (provides title, slug, link, excerpt, and featured media)
           const wpEndpoint = 'https://stylesdays.com/wp-json/wp/v2/posts?_embed&per_page=15';
           const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(wpEndpoint)}`;
           const res = await fetch(proxyUrl);
@@ -2150,6 +2087,7 @@
                 const link = post.link || `https://stylesdays.com/${slug}/`;
                 const ensured = ensureStylesdaysSlugExists(slug, link);
                 if (ensured && CURATED_REGISTRY[ensured]) {
+                  // Decode HTML entities in WP title
                   const tempDiv = document.createElement('div');
                   tempDiv.innerHTML = (post.title && post.title.rendered) || CURATED_REGISTRY[ensured].title;
                   CURATED_REGISTRY[ensured].title = tempDiv.textContent.trim();
@@ -2162,6 +2100,7 @@
                     }
                   }
 
+                  // Check embedded WP featured media
                   const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
                   if (media && media.source_url) {
                     CURATED_REGISTRY[ensured].image = media.source_url;
@@ -2172,6 +2111,7 @@
             }
           }
         } catch (_) {
+          // Fallback Attempt 2: Fetch post-sitemap.xml via proxy
           try {
             const xmlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent('https://stylesdays.com/post-sitemap.xml')}`;
             const xmlRes = await fetch(xmlProxy);
@@ -2180,7 +2120,7 @@
               const result = parseStylesdaysSitemapXml(xmlJson.contents);
               added += result.importedCount;
             }
-          } catch (_) {}
+          } catch (e2) {}
         } finally {
           spinner.classList.add('hidden');
           updateSitemapCounter();
@@ -2190,12 +2130,11 @@
             statusEl.textContent = `✓ Successfully synced ${added} articles from stylesdays.com! Total catalog: ${Object.keys(CURATED_REGISTRY).length} guides.`;
             showToast(`Synced ${added} posts from stylesdays.com!`);
           } else {
-            statusEl.textContent = `✓ All core stylesdays.com sitemap guides are active and ready!`;
+            statusEl.textContent = `✓ All 8 core stylesdays.com sitemap guides are active and ready! Paste additional XML on the right anytime.`;
             showToast('stylesdays.com Sitemap Catalog verified!');
           }
         }
-      });
-
+      // 2. Single stylesdays URL / Clean Slug Resolver
       document.getElementById('btnResolveSingleStylesdaysUrl').addEventListener('click', () => {
         const input = document.getElementById('quickStylesdaysUrlInput').value.trim();
         if (!input) {
@@ -2212,6 +2151,7 @@
         }
       });
 
+      // 3. Load Sample XML from stylesdays.com/post-sitemap.xml
       document.getElementById('btnLoadSampleSitemapXml').addEventListener('click', () => {
         document.getElementById('rawSitemapXmlInput').value = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -2228,6 +2168,7 @@
         showToast('Loaded stylesdays.com XML sample — click Parse XML to import!');
       });
 
+      // 4. Parse Raw XML Button
       document.getElementById('btnParseRawSitemapXml').addEventListener('click', () => {
         const xmlText = document.getElementById('rawSitemapXmlInput').value.trim();
         if (!xmlText) {
@@ -2249,6 +2190,7 @@
         }
       });
 
+      // Auto-sync slug & prepended https://stylesdays.com/<slug>/ when edited in Studio
       document.getElementById('studioTargetUrl').addEventListener('input', (e) => {
         const val = e.target.value.trim();
         if (val.includes('stylesdays.com/')) {
@@ -2268,6 +2210,7 @@
         document.getElementById('downloadBtnText').textContent = `Download Static ${clean || 'guide'}.html`;
       });
 
+      // Authoring-Time OpenGraph Fetcher via Microlink API
       document.getElementById('btnStudioFetchOg').addEventListener('click', async () => {
         const targetUrl = document.getElementById('studioTargetUrl').value.trim();
         if (!isValidHttpUrl(targetUrl)) {
@@ -2297,13 +2240,14 @@
           } else {
             showToast('Could not auto-extract metadata; please customize fields manually.');
           }
-        } catch (_) {
+        } catch (err) {
           showToast('Metadata lookup blocked by CORS; fill fields manually.');
         } finally {
           spinner.classList.add('hidden');
         }
       });
 
+      // Preview & Save to Session Registry
       document.getElementById('btnStudioApplyLive').addEventListener('click', () => {
         const updated = getStudioArticleObject();
         CURATED_REGISTRY[updated.slug] = updated;
@@ -2311,6 +2255,7 @@
         showToast(`Active Clean Path: /${updated.slug} → ${updated.targetUrl}`);
       });
 
+      // Copy Clean Path Pin Link (https://<org-name>.github.io/<slug>)
       document.getElementById('btnCopySafeSlugUrl').addEventListener('click', () => {
         const updated = getStudioArticleObject();
         CURATED_REGISTRY[updated.slug] = updated;
@@ -2320,6 +2265,7 @@
         copyToClipboard(cleanUrl);
       });
 
+      // Download 100% Standalone Static Compliant HTML File for GitHub Pages
       document.getElementById('btnDownloadStaticHtml').addEventListener('click', () => {
         const article = getStudioArticleObject();
         const staticHtmlContent = generateStandaloneStaticHtmlFile(article);
@@ -2339,7 +2285,9 @@
     }
 
     /**
-     * Generate Standalone Static HTML File
+     * GENERATE 100% STATIC STANDALONE COMPLIANT HTML FILE FOR STYLESDAYS.COM
+     * Creates a pure, hardcoded HTML file with baked-in OpenGraph tags, substantive editorial content,
+     * and standard <a href="https://stylesdays.com/..."> links.
      */
     function generateStandaloneStaticHtmlFile(item) {
       const domain = extractHostname(item.targetUrl);
@@ -2412,6 +2360,9 @@
 </html>`;
     }
 
+    /**
+     * Validate HTTP/HTTPS URL
+     */
     function isValidHttpUrl(str) {
       try {
         const u = new URL(str);
@@ -2421,6 +2372,9 @@
       }
     }
 
+    /**
+     * Escape HTML entities to prevent XSS
+     */
     function escapeHtml(str) {
       return String(str || '')
         .replace(/&/g, '&amp;')
@@ -2430,6 +2384,9 @@
         .replace(/'/g, '&#039;');
     }
 
+    /**
+     * Clipboard Helper
+     */
     function copyToClipboard(text) {
       const textarea = document.createElement('textarea');
       textarea.value = text;
@@ -2447,6 +2404,9 @@
       }
     }
 
+    /**
+     * Toast Notification Helper
+     */
     function showToast(msg) {
       const toast = document.getElementById('toastBanner');
       document.getElementById('toastMessage').textContent = msg;
