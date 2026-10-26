@@ -31,7 +31,6 @@
     .font-serif-editorial {
       font-family: 'Playfair Display', Georgia, serif;
     }
-    /* Smooth image fade-in */
     @keyframes shimmer {
       0% { background-position: -200% 0; }
       100% { background-position: 200% 0; }
@@ -41,11 +40,13 @@
       background-size: 200% 100%;
       animation: shimmer 1.6s infinite;
     }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-[#E60023] selection:text-white">
 
-  <!-- 1. ABOVE-THE-FOLD EDITORIAL & COMMERCIAL DISCLOSURE BANNER (Pinterest Policy Requirement) -->
+  <!-- 1. ABOVE-THE-FOLD DISCLOSURE BANNER -->
   <div class="w-full bg-[#F1EDE6] border-b border-stone-200/80 text-stone-700 text-xs py-2 px-4">
     <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-2">
       <div class="flex items-center space-x-2">
@@ -58,18 +59,16 @@
       </div>
       <div class="flex items-center space-x-3 text-[11px] font-medium text-stone-500">
         <span id="sponsoredHashtagBadge" class="hidden px-2 py-0.5 bg-amber-100 text-amber-900 rounded font-semibold">#ad #sponsored</span>
-        <span>Sitemap Connected: <code class="text-stone-700 font-mono">stylesdays.com/sitemap_index.xml</code></span>
+        <span>Sitemap: <code class="text-stone-700 font-mono">stylesdays.com/sitemap_index.xml</code></span>
       </div>
     </div>
   </div>
 
-  <!-- 2. STICKY TOP NAVIGATION & COMPLIANCE INSPECTOR BAR -->
+  <!-- 2. STICKY NAVIGATION -->
   <header class="w-full bg-white/95 backdrop-blur-md border-b border-stone-200/80 sticky top-0 z-40">
     <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
-      
-      <!-- Brand Identity: stylesdays -->
       <div class="flex items-center space-x-3">
-        <a href="/moroccan-wool-runners" onclick="event.preventDefault(); navigateToCleanSlug('moroccan-wool-runners');" class="flex items-center space-x-3 group">
+        <a href="/" onclick="event.preventDefault(); navigateToCleanSlug('moroccan-wool-runners');" class="flex items-center space-x-3 group">
           <div class="w-10 h-10 rounded-xl bg-stone-900 flex items-center justify-center text-white shadow-sm group-hover:bg-[#E60023] transition">
             <span class="font-serif-editorial font-bold text-xl tracking-tighter">sd</span>
           </div>
@@ -83,708 +82,323 @@
         </a>
       </div>
 
-      <!-- Action Pills: GitHub Pages 404 Router, Sitemap Sync, Compliance Audit & Editorial Builder -->
       <div class="flex flex-wrap items-center gap-2">
-        <!-- GitHub Pages Clean URL Setup (404.html Generator) -->
-        <button id="btnToggleGhPagesModal" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 transition flex items-center gap-1.5 shadow-2xs">
-          <svg class="w-3.5 h-3.5 text-indigo-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-          </svg>
-          <span>GitHub Pages Clean URL Kit (<code class="font-mono text-[11px]">404.html</code>)</span>
+        <button id="btnToggleGhPagesModal" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-900 border border-indigo-200 transition flex items-center gap-1.5">
+          <span>GitHub Pages Clean URL Kit</span>
         </button>
-
-        <!-- Live Sitemap XML Sync Trigger -->
-        <button id="btnToggleSitemapModal" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 transition flex items-center gap-1.5 shadow-2xs">
-          <svg class="w-3.5 h-3.5 text-amber-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-          </svg>
+        <button id="btnToggleSitemapModal" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300/80 transition flex items-center gap-1.5">
           <span>Sitemap Sync (<span id="sitemapCountBadge">9</span>)</span>
         </button>
-
-        <!-- Pinterest Policy Audit Status Pill -->
-        <button id="btnToggleAudit" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-[#15803D] border border-emerald-200 transition flex items-center gap-1.5">
-          <span class="w-2 h-2 rounded-full bg-[#15803D]"></span>
+        <button id="btnToggleAudit" class="text-xs font-semibold px-3 py-1.5 rounded-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 transition flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
           <span>Pinterest Policy: 6/6 Passed</span>
         </button>
-
-        <!-- Publisher Studio Toggle -->
-        <button id="btnToggleStudio" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white transition flex items-center gap-1.5 shadow-xs">
-          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-          </svg>
+        <button id="btnToggleStudio" class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-stone-900 hover:bg-stone-800 text-white transition flex items-center gap-1.5">
           <span id="studioBtnLabel">Builder &amp; Exporter</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- 2A. INTERACTIVE CLEAN PATH BAR & LIVE URL MAPPER (https://<org-name>.github.io/<slug> -> https://stylesdays.com/<slug>/) -->
+  <!-- 2A. CLEAN PATH INTERACTIVE BAR -->
   <div class="bg-stone-900 text-stone-100 border-b border-stone-800 py-2.5 px-4">
     <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 text-xs">
-      
-      <!-- Left: Simulated Clean Path Address Bar -->
       <div class="flex flex-wrap sm:flex-nowrap items-center gap-1.5 bg-stone-950 border border-stone-700/90 rounded-xl px-3 py-1.5 flex-1">
-        <span class="text-emerald-400 font-bold flex items-center gap-1 shrink-0" title="Zero Query Parameters - Clean Path Routing">
-          <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
-          <span>https://</span>
-        </span>
-        <input 
-          type="text" 
-          id="ghOrgDomainInput" 
-          value="stylesdays-hub.github.io" 
-          aria-label="GitHub Pages Organization Domain"
-          class="bg-stone-800/90 text-amber-300 font-mono text-[11px] px-2 py-0.5 rounded border border-stone-700 focus:outline-none focus:border-amber-400 w-44 shrink-0"
-          title="Edit your GitHub Organization domain (<org-name>.github.io)"
-        />
+        <span class="text-emerald-400 font-bold flex items-center gap-1 shrink-0">https://</span>
+        <input type="text" id="ghOrgDomainInput" value="stylesdays-hub.github.io" class="bg-stone-800/90 text-amber-300 font-mono text-[11px] px-2 py-0.5 rounded border border-stone-700 focus:outline-none w-44 shrink-0">
         <span class="text-stone-400 font-mono font-bold">/</span>
-        <input 
-          type="text" 
-          id="livePathSlugInput" 
-          value="moroccan-wool-runners" 
-          placeholder="moroccan-wool-runners"
-          aria-label="Clean URL Path Slug"
-          class="bg-transparent text-white font-mono font-semibold text-xs focus:outline-none w-full min-w-[160px]"
-          title="Type any slug (e.g., moroccan-wool-runners) to extract & prepend https://stylesdays.com/"
-        />
-        <button id="btnLoadPathSlug" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-3 py-1 rounded-lg text-[11px] transition shrink-0">
-          Load Path
-        </button>
+        <input type="text" id="livePathSlugInput" value="moroccan-wool-runners" placeholder="slug-name" class="bg-transparent text-white font-mono font-semibold text-xs focus:outline-none w-full min-w-[160px]">
+        <button id="btnLoadPathSlug" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-3 py-1 rounded-lg text-[11px] transition shrink-0">Load Path</button>
       </div>
-
-      <!-- Center: Automatic Prefix Mapping Indicator -->
-      <div class="flex items-center justify-between sm:justify-start gap-2 text-[11px] font-mono bg-stone-800/70 px-3 py-1.5 rounded-xl border border-stone-700/70 shrink-0">
+      <div class="flex items-center gap-2 text-[11px] font-mono bg-stone-800/70 px-3 py-1.5 rounded-xl border border-stone-700/70 shrink-0">
         <span class="text-stone-400">Auto-Prepends:</span>
-        <a id="liveMappedStylesdaysUrl" href="https://stylesdays.com/moroccan-wool-runners/" target="_blank" rel="noopener" class="text-emerald-300 hover:underline font-semibold truncate max-w-[260px] sm:max-w-xs">
+        <a id="liveMappedStylesdaysUrl" href="https://stylesdays.com/moroccan-wool-runners/" target="_blank" rel="noopener" class="text-emerald-300 hover:underline font-semibold truncate max-w-[260px]">
           https://stylesdays.com/moroccan-wool-runners/
         </a>
       </div>
-
-      <!-- Right: Copy Clean Pin URL (No ?post=) -->
-      <div class="flex items-center gap-2 shrink-0">
-        <button id="btnTopCopyCleanPinUrl" class="w-full sm:w-auto bg-white hover:bg-stone-200 text-stone-950 font-bold px-3.5 py-1.5 rounded-xl text-[11px] transition flex items-center justify-center gap-1.5 shadow-2xs">
-          <svg class="w-3.5 h-3.5 text-[#E60023]" fill="currentColor" viewBox="0 0 20 20"><path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"></path><path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z"></path></svg>
-          <span>Copy Clean Pin URL</span>
-        </button>
-      </div>
-
+      <button id="btnTopCopyCleanPinUrl" class="bg-white hover:bg-stone-200 text-stone-950 font-bold px-3.5 py-1.5 rounded-xl text-[11px] transition shrink-0">
+        Copy Clean Pin URL
+      </button>
     </div>
   </div>
 
-  <!-- 2A-MODAL. GITHUB PAGES CLEAN URL SETUP DRAWER (404.HTML CATCH-ALL ROUTER & EXPORTER) -->
+  <!-- 2A-MODAL. GITHUB PAGES CLEAN URL SETUP DRAWER -->
   <section id="ghPagesSetupDrawer" class="bg-indigo-950 text-indigo-50 border-b border-indigo-800 hidden">
     <div class="max-w-6xl mx-auto px-4 py-6">
-      <div class="flex flex-wrap items-start justify-between gap-4 pb-4 mb-5 border-b border-indigo-800/80">
+      <div class="flex items-start justify-between pb-4 mb-5 border-b border-indigo-800/80">
         <div>
-          <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-indigo-400 text-indigo-950 rounded">Zero Query Params</span>
-            <h2 class="text-base font-bold text-white">How to Serve <code class="text-amber-300">https://&lt;org-name&gt;.github.io/moroccan-wool-runners</code> on GitHub Pages</h2>
-          </div>
-          <p class="text-xs text-indigo-200 mt-1">
-            Because GitHub Pages is a static host, visiting <code class="text-white">/moroccan-wool-runners</code> without a query string looks for a matching file or serves <code class="text-white">404.html</code>. Choose either method below:
-          </p>
+          <h2 class="text-base font-bold text-white">GitHub Pages Clean URL Routing</h2>
+          <p class="text-xs text-indigo-200 mt-1">Serve clean path URLs on static GitHub Pages by deploying the catch-all router.</p>
         </div>
-        <button id="btnCloseGhPagesModal" class="text-indigo-300 hover:text-white text-xs px-3 py-1.5 rounded-lg bg-indigo-900 hover:bg-indigo-800">Close ✕</button>
+        <button id="btnCloseGhPagesModal" class="text-indigo-300 hover:text-white text-xs px-3 py-1.5 rounded-lg bg-indigo-900">Close ✕</button>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-        <!-- Method A: Universal 404.html Catch-All Router -->
-        <div class="p-5 rounded-2xl bg-indigo-900/60 border border-indigo-700/80 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-emerald-400 text-emerald-950">Method A • Recommended (1 File Supports All Slugs)</span>
-              <span class="font-mono text-[11px] text-indigo-300">index.html + 404.html</span>
-            </div>
-            <h3 class="text-sm font-bold text-white mb-2">Universal <code class="text-amber-300">404.html</code> Catch-All Clean Path Router</h3>
-            <p class="text-indigo-200 leading-relaxed mb-3">
-              Upload this file as both <code class="text-white font-bold">index.html</code> and <code class="text-white font-bold">404.html</code> in the root of your <code class="text-white">&lt;org-name&gt;.github.io</code> repository.
-            </p>
-            <ol class="list-decimal list-inside space-y-1.5 text-indigo-100/90 text-[11px] mb-4">
-              <li>When someone visits <code class="text-amber-300">https://&lt;org-name&gt;.github.io/moroccan-wool-runners</code>, GitHub Pages serves <code class="text-white">404.html</code> while keeping the clean URL in the address bar.</li>
-              <li>This app reads <code class="text-white">window.location.pathname</code> (<code class="text-amber-300">/moroccan-wool-runners</code>).</li>
-              <li>It automatically prepends <code class="text-emerald-300">https://stylesdays.com/</code> → <code class="text-emerald-300">https://stylesdays.com/moroccan-wool-runners/</code> and fetches live WordPress &amp; OpenGraph data!</li>
-            </ol>
-          </div>
-          <div class="flex flex-wrap gap-2 pt-3 border-t border-indigo-800/80">
-            <button id="btnDownloadCatchAll404" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              <span>Download Universal <code class="font-mono">404.html</code> Router</span>
-            </button>
-            <button id="btnDownloadRootIndex" class="bg-indigo-800 hover:bg-indigo-700 text-white font-semibold px-3.5 py-2.5 rounded-xl transition">
-              Download Matching <code class="font-mono">index.html</code>
-            </button>
-          </div>
-        </div>
-
-        <!-- Method B: Dedicated Static HTML File per Slug -->
-        <div class="p-5 rounded-2xl bg-indigo-900/60 border border-indigo-700/80 flex flex-col justify-between">
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase bg-indigo-300 text-indigo-950">Method B • HTTP 200 Static Pre-Rendered</span>
-              <span class="font-mono text-[11px] text-indigo-300">/&lt;slug&gt;.html</span>
-            </div>
-            <h3 class="text-sm font-bold text-white mb-2">Pre-Baked Static File (<code class="text-amber-300">moroccan-wool-runners.html</code>)</h3>
-            <p class="text-indigo-200 leading-relaxed mb-3">
-              GitHub Pages automatically resolves extensionless clean URLs! If you upload <code class="text-white font-bold">moroccan-wool-runners.html</code> to your repo root (or <code class="text-white font-bold">moroccan-wool-runners/index.html</code>), visiting <code class="text-amber-300">https://&lt;org-name&gt;.github.io/moroccan-wool-runners</code> returns an HTTP 200 status with hardcoded OpenGraph tags.
-            </p>
-            <div class="p-3 rounded-xl bg-indigo-950/90 border border-indigo-800 font-mono text-[11px] text-indigo-200 mb-4">
-              <div>Repo Root Structure for Clean URLs:</div>
-              <div class="text-emerald-300 mt-1">├── index.html</div>
-              <div class="text-emerald-300">├── 404.html <span class="text-indigo-400">(fallback for any new stylesdays.com slug)</span></div>
-              <div class="text-amber-300">└── moroccan-wool-runners.html <span class="text-indigo-400">(served at /moroccan-wool-runners)</span></div>
-            </div>
-          </div>
-          <div class="flex flex-wrap gap-2 pt-3 border-t border-indigo-800/80">
-            <button onclick="document.getElementById('btnDownloadStaticHtml').click()" class="bg-white hover:bg-stone-200 text-stone-950 font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm">
-              <svg class="w-4 h-4 text-[#E60023]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-              <span id="ghModalStaticBtnLabel">Download Static moroccan-wool-runners.html</span>
-            </button>
-          </div>
-        </div>
+      <div class="flex gap-3">
+        <button id="btnDownloadCatchAll404" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold px-4 py-2.5 rounded-xl text-xs">Download 404.html</button>
+        <button id="btnDownloadRootIndex" class="bg-indigo-800 hover:bg-indigo-700 text-white font-semibold px-3.5 py-2.5 rounded-xl text-xs">Download index.html</button>
       </div>
     </div>
   </section>
 
-  <!-- 2B. SITEMAP_INDEX.XML LIVE SYNC & PARSER DRAWER (Custom Built for stylesdays.com) -->
+  <!-- 2B. SITEMAP SYNC DRAWER -->
   <section id="sitemapSyncDrawer" class="bg-stone-950 text-stone-100 border-b border-stone-800 hidden">
     <div class="max-w-6xl mx-auto px-4 py-6">
-      <div class="flex flex-wrap items-start justify-between gap-4 pb-4 mb-5 border-b border-stone-800">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-amber-400 text-stone-950 rounded">Yoast / WP Sitemap Engine</span>
-            <h2 class="text-base font-bold text-white">stylesdays.com Sitemap Index & WordPress Feed Synchronizer</h2>
-          </div>
-          <p class="text-xs text-stone-400 mt-1">
-            Sync directly with <code class="text-amber-300">https://stylesdays.com/sitemap_index.xml</code>, <code class="text-amber-300">post-sitemap.xml</code>, or paste any <code class="text-amber-300">&lt;urlset&gt;</code> XML snippet to auto-build compliant editorial preview pages.
-          </p>
-        </div>
-        <button id="btnCloseSitemapDrawer" class="text-stone-400 hover:text-white text-xs px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700">Close ✕</button>
+      <div class="flex items-start justify-between pb-4 mb-5 border-b border-stone-800">
+        <h2 class="text-base font-bold text-white">stylesdays.com Sitemap Index &amp; Post Synchronizer</h2>
+        <button id="btnCloseSitemapDrawer" class="text-stone-400 hover:text-white text-xs px-3 py-1.5 rounded-lg bg-stone-800">Close ✕</button>
       </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 text-xs">
-        <!-- Left Column: Live Auto-Sync Controls & Direct Slug Lookup -->
-        <div class="lg:col-span-5 space-y-4">
-          <div class="p-4 rounded-2xl bg-stone-900 border border-stone-800">
-            <h3 class="font-bold text-white text-sm mb-1">1. Live Auto-Fetch from stylesdays.com</h3>
-            <p class="text-stone-400 text-[11px] mb-3 leading-relaxed">
-              Queries <code class="text-stone-300">stylesdays.com/wp-json/wp/v2/posts</code> &amp; <code class="text-stone-300">sitemap_index.xml</code> via CORS-safe proxy to import your latest published articles, featured images, and categories.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <button id="btnFetchLiveSitemap" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-4 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm">
-                <svg id="sitemapSyncSpinner" class="w-4 h-4 hidden animate-spin" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-                </svg>
-                <span>Sync Live from stylesdays.com Now</span>
-              </button>
-            </div>
-            <div id="sitemapFetchStatus" class="mt-2.5 text-[11px] text-emerald-400 font-medium hidden"></div>
-          </div>
-
-          <div class="p-4 rounded-2xl bg-stone-900 border border-stone-800">
-            <h3 class="font-bold text-white text-sm mb-1">2. Instant Clean Path Slug or stylesdays.com URL Resolver</h3>
-            <p class="text-stone-400 text-[11px] mb-2.5">
-              Type any path slug (e.g. <code class="text-amber-300">/moroccan-wool-runners</code>) or full <code class="text-stone-300">https://stylesdays.com/...</code> link. We automatically prepend <code class="text-emerald-400">https://stylesdays.com/</code> and fetch live metadata:
-            </p>
-            <div class="flex gap-2">
-              <input type="text" id="quickStylesdaysUrlInput" placeholder="/moroccan-wool-runners or https://stylesdays.com/..." class="flex-1 bg-stone-950 border border-stone-700 rounded-xl px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-amber-400">
-              <button id="btnResolveSingleStylesdaysUrl" class="bg-amber-400 hover:bg-amber-300 text-stone-950 font-bold px-3.5 py-2 rounded-xl transition shrink-0">
-                Resolve Slug
-              </button>
-            </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="p-4 bg-stone-900 rounded-xl border border-stone-800 space-y-3">
+          <p class="text-stone-400">Sync latest published posts directly from WordPress REST API.</p>
+          <button id="btnFetchLiveSitemap" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-4 py-2 rounded-xl flex items-center gap-2">
+            <span id="sitemapSyncSpinner" class="hidden">⌛</span>
+            <span>Sync Live Posts</span>
+          </button>
+          <div id="sitemapFetchStatus" class="text-emerald-400 hidden"></div>
+          <div class="pt-2">
+            <input type="text" id="quickStylesdaysUrlInput" placeholder="/moroccan-wool-runners" class="bg-stone-950 border border-stone-700 rounded-lg px-3 py-1.5 text-white w-full mb-2">
+            <button id="btnResolveSingleStylesdaysUrl" class="bg-amber-400 text-stone-950 font-bold px-3 py-1.5 rounded-lg">Resolve Path</button>
           </div>
         </div>
-
-        <!-- Right Column: Raw XML Sitemap Parser -->
-        <div class="lg:col-span-7">
-          <div class="p-4 rounded-2xl bg-stone-900 border border-stone-800 h-full flex flex-col justify-between">
-            <div>
-              <div class="flex items-center justify-between mb-1.5">
-                <h3 class="font-bold text-white text-sm">3. Paste Raw XML from <code class="text-amber-300">post-sitemap.xml</code> or <code class="text-amber-300">sitemap_index.xml</code></h3>
-                <button id="btnLoadSampleSitemapXml" class="text-[11px] text-amber-300 hover:underline">Load stylesdays XML Sample</button>
-              </div>
-              <p class="text-stone-400 text-[11px] mb-2.5">
-                Paste the XML source from <code class="text-stone-300">https://stylesdays.com/post-sitemap.xml</code>. Every <code class="text-stone-300">&lt;loc&gt;</code> URL is parsed into a clean path <code class="text-amber-300">/&lt;slug&gt;</code> editorial guide.
-              </p>
-              <textarea id="rawSitemapXmlInput" rows="5" placeholder="<urlset>&#10;  <url><loc>https://stylesdays.com/moroccan-wool-runners/</loc></url>&#10;  <url><loc>https://stylesdays.com/minimalist-bedroom-ideas-for-2026/</loc></url>&#10;</urlset>" class="w-full bg-stone-950 border border-stone-700 rounded-xl p-3 text-stone-200 font-mono text-[11px] placeholder-stone-600 focus:outline-none focus:border-amber-400"></textarea>
-            </div>
-            <div class="flex flex-wrap items-center justify-between gap-2 mt-3 pt-3 border-t border-stone-800">
-              <span class="text-[11px] text-stone-400">Automatically strips <code class="text-stone-300">/category/</code>, <code class="text-stone-300">/tag/</code>, and non-article URLs.</span>
-              <button id="btnParseRawSitemapXml" class="bg-white hover:bg-stone-200 text-stone-950 font-bold px-4 py-2 rounded-xl transition">
-                Parse XML &amp; Populate Hub Catalog
-              </button>
-            </div>
+        <div class="p-4 bg-stone-900 rounded-xl border border-stone-800 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-stone-400">Paste XML Sitemap Snippet:</span>
+            <button id="btnLoadSampleSitemapXml" class="text-amber-300 hover:underline text-[11px]">Load Sample</button>
           </div>
+          <textarea id="rawSitemapXmlInput" rows="4" class="w-full bg-stone-950 border border-stone-700 rounded-lg p-2 text-white font-mono text-[11px]"></textarea>
+          <button id="btnParseRawSitemapXml" class="bg-white text-stone-950 font-bold px-3.5 py-1.5 rounded-lg">Parse XML</button>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. PINTEREST POLICY COMPLIANCE AUDIT DRAWER (Collapsible Inspector) -->
+  <!-- 3. COMPLIANCE AUDIT DRAWER -->
   <section id="complianceAuditDrawer" class="bg-emerald-950 text-emerald-50 border-b border-emerald-800 hidden">
     <div class="max-w-6xl mx-auto px-4 py-6">
       <div class="flex items-start justify-between pb-4 mb-4 border-b border-emerald-800/80">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-emerald-500 text-emerald-950 rounded">Pinterestbot Ready</span>
-            <h2 class="text-base font-bold text-white">stylesdays.com Technical &amp; Anti-Spam Compliance Verification</h2>
-          </div>
-          <p class="text-xs text-emerald-200/90 mt-1">
-            How this hub protects <code class="text-emerald-300">stylesdays.com</code> and your GitHub Pages domain from Pinterest spam blocks and open-redirect flags.
-          </p>
-        </div>
-        <button id="btnCloseAudit" class="text-emerald-300 hover:text-white text-xs px-2.5 py-1 rounded bg-emerald-900/60 hover:bg-emerald-900">Close ✕</button>
+        <h2 class="text-base font-bold text-white">Pinterest Anti-Spam Compliance Details</h2>
+        <button id="btnCloseAudit" class="text-emerald-300 hover:text-white text-xs px-2.5 py-1 rounded bg-emerald-900/60">Close ✕</button>
       </div>
-
-      <!-- Warning Alert if legacy ?url= parameter was detected and sanitized -->
-      <div id="rawUrlSanitizedAlert" class="hidden mb-4 p-3.5 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-100 text-xs flex items-center justify-between">
-        <div id="rawUrlSanitizedMessage">
-          <strong class="font-bold text-amber-300">Query Parameter Normalized for Pinterest Safety:</strong>
-          We detected a URL parameter in the address bar. If it pointed to <code class="text-white">stylesdays.com</code>, we safely mapped it to its clean <code class="text-white">?post=slug</code> route. Unverified third-party domains in query parameters are blocked to prevent Open-Redirect flags.
-        </div>
+      <div id="rawUrlSanitizedAlert" class="hidden mb-4 p-3 rounded-xl bg-amber-500/20 border border-amber-400/50 text-amber-100 text-xs">
+        Query parameter sanitized to prevent open-redirect flags.
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-        <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
-          <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 2. Clean Path Routing (Zero Query Strings)</span>
-          </div>
-          <p class="text-emerald-100/80 leading-relaxed">
-            Extracts the slug directly from <code class="text-emerald-300">https://&lt;org-name&gt;.github.io/&lt;slug&gt;</code> and prepends <code class="text-emerald-300">https://stylesdays.com/</code> with zero suspicious query parameters.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
-          <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 3. Explicit Standard &lt;a href&gt;</span>
-          </div>
-          <p class="text-emerald-100/80 leading-relaxed">
-            Outbound buttons use semantic HTML <code class="text-emerald-300">&lt;a href="https://stylesdays.com/..."&gt;</code> tags so <code class="text-emerald-300">Pinterestbot</code> verifies the exact destination URL.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
-          <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 4. Substantive Home &amp; DIY Value</span>
-          </div>
-          <p class="text-emerald-100/80 leading-relaxed">
-            Each preview provides a full Executive Summary, numbered Styling &amp; DIY Takeaways, a Room Preparation Checklist, and Project Specifications.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
-          <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 5. Above-the-Fold Disclosure</span>
-          </div>
-          <p class="text-emerald-100/80 leading-relaxed">
-            Clearly identifies the page as the official <code class="text-emerald-300">stylesdays.com</code> editorial hub and supports <code class="text-emerald-300">#ad / rel="sponsored"</code> disclosures when needed.
-          </p>
-        </div>
-
-        <div class="p-3.5 rounded-xl bg-emerald-900/50 border border-emerald-800">
-          <div class="flex items-center gap-2 font-bold text-emerald-300 mb-1">
-            <span>✓ 6. Static GitHub Pages Export</span>
-          </div>
-          <p class="text-emerald-100/80 leading-relaxed">
-            Export standalone <code class="text-emerald-300">&lt;slug&gt;.html</code> files with baked-in OpenGraph tags so non-JS crawlers index every <code class="text-emerald-300">stylesdays.com</code> post cleanly.
-          </p>
-        </div>
-      </div>
+      <p class="text-xs text-emerald-200">Zero query parameter routing, hardcoded outbound semantic anchors, and substantive editorial content enabled.</p>
     </div>
   </section>
 
-  <!-- 4. COMPLIANT EDITORIAL BUILDER & STATIC HTML EXPORTER STUDIO -->
+  <!-- 4. PUBLISHER STUDIO DRAWER -->
   <aside id="publisherStudioDrawer" class="bg-stone-900 text-stone-100 border-b border-stone-800 hidden">
     <div class="max-w-6xl mx-auto px-4 py-6">
-      <div class="flex flex-wrap items-center justify-between gap-2 pb-4 mb-5 border-b border-stone-800">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-[#E60023] text-white rounded">stylesdays Studio</span>
-            <h2 class="text-base font-bold text-white">Customize stylesdays.com Article Preview &amp; Export Static HTML</h2>
-          </div>
-          <p class="text-xs text-stone-400 mt-1">
-            Auto-fetch OpenGraph data from any <code class="text-stone-200">https://stylesdays.com/...</code> post, customize takeaways, and download a static <code class="text-stone-200">.html</code> file for GitHub Pages.
-          </p>
-        </div>
-        <button id="btnCloseStudio" class="text-stone-400 hover:text-white text-xs px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700">Close Studio ✕</button>
+      <div class="flex items-center justify-between pb-4 mb-4 border-b border-stone-800">
+        <h2 class="text-base font-bold text-white">Customize Article Preview &amp; Export Static HTML</h2>
+        <button id="btnCloseStudio" class="text-stone-400 hover:text-white text-xs px-2.5 py-1 rounded bg-stone-800">Close ✕</button>
       </div>
-
-      <!-- Studio Form Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 text-xs">
-        
-        <!-- Row 1: Destination URL + Auto-Fetch OG + Safe Slug -->
-        <div class="md:col-span-7">
-          <label class="block text-stone-300 font-semibold mb-1">1. stylesdays.com Post URL <span class="text-red-400">*</span></label>
-          <div class="flex gap-2">
-            <input type="url" id="studioTargetUrl" placeholder="https://stylesdays.com/gorgeous-ikea-nightstand-hacks/" class="flex-1 bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-[#E60023]">
-            <button id="btnStudioFetchOg" class="bg-stone-700 hover:bg-stone-600 text-white font-semibold px-3.5 py-2 rounded-lg flex items-center gap-1.5 transition shrink-0">
-              <svg id="studioFetchSpinner" class="w-3.5 h-3.5 hidden animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-              </svg>
-              <span>Fetch Live OG Data</span>
-            </button>
-          </div>
-          <p class="text-[11px] text-stone-400 mt-1">Pulls live <code class="text-stone-300">og:title</code>, <code class="text-stone-300">og:description</code>, and featured image from your WordPress post.</p>
-        </div>
-
-        <div class="md:col-span-5">
-          <label class="block text-stone-300 font-semibold mb-1">2. Clean URL Path Slug (Auto-Prepends stylesdays.com/) <span class="text-red-400">*</span></label>
-          <div class="flex items-center bg-stone-800 border border-stone-700 rounded-lg overflow-hidden focus-within:border-[#E60023]">
-            <span class="px-2.5 py-2 bg-stone-950 text-amber-300 font-mono text-[11px] border-r border-stone-700">/</span>
-            <input type="text" id="studioSlug" placeholder="moroccan-wool-runners" class="w-full bg-transparent px-3 py-2 text-white font-mono placeholder-stone-500 focus:outline-none">
-          </div>
-          <p class="text-[11px] text-stone-400 mt-1">Maps <code class="text-stone-300">/&lt;slug&gt;</code> ➔ <code class="text-emerald-400">https://stylesdays.com/&lt;slug&gt;/</code></p>
-        </div>
-
-        <!-- Row 2: Headline & Image URL -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-3 text-xs">
         <div class="md:col-span-6">
-          <label class="block text-stone-300 font-semibold mb-1">3. Editorial Headline</label>
-          <input type="text" id="studioTitle" placeholder="11 Gorgeous Ikea Nightstand Hacks: Affordable Elegance" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-[#E60023]">
+          <label class="block text-stone-300 font-semibold mb-1">Target URL</label>
+          <div class="flex gap-2">
+            <input type="url" id="studioTargetUrl" class="flex-1 bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-white">
+            <button id="btnStudioFetchOg" class="bg-stone-700 hover:bg-stone-600 px-3 py-1 rounded-lg text-white font-semibold">Fetch OG</button>
+          </div>
         </div>
-
+        <div class="md:col-span-6">
+          <label class="block text-stone-300 font-semibold mb-1">Slug</label>
+          <input type="text" id="studioSlug" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-white font-mono">
+        </div>
+        <div class="md:col-span-8">
+          <label class="block text-stone-300 font-semibold mb-1">Title</label>
+          <input type="text" id="studioTitle" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-white">
+        </div>
         <div class="md:col-span-4">
-          <label class="block text-stone-300 font-semibold mb-1">4. Featured Pinterest / Hero Image URL</label>
-          <input type="url" id="studioImage" placeholder="https://stylesdays.com/wp-content/uploads/..." class="w-full bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-[#E60023]">
-        </div>
-
-        <div class="md:col-span-2">
-          <label class="block text-stone-300 font-semibold mb-1">5. Category</label>
-          <select id="studioCategory" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-[#E60023]">
+          <label class="block text-stone-300 font-semibold mb-1">Category</label>
+          <select id="studioCategory" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-white">
             <option value="Home Decor">Home Decor</option>
             <option value="IKEA Hacks">IKEA Hacks</option>
             <option value="IKEA Bedroom">IKEA Bedroom</option>
             <option value="IKEA Storage">IKEA Storage</option>
-            <option value="Guest Bedroom & Daybeds">Guest Bedroom & Daybeds</option>
-            <option value="IKEA Living Room & Entryway">IKEA Living Room & Entryway</option>
+            <option value="Guest Bedroom &amp; Daybeds">Guest Bedroom &amp; Daybeds</option>
           </select>
         </div>
-
-        <!-- Row 3: Executive Summary & Editorial Notes -->
+        <div class="md:col-span-12">
+          <label class="block text-stone-300 font-semibold mb-1">Hero Image URL</label>
+          <input type="url" id="studioImage" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-white">
+        </div>
         <div class="md:col-span-6">
-          <label class="block text-stone-300 font-semibold mb-1">6. Executive Summary / Room Overview</label>
-          <textarea id="studioSummary" rows="3" placeholder="Provide a substantive 2-3 sentence overview of the room styling or IKEA hack guide..." class="w-full bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-[#E60023]"></textarea>
+          <label class="block text-stone-300 font-semibold mb-1">Summary</label>
+          <textarea id="studioSummary" rows="2" class="w-full bg-stone-800 border border-stone-700 rounded-lg p-2 text-white"></textarea>
         </div>
-
         <div class="md:col-span-6">
-          <label class="block text-stone-300 font-semibold mb-1">7. Key Styling &amp; DIY Takeaways (One bullet per line)</label>
-          <textarea id="studioTakeaways" rows="3" placeholder="Soft Neutral Reset: Layer warm linen bedding with muted oat and stone walls&#10;Custom Hardware Swaps: Upgrade standard IKEA knobs with brushed brass pulls" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-[#E60023]"></textarea>
+          <label class="block text-stone-300 font-semibold mb-1">Takeaways (1 per line)</label>
+          <textarea id="studioTakeaways" rows="2" class="w-full bg-stone-800 border border-stone-700 rounded-lg p-2 text-white"></textarea>
         </div>
-
-        <!-- Row 4: Editorial Review Note & Commercial Disclosure Toggle -->
-        <div class="md:col-span-8">
-          <label class="block text-stone-300 font-semibold mb-1">8. stylesdays Editor's Styling Note</label>
-          <input type="text" id="studioEditorNote" placeholder="Why this works in real-life homes: Combines accessible IKEA foundations with high-texture natural wood and linen accents." class="w-full bg-stone-800 border border-stone-700 rounded-lg px-3 py-2 text-white placeholder-stone-500 focus:outline-none focus:border-[#E60023]">
+        <div class="md:col-span-9">
+          <label class="block text-stone-300 font-semibold mb-1">Editor Note</label>
+          <input type="text" id="studioEditorNote" class="w-full bg-stone-800 border border-stone-700 rounded-lg px-2 py-1 text-white">
         </div>
-
-        <div class="md:col-span-4 flex items-center pt-5">
-          <label class="inline-flex items-center gap-2.5 cursor-pointer select-none">
-            <input type="checkbox" id="studioSponsoredCheck" class="w-4 h-4 rounded text-[#E60023] bg-stone-800 border-stone-600 focus:ring-0">
-            <span class="text-stone-300 font-medium">Include <code class="text-amber-400">#ad / Sponsored</code> Affiliate Disclosure</span>
+        <div class="md:col-span-3 flex items-center pt-4">
+          <label class="inline-flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="studioSponsoredCheck" class="rounded text-[#E60023]">
+            <span>Sponsored (#ad)</span>
           </label>
         </div>
       </div>
-
-      <!-- Studio Action Bar: Preview, Export Static HTML, or Copy Safe Link -->
-      <div class="mt-5 pt-4 border-t border-stone-800 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex flex-wrap items-center gap-2">
-          <button id="btnStudioApplyLive" class="bg-stone-700 hover:bg-stone-600 text-white font-semibold px-4 py-2.5 rounded-xl text-xs transition">
-            Save &amp; Preview Clean Path
-          </button>
-          <button id="btnCopySafeSlugUrl" class="bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-200 font-semibold px-3.5 py-2.5 rounded-xl text-xs transition flex items-center gap-1.5">
-            <span>Copy Clean Pin URL (https://&lt;org&gt;.github.io/&lt;slug&gt;)</span>
-          </button>
+      <div class="mt-4 pt-3 border-t border-stone-800 flex justify-between items-center">
+        <div class="flex gap-2">
+          <button id="btnStudioApplyLive" class="bg-stone-700 hover:bg-stone-600 text-white font-semibold px-3 py-1.5 rounded-lg text-xs">Preview</button>
+          <button id="btnCopySafeSlugUrl" class="bg-stone-800 hover:bg-stone-700 text-stone-200 font-semibold px-3 py-1.5 rounded-lg text-xs">Copy Pin URL</button>
         </div>
-
-        <div class="flex items-center gap-2">
-          <!-- Primary Recommended Export: 100% Standalone Static HTML Page -->
-          <button id="btnDownloadStaticHtml" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition flex items-center gap-2 shadow-md">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-            </svg>
-            <span id="downloadBtnText">Download Static moroccan-wool-runners.html</span>
-          </button>
-        </div>
+        <button id="btnDownloadStaticHtml" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold px-4 py-1.5 rounded-lg text-xs">
+          <span id="downloadBtnText">Download Static HTML</span>
+        </button>
       </div>
     </div>
   </aside>
 
-  <!-- 5. STYLESDAYS.COM CATEGORY FILTER & SITEMAP POST SWITCHER BAR -->
-  <div class="bg-white border-b border-stone-200/70 shadow-2xs">
+  <!-- 5. CATEGORY & SITEMAP NAVIGATION BAR -->
+  <div class="bg-white border-b border-stone-200/70 shadow-xs">
     <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-2.5">
-      <!-- Row A: stylesdays Categories -->
       <div class="flex items-center justify-between overflow-x-auto no-scrollbar gap-4">
         <div class="flex items-center space-x-1.5 text-xs shrink-0">
-          <span class="text-stone-400 font-bold uppercase tracking-wider text-[10px] mr-1">Categories:</span>
-          <div id="categoryFilterPills" class="flex items-center gap-1.5">
-            <!-- Populated dynamically with stylesdays.com categories -->
-          </div>
+          <span class="text-stone-400 font-bold uppercase text-[10px] mr-1">Categories:</span>
+          <div id="categoryFilterPills" class="flex items-center gap-1.5"></div>
         </div>
         <div class="text-[11px] text-stone-500 font-mono hidden md:flex items-center gap-2 shrink-0">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span id="activeRouteIndicator">Path: /moroccan-wool-runners → stylesdays.com/moroccan-wool-runners/</span>
+          <span id="activeRouteIndicator">Path: /moroccan-wool-runners</span>
         </div>
       </div>
-
-      <!-- Row B: Sitemap Article Selector Pills -->
       <div class="flex items-center space-x-1.5 text-xs overflow-x-auto no-scrollbar pt-1 border-t border-stone-100">
-        <span class="text-stone-400 font-bold uppercase tracking-wider text-[10px] mr-1 shrink-0">Sitemap Posts:</span>
-        <div id="curatedNavPills" class="flex items-center gap-1.5 shrink-0">
-          <!-- Dynamically populated pills from stylesdays.com registry -->
-        </div>
+        <span class="text-stone-400 font-bold uppercase text-[10px] mr-1 shrink-0">Posts:</span>
+        <div id="curatedNavPills" class="flex items-center gap-1.5 shrink-0"></div>
       </div>
     </div>
   </div>
 
-  <!-- 6. MAIN STANDALONE EDITORIAL CONTENT HUB -->
+  <!-- 6. MAIN CONTENT SECTION -->
   <main class="max-w-6xl w-full mx-auto px-4 py-8 md:py-10 flex-grow">
-    
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       
-      <!-- LEFT / PRIMARY COLUMN: Editorial Feature & Substantive Review (8 cols) -->
-      <article class="lg:col-span-8 bg-white rounded-3xl shadow-[0_12px_32px_-8px_rgba(28,25,23,0.06)] border border-stone-200/80 overflow-hidden">
-        
-        <!-- Hero Image Wrapper -->
+      <!-- Primary Column -->
+      <article class="lg:col-span-8 bg-white rounded-3xl shadow-sm border border-stone-200/80 overflow-hidden">
         <div class="relative w-full aspect-[16/10] bg-stone-100 overflow-hidden">
           <div id="heroSkeleton" class="absolute inset-0 skeleton-shimmer z-0"></div>
-          <img 
-            id="articleHeroImage" 
-            src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85" 
-            alt="stylesdays Editorial Featured Preview" 
-            class="relative z-10 w-full h-full object-cover transition-opacity duration-500"
-            onload="document.getElementById('heroSkeleton').style.display='none';"
-            onerror="this.src='https://placehold.co/1200x750/f5f5f4/78716c?text=stylesdays+Home+Decor+Preview'; document.getElementById('heroSkeleton').style.display='none';"
-          />
-
-          <!-- Category Badge -->
-          <div class="absolute top-4 left-4 z-20 flex items-center gap-2">
-            <span id="articleCategoryBadge" class="bg-white/95 backdrop-blur-md text-stone-900 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-sm border border-stone-200">
-              Home Decor
-            </span>
+          <img id="articleHeroImage" src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85" alt="stylesdays preview" class="relative z-10 w-full h-full object-cover" onload="document.getElementById('heroSkeleton').style.display='none';">
+          <div class="absolute top-4 left-4 z-20">
+            <span id="articleCategoryBadge" class="bg-white/95 text-stone-900 text-xs font-bold uppercase px-3.5 py-1.5 rounded-full shadow-sm">Home Decor</span>
           </div>
-
-          <!-- Transparent Destination Hostname Badge -->
           <div class="absolute bottom-4 right-4 z-20">
-            <div class="flex items-center space-x-1.5 bg-stone-900/90 backdrop-blur-md text-white text-xs font-medium px-3.5 py-1.5 rounded-full shadow-md border border-white/15">
-              <span class="text-stone-300">Published on:</span>
-              <strong id="heroDomainBadge" class="font-semibold text-white">stylesdays.com</strong>
-            </div>
+            <span class="bg-stone-900/90 text-white text-xs px-3.5 py-1.5 rounded-full shadow-md font-semibold" id="heroDomainBadge">stylesdays.com</span>
           </div>
         </div>
 
-        <!-- Article Body Content -->
         <div class="p-6 sm:p-10">
-          
-          <!-- Article Meta Header -->
-          <div class="flex flex-wrap items-center justify-between gap-3 text-xs text-stone-500 font-medium mb-4">
-            <div class="flex flex-wrap items-center gap-2.5">
-              <span class="flex items-center gap-1.5 text-stone-800 font-semibold">
-                <svg class="w-4 h-4 text-[#15803D]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                </svg>
-                <span>stylesdays Editorial Team</span>
-              </span>
+          <div class="flex items-center justify-between text-xs text-stone-500 font-medium mb-4">
+            <div class="flex items-center gap-2">
+              <span class="text-stone-800 font-semibold">stylesdays Editorial Desk</span>
               <span>•</span>
-              <span id="articleReadTime">6 min full read</span>
+              <span id="articleReadTime">6 min read</span>
               <span>•</span>
-              <span id="articleUpdatedDate">2026 Home &amp; DIY Edition</span>
+              <span id="articleUpdatedDate">2026 Edition</span>
             </div>
-
-            <!-- Live OG Refresh Button for any Sitemap Post -->
-            <button id="btnRefreshLiveOgOnCard" class="text-[11px] font-semibold text-stone-600 hover:text-stone-900 bg-stone-100 hover:bg-stone-200 px-2.5 py-1 rounded-lg transition flex items-center gap-1" title="Fetch live OpenGraph image & description from stylesdays.com">
-              <svg id="cardOgSpinner" class="w-3 h-3 hidden animate-spin" fill="none" viewBox="0 0 24 24">
-                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
-              </svg>
-              <span>↻ Sync Live WP Image/Meta</span>
-            </button>
+            <button id="btnRefreshLiveOgOnCard" class="bg-stone-100 hover:bg-stone-200 px-2 py-1 rounded text-[11px] font-semibold text-stone-600">↻ Sync WP Meta</button>
           </div>
 
-          <!-- Editorial Headline -->
-          <h1 id="articleHeadline" class="font-serif-editorial text-2xl sm:text-4xl font-bold text-stone-900 leading-tight mb-5">
-            7 Minimalist Bedroom Ideas for 2026 That Inspire Calm
-          </h1>
+          <h1 id="articleHeadline" class="font-serif-editorial text-2xl sm:text-4xl font-bold text-stone-900 mb-5">7 Minimalist Bedroom Ideas for 2026 That Inspire Calm</h1>
+          <p id="articleSummaryText" class="text-stone-700 text-base leading-relaxed mb-8">Creating a calm, clutter-free bedroom in 2026.</p>
 
-          <!-- Executive Summary Paragraph -->
-          <div class="prose prose-stone max-w-none mb-8">
-            <p id="articleSummaryText" class="text-stone-700 text-base sm:text-lg leading-relaxed font-normal">
-              Creating a calm, clutter-free bedroom in 2026 isn't about cold, empty spaces—it's about warm minimalism layered with organic textures, soft neutral palettes, and purposeful storage. This guide walks through seven real-life bedroom resets, from coastal neutral layering to clean-lined wooden bed frames that anchor your space in tranquility.
-            </p>
-          </div>
-
-          <!-- PRIMARY USER-INITIATED ANCHOR CTA (Above-the-fold accessible & explicit) -->
-          <div class="bg-[#FAF8F5] p-5 sm:p-6 rounded-2xl border border-stone-200/90 mb-8">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div>
-                <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400 block mb-1">Full Illustrated Article &amp; Room Photos</span>
-                <div class="text-sm font-semibold text-stone-900 flex items-center gap-1.5 flex-wrap">
-                  <span>Explore all room photos &amp; step-by-step styling tips on</span>
-                  <span id="ctaInlineDomain" class="underline decoration-[#E60023] decoration-2 underline-offset-4 font-bold">stylesdays.com</span>
-                </div>
-              </div>
-
-              <!-- Standard HTML <a href="..."> — No JS Redirects -->
-              <a 
-                id="primaryAnchorCta" 
-                href="https://stylesdays.com/minimalist-bedroom-ideas-for-2026/" 
-                target="_blank"
-                rel="noopener"
-                class="inline-flex items-center justify-center space-x-2 bg-[#E60023] hover:bg-[#c4001d] text-white font-bold text-sm px-6 py-3.5 rounded-xl shadow-sm transition shrink-0"
-              >
-                <span id="primaryCtaLabel">Read Full Guide on stylesdays.com</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                </svg>
-              </a>
+          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200/90 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <span class="text-[11px] font-bold uppercase text-stone-400 block mb-0.5">Full Guide &amp; Photos</span>
+              <span class="text-sm font-semibold text-stone-900">Explore on <span id="ctaInlineDomain" class="underline decoration-[#E60023]">stylesdays.com</span></span>
             </div>
+            <a id="primaryAnchorCta" href="https://stylesdays.com/moroccan-wool-runners/" target="_blank" rel="noopener" class="bg-[#E60023] hover:bg-[#c4001d] text-white font-bold text-sm px-6 py-3 rounded-xl transition">
+              <span id="primaryCtaLabel">Read Full Guide on stylesdays.com</span> →
+            </a>
           </div>
 
-          <!-- SUBSTANTIVE SECTION 1: Key Takeaways & Styling Highlights -->
           <section class="mb-8">
-            <h2 class="font-serif-editorial text-xl font-bold text-stone-900 mb-4 flex items-center gap-2">
-              <span>Key Styling Ideas &amp; DIY Highlights Inside This Guide</span>
-            </h2>
-            <div id="articleTakeawaysList" class="grid grid-cols-1 gap-3">
-              <!-- Populated dynamically with structured cards -->
-            </div>
+            <h2 class="font-serif-editorial text-xl font-bold text-stone-900 mb-4">Key Takeaways</h2>
+            <div id="articleTakeawaysList" class="grid grid-cols-1 gap-3"></div>
           </section>
 
-          <!-- SUBSTANTIVE SECTION 2: Editor's Curated Review Note -->
-          <section class="mb-8 bg-stone-50 rounded-2xl p-5 sm:p-6 border-l-4 border-stone-900">
-            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-2">
-              stylesdays Design Note • Why It Works in Real-Life Homes
-            </h3>
-            <p id="articleEditorNote" class="text-stone-700 text-sm sm:text-base italic leading-relaxed font-serif-editorial">
-              "Warm minimalism succeeds when you replace visual clutter with tactile warmth—think nubby oatmeal linen duvets, natural oak nightstands, and concealed under-bed storage bins."
-            </p>
+          <section class="mb-8 bg-stone-50 rounded-2xl p-5 border-l-4 border-stone-900">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">stylesdays Design Note</h3>
+            <p id="articleEditorNote" class="text-stone-700 text-sm italic font-serif-editorial leading-relaxed">""</p>
           </section>
 
-          <!-- SUBSTANTIVE SECTION 3: Quick Reference & Resource Specifications -->
           <section class="mb-8">
-            <h2 class="font-serif-editorial text-lg font-bold text-stone-900 mb-3">
-              Guide &amp; Project Overview
-            </h2>
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span class="text-stone-400 block mb-1">Publication</span>
-                <strong id="specDomain" class="text-stone-800 font-semibold truncate block">stylesdays.com</strong>
+              <div class="p-3 bg-stone-50 border border-stone-200 rounded-xl">
+                <span class="text-stone-400 block">Publication</span>
+                <strong id="specDomain" class="text-stone-800">stylesdays.com</strong>
               </div>
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span class="text-stone-400 block mb-1">Guide Format</span>
-                <strong id="specFormat" class="text-stone-800 font-semibold block">Room Styling &amp; Photo Guide</strong>
+              <div class="p-3 bg-stone-50 border border-stone-200 rounded-xl">
+                <span class="text-stone-400 block">Format</span>
+                <strong id="specFormat" class="text-stone-800">Room Styling Guide</strong>
               </div>
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span class="text-stone-400 block mb-1">Skill / Budget Tier</span>
-                <strong class="text-emerald-700 font-semibold block">Real-Life &amp; Budget Friendly</strong>
+              <div class="p-3 bg-stone-50 border border-stone-200 rounded-xl">
+                <span class="text-stone-400 block">Tier</span>
+                <strong class="text-emerald-700">Budget Friendly</strong>
               </div>
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span class="text-stone-400 block mb-1">Category Archive</span>
-                <a id="specCategoryLink" href="https://stylesdays.com/category/home-decor/" target="_blank" rel="noopener" class="text-[#E60023] hover:underline font-semibold block truncate">Home Decor →</a>
+              <div class="p-3 bg-stone-50 border border-stone-200 rounded-xl">
+                <span class="text-stone-400 block">Category</span>
+                <a id="specCategoryLink" href="#" target="_blank" class="text-[#E60023] font-semibold">Home Decor →</a>
               </div>
             </div>
           </section>
 
-          <!-- SECONDARY BOTTOM USER-INITIATED ANCHOR CTA -->
-          <div class="pt-6 border-t border-stone-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="text-xs text-stone-500 text-center sm:text-left">
-              <span>Direct stylesdays Permalink:</span>
-              <span id="bottomFullUrlText" class="font-mono text-stone-700 break-all block sm:inline ml-0 sm:ml-1">https://stylesdays.com/minimalist-bedroom-ideas-for-2026/</span>
+          <div class="pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-xs text-stone-500 break-all">
+              Permalink: <span id="bottomFullUrlText" class="font-mono text-stone-700">https://stylesdays.com/moroccan-wool-runners/</span>
             </div>
-            <a 
-              id="secondaryAnchorCta" 
-              href="https://stylesdays.com/minimalist-bedroom-ideas-for-2026/" 
-              target="_blank"
-              rel="noopener"
-              class="w-full sm:w-auto text-center bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs px-5 py-3 rounded-xl transition shrink-0"
-            >
+            <a id="secondaryAnchorCta" href="#" target="_blank" rel="noopener" class="bg-stone-900 text-white font-semibold text-xs px-5 py-2.5 rounded-xl">
               Continue to stylesdays.com →
             </a>
           </div>
-
         </div>
       </article>
 
-      <!-- RIGHT SIDEBAR: Room Prep Checklist, Direct Category Links & Sitemap Tools (4 cols) -->
+      <!-- Sidebar -->
       <aside class="lg:col-span-4 space-y-6">
-        
-        <!-- Quick Room Styling / DIY Checklist Box -->
         <div class="bg-[#F1EDE6] rounded-3xl p-6 border border-stone-200/90">
-          <div class="flex items-center justify-between mb-2">
-            <h3 class="font-serif-editorial text-base font-bold text-stone-900">
-              Room &amp; DIY Action Checklist
-            </h3>
-            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-stone-800 text-white">Interactive</span>
-          </div>
-          <p class="text-xs text-stone-600 mb-4">
-            Key prep steps before diving into the full tutorial on <strong id="sidebarDomainName" class="text-stone-800">stylesdays.com</strong>:
-          </p>
-          <div id="sidebarChecklistItems" class="space-y-2.5 text-xs text-stone-700">
-            <!-- Populated dynamically -->
-          </div>
+          <h3 class="font-serif-editorial text-base font-bold text-stone-900 mb-2">Room &amp; DIY Checklist</h3>
+          <p class="text-xs text-stone-600 mb-4">Quick prep steps before diving in:</p>
+          <div id="sidebarChecklistItems" class="space-y-2 text-xs text-stone-700"></div>
         </div>
 
-        <!-- stylesdays.com Official Category Directories -->
         <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs">
-          <span class="text-[10px] font-bold uppercase tracking-wider text-stone-400 block mb-1">Explore by Topic</span>
-          <h3 class="font-serif-editorial text-base font-bold text-stone-900 mb-3">stylesdays.com Hub Sections</h3>
-          <div class="space-y-2 text-xs">
-            <a href="https://stylesdays.com/category/home-decor/" target="_blank" rel="noopener" class="flex items-center justify-between p-2.5 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-800 font-medium transition">
-              <span>✨ Home Decor &amp; Real-Life Styling</span>
-              <span class="text-stone-400">→</span>
-            </a>
-            <a href="https://stylesdays.com/category/guest-bedroom-ideas-daybed/" target="_blank" rel="noopener" class="flex items-center justify-between p-2.5 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-800 font-medium transition">
-              <span>🛏️ Guest Bedroom &amp; Daybed Ideas</span>
-              <span class="text-stone-400">→</span>
-            </a>
-            <a href="https://stylesdays.com/gorgeous-ikea-nightstand-hacks/" target="_blank" rel="noopener" class="flex items-center justify-between p-2.5 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-800 font-medium transition">
-              <span>🔨 IKEA Hacks &amp; Custom Upgrades</span>
-              <span class="text-stone-400">→</span>
-            </a>
-            <a href="https://stylesdays.com/ikea-bedroom-storage-ideas/" target="_blank" rel="noopener" class="flex items-center justify-between p-2.5 rounded-xl bg-stone-50 hover:bg-stone-100 text-stone-800 font-medium transition">
-              <span>📦 IKEA PAX &amp; Bedroom Storage</span>
-              <span class="text-stone-400">→</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Shareable Pinterest Hub Link Box -->
-        <div class="bg-white rounded-3xl p-6 border border-stone-200/80 shadow-xs">
-          <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] font-bold uppercase tracking-wider text-[#E60023]">Clean Pinterest Destination URL</span>
-            <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">Zero Query Params</span>
-          </div>
-          <h3 class="text-sm font-bold text-stone-900 mb-1.5">Clean Path Pin Link</h3>
-          <p class="text-xs text-stone-500 leading-relaxed mb-3">
-            Extracts <code id="sidebarSlugCodeBadge" class="bg-stone-100 px-1 py-0.5 rounded text-stone-800">/moroccan-wool-runners</code> from the path and automatically prepends <code class="bg-stone-100 px-1 py-0.5 rounded text-stone-800">https://stylesdays.com/</code>:
-          </p>
-          <div class="bg-stone-50 border border-stone-200 rounded-xl p-2.5 font-mono text-[11px] text-stone-800 break-all mb-2" id="sidebarPinSlugUrlBox">
+          <span class="text-[10px] font-bold uppercase text-[#E60023]">Clean Pinterest Link</span>
+          <div class="bg-stone-50 border border-stone-200 rounded-xl p-2.5 font-mono text-[11px] text-stone-800 break-all my-2" id="sidebarPinSlugUrlBox">
             https://stylesdays-hub.github.io/moroccan-wool-runners
           </div>
-          <div class="text-[11px] text-stone-500 font-mono mb-3 truncate">
-            ↳ Target: <span id="sidebarTargetUrlPreview" class="text-emerald-700 font-semibold">https://stylesdays.com/moroccan-wool-runners/</span>
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <button id="btnSidebarCopyPinUrl" class="py-2 px-3 rounded-xl bg-stone-900 hover:bg-stone-800 text-white font-semibold text-xs transition">
-              Copy Clean URL
-            </button>
-            <button onclick="document.getElementById('btnDownloadStaticHtml').click()" class="py-2 px-3 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-800 font-semibold text-xs transition">
-              Export .HTML
-            </button>
-          </div>
+          <button id="btnSidebarCopyPinUrl" class="w-full py-2 rounded-xl bg-stone-900 text-white font-semibold text-xs transition">
+            Copy Clean URL
+          </button>
         </div>
-
       </aside>
-  <!-- APPLICATION SCRIPT (stylesdays.com Clean Path Slug Extraction, Automatic Prefixing & Static/404 Exporter) -->
+
+    </div>
+
+    <!-- Related Articles Section -->
+    <section class="mt-12">
+      <h2 class="font-serif-editorial text-2xl font-bold text-stone-900 mb-6">More Curated Guides</h2>
+      <div id="relatedGuidesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
+    </section>
+  </main>
+
+  <footer class="w-full bg-stone-100 border-t border-stone-200 py-6 text-center text-xs text-stone-500 mt-12">
+    © <span id="footerYear">2026</span> stylesdays Editorial Hub. All rights reserved.
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toastBanner" class="fixed bottom-6 right-6 bg-stone-950 text-white text-xs px-4 py-3 rounded-2xl shadow-xl transition-all duration-300 transform translate-y-20 opacity-0 z-50 flex items-center gap-2">
+    <span class="text-emerald-400 font-bold">✓</span>
+    <span id="toastMessage"></span>
+  </div>
+
+  <!-- APPLICATION SCRIPT -->
   <script>
-    /**
-     * CANONICAL DESTINATION DOMAIN PREFIX
-     * Every extracted slug from https://<org-name>.github.io/<slug> automatically gets
-     * https://stylesdays.com/ prepended to form https://stylesdays.com/<slug>/
-     */
     const STYLESDAYS_BASE_ORIGIN = 'https://stylesdays.com/';
 
-    /**
-     * Helper: Build canonical stylesdays.com URL from any clean slug
-     */
     function buildStylesdaysUrlFromSlug(slug) {
       const cleaned = String(slug || '')
         .trim()
@@ -794,24 +408,15 @@
       return `${STYLESDAYS_BASE_ORIGIN}${cleaned}/`;
     }
 
-    /**
-     * STYLESDAYS.COM OFFICIAL CATEGORIES
-     */
     const STYLESDAYS_CATEGORIES = [
-      { id: 'all', name: 'All Guides', url: 'https://stylesdays.com/' },
-      { id: 'Home Decor', name: 'Home Decor', url: 'https://stylesdays.com/category/home-decor/' },
-      { id: 'IKEA Hacks', name: 'IKEA Hacks', url: 'https://stylesdays.com/gorgeous-ikea-nightstand-hacks/' },
-      { id: 'IKEA Bedroom', name: 'IKEA Bedroom', url: 'https://stylesdays.com/8-stunning-ikea-hemnes-bed-hacks/' },
-      { id: 'IKEA Storage', name: 'IKEA Storage', url: 'https://stylesdays.com/ikea-bedroom-storage-ideas/' },
-      { id: 'Guest Bedroom & Daybeds', name: 'Guest Bedroom & Daybeds', url: 'https://stylesdays.com/category/guest-bedroom-ideas-daybed/' }
+      { id: 'all', name: 'All Guides' },
+      { id: 'Home Decor', name: 'Home Decor' },
+      { id: 'IKEA Hacks', name: 'IKEA Hacks' },
+      { id: 'IKEA Bedroom', name: 'IKEA Bedroom' },
+      { id: 'IKEA Storage', name: 'IKEA Storage' },
+      { id: 'Guest Bedroom & Daybeds', name: 'Guest Bedroom & Daybeds' }
     ];
 
-    /**
-     * PRE-LOADED REAL STYLESDAYS.COM SITEMAP POST REGISTRY
-     * Includes 'moroccan-wool-runners' + 8 core stylesdays.com guides.
-     * Any other slug visited at https://<org-name>.github.io/<slug> is dynamically synthesized
-     * with https://stylesdays.com/<slug>/ and live-synced via WP REST / OpenGraph API!
-     */
     const CURATED_REGISTRY = {
       'moroccan-wool-runners': {
         slug: 'moroccan-wool-runners',
@@ -819,24 +424,24 @@
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: 'Moroccan Wool Runners: Handwoven Hallway & Kitchen Styling Guide',
         category: 'Home Decor',
-        readTime: '6 min full read',
-        updatedDate: '2026 Artisan Textile Edition',
+        readTime: '6 min read',
+        updatedDate: '2026 Artisan Edition',
         image: 'https://images.unsplash.com/photo-1600166898405-da9535204843?auto=format&fit=crop&w=1200&q=85',
-        summary: 'Handwoven Moroccan wool runners bring immediate architectural warmth, organic texture, and sound-softening comfort to narrow hallways, kitchens, and bedside zones. Explore how authentic Berber knots, muted olive green and blush pink geometric motifs, and braided fringe details elevate modern warm-minimalist homes.',
+        summary: 'Handwoven Moroccan wool runners bring immediate architectural warmth, organic texture, and sound-softening comfort to narrow hallways, kitchens, and bedside zones.',
         takeaways: [
-          'Olive Green, Terracotta & Blush Pink Palettes: Balance warm oak or tile floors with low-contrast geometric lozenge motifs dyed in muted botanical tones.',
-          'High-Pile Beni Ourain vs. Flatweave Kilim Runners: Choose plush hand-knotted wool for barefoot bedroom corridors and tighter Boujad or Azilal weaves for high-traffic kitchens.',
-          'The 4-Inch Floor Border Rule: Leave 4 to 6 inches of visible hardwood or tile on both sides of your runner so narrow hallways feel wider and intentionally framed.',
-          'Non-Slip Felt + Rubber Underlayment: Pair handwoven wool runners with a dense 1/4-inch eco-felt pad to protect knot tension and prevent creeping.'
+          'Olive Green, Terracotta & Blush Pink Palettes: Balance warm oak or tile floors with muted botanical tones.',
+          'High-Pile Beni Ourain vs. Flatweave: Choose plush hand-knotted wool for bedrooms and tight weaves for kitchens.',
+          'The 4-Inch Border Rule: Leave 4 to 6 inches of visible flooring on both sides so narrow spaces feel wider.',
+          'Non-Slip Felt Pad: Protect handwoven knot tension with a dense 1/4-inch eco-felt pad.'
         ],
-        editorNote: 'A vintage or artisan-woven Moroccan wool runner is the fastest way to soften long architectural sightlines and add soulful texture to a modern neutral home.',
+        editorNote: 'A vintage or artisan-woven Moroccan wool runner is the fastest way to soften long architectural sightlines.',
         checklist: [
-          'Measure hallway width and subtract 8–10 inches for ideal runner width',
-          'Account for 3–4 inches of braided cotton or wool fringe at both ends',
-          'Trim a dual-surface felt/rubber rug pad 2 inches smaller than runner edges',
-          'Vacuum with suction-only (beater bar off) to preserve hand-knotted wool fibers'
+          'Measure hallway width and subtract 8-10 inches',
+          'Account for 3-4 inches of fringe at both ends',
+          'Trim felt pad 2 inches smaller than runner edges',
+          'Vacuum with suction-only (beater bar off)'
         ],
-        format: 'Textile & Room Styling Guide',
+        format: 'Textile Guide',
         isSponsored: false
       },
       'minimalist-bedroom-ideas-for-2026': {
@@ -845,50 +450,24 @@
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: '7 Minimalist Bedroom Ideas for 2026 That Inspire Calm',
         category: 'Home Decor',
-        readTime: '6 min full read',
-        updatedDate: '2026 Home Decor Guide',
+        readTime: '6 min read',
+        updatedDate: '2026 Guide',
         image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
-        summary: 'Creating a calm, clutter-free bedroom in 2026 isn\'t about sterile white boxes—it\'s about warm minimalism layered with organic textures, soft neutral resets, and clean-lined furniture. Discover seven approachable bedroom styling concepts that balance visual quiet with everyday coziness.',
+        summary: 'Warm minimalism layered with organic textures, soft neutral resets, and clean-lined furniture for calm, clutter-free bedrooms.',
         takeaways: [
-          'Soft Neutral Reset: Layer warm alabaster, oat, and greige tones across walls and linen bedding to soften natural morning light.',
-          'Effortless Coastal Neutral: Pair light bleached oak bedside tables with breathable gauzy curtains and woven seagrass textures.',
-          'Clean Lines, Cozy Finish: Anchor low-profile platform beds with plush high-pile wool rugs and upholstered headboards for acoustic calm.',
-          'Modern Warm Balance: Keep bedside surfaces 80% clear by using wall-mounted sconces and concealed drawer charging stations.'
+          'Soft Neutral Reset: Layer alabaster, oat, and greige tones across walls and linen bedding.',
+          'Coastal Neutral: Pair bleached oak nightstands with breathable gauzy curtains.',
+          'Acoustic Warmth: Anchor platform beds with plush wool rugs.',
+          'Clear Surfaces: Keep nightstand surfaces 80% clear with wall sconces.'
         ],
-        editorNote: 'Warm minimalism succeeds in real-life homes when you replace visual clutter with tactile warmth—think washed linen duvets, natural wood grain, and hidden under-bed storage.',
+        editorNote: 'Warm minimalism succeeds when you replace visual clutter with tactile warmth.',
         checklist: [
-          'Swap mismatched visual clutter on nightstands for a single ceramic tray',
-          'Choose 2700K warm white bulbs for bedside lamps and sconces',
-          'Layer 3 distinct textures (washed linen, raw wood, boucle or wool)',
-          'Use concealed under-bed bins for out-of-season bedding'
+          'Swap mismatched nightstand items for a ceramic tray',
+          'Use 2700K warm white bulbs',
+          'Layer linen, raw wood, and wool textures',
+          'Use concealed under-bed bins'
         ],
-        format: 'Room Styling & Photo Guide',
-        isSponsored: false
-      },
-      'stylish-home-decor-ideas-for-real-life-homes': {
-        slug: 'stylish-home-decor-ideas-for-real-life-homes',
-        targetUrl: 'https://stylesdays.com/stylish-home-decor-ideas-for-real-life-homes/',
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: '7 Stylish Home Decor Ideas for Real Life Homes',
-        category: 'Home Decor',
-        readTime: '6 min full read',
-        updatedDate: 'Real-Life Styling Edition',
-        image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85',
-        summary: 'High-style interiors should still function effortlessly for busy households, pets, and everyday living. This guide breaks down seven practical home decor upgrades—from mixing natural wood tones to selecting durable, clean-lined silhouettes that look curated rather than staged.',
-        takeaways: [
-          'Wooden Furniture with Clean Lines: Anchor living and dining spaces with timeless shaker and mid-century wood profiles that outlast micro-trends.',
-          'Mixed Wood Finishes for a Collected Look: Combine warm walnut, white oak, and matte black accents using the 70/30 dominant-to-accent wood rule.',
-          'Natural Wood Accents & Architectural Warmth: Introduce fluted wood trays, floating shelves, and woven baskets to soften modern drywall rooms.',
-          'Washable Performance Textiles: Layer slipcovered sofas and stain-resistant vintage-style rugs that handle daily family traffic.'
-        ],
-        editorNote: 'The secret to a home that looks effortlessly pulled together is repeating your primary wood tone at least three times across the room.',
-        checklist: [
-          'Identify your room\'s dominant wood undertone (warm, cool, or neutral)',
-          'Add one woven or organic texture per seating zone',
-          'Group coffee table decor in odd numbers (rule of threes)',
-          'Leave 30 inches of clear walking flow around main seating'
-        ],
-        format: 'Interior Styling Guide',
+        format: 'Room Guide',
         isSponsored: false
       },
       'gorgeous-ikea-nightstand-hacks': {
@@ -897,171 +476,34 @@
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: '11 Gorgeous Ikea Nightstand Hacks: Affordable Elegance',
         category: 'IKEA Hacks',
-        readTime: '7 min full read',
-        updatedDate: 'DIY & IKEA Hack Series',
+        readTime: '7 min read',
+        updatedDate: 'DIY Series',
         image: 'https://images.unsplash.com/photo-1532372320572-cda25653a26d?auto=format&fit=crop&w=1200&q=85',
-        summary: 'Transform basic flat-pack bedside tables like the IKEA RAST, HEMNES, TARVA, and MALM into custom designer-look nightstands on a weekend budget. From half-round wooden dowel fluting to calming soft pastel lacquer and solid brass hardware swaps, these 11 hacks elevate any bedroom.',
+        summary: 'Transform basic flat-pack bedside tables like the IKEA RAST, HEMNES, and TARVA into designer pieces with dowel fluting, paint, and custom legs.',
         takeaways: [
-          'Calming Soft Pastel & Earthy Paint Finishes: Prep laminate or raw pine with shellac bonding primer before rolling on muted sage, mushroom, or warm taupe enamel.',
-          'Fluted & Reeded Drawer Overlays: Attach pine half-round trim molding to TARVA or MALM drawer fronts for rich architectural texture.',
-          'Bespoke Hardware & Leg Upgrades: Swap standard knobs for unlacquered brass pulls, leather loops, or tapered mid-century wood legs.',
-          'Faux Marble & Stone Contact Wraps: Add water-resistant stone-look tops or custom cut plywood waterfall edges.'
+          'Prep laminate with shellac bonding primer before enamel paint.',
+          'Add pine half-round molding to drawer fronts for architectural texture.',
+          'Swap standard knobs for brass pulls or tapered mid-century legs.'
         ],
-        editorNote: 'Lightly sanding with 220-grit paper and using a high-adhesion primer is the single most important step to give hacked IKEA nightstands a factory-sprayed boutique finish.',
+        editorNote: 'Sanding with 220-grit paper and using high-adhesion primer makes all the difference.',
         checklist: [
-          'Measure bedside mattress height before selecting leg risers',
-          'Degrease and scuff-sand IKEA laminate surfaces with 220-grit sandpaper',
-          'Apply 1 coat of bonding primer + 2 thin coats of satin cabinet enamel',
-          'Use a hardware drilling template jig for symmetrical pull placement'
+          'Measure mattress height before choosing leg risers',
+          'Scuff-sand laminate surfaces with 220-grit sandpaper',
+          'Use a hardware template jig for symmetrical drilling'
         ],
-        format: 'Step-by-Step IKEA Hack Guide',
-        isSponsored: false
-      },
-      'ikea-bedroom-storage-ideas': {
-        slug: 'ikea-bedroom-storage-ideas',
-        targetUrl: 'https://stylesdays.com/ikea-bedroom-storage-ideas/',
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: 'Enhance Your Space with 11 Genius IKEA Storage Ideas',
-        category: 'IKEA Storage',
-        readTime: '6 min full read',
-        updatedDate: 'Small Space Organization',
-        image: 'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=1200&q=85',
-        summary: 'Maximize every square inch of compact bedrooms and reach-in closets using modular IKEA storage systems. These 11 clever organization setups combine SKUBB dividers, KALLAX closet inserts, and bridge shelving above the bed to double your storage capacity without crowding the floor.',
-        takeaways: [
-          'Over-the-Bed Bridge Cabinets: Frame your headboard with wall-mounted EKET or BESTÅ cabinets to utilize dead vertical wall space.',
-          'Drawer-Within-a-Drawer Micro Zoning: Use modular felt and bamboo inserts inside MALM and HEMNES dressers so small accessories never tangle.',
-          'Under-Bed Rolling Linen Vaults: Tuck zippered dust-proof storage cases or wheeled drawers beneath bed frames for seasonal duvets and shoes.',
-          'Behind-the-Door Vertical Rails: Mount slim pegboards and shallow racks for scarves, handbags, and daily jewelry.'
-        ],
-        editorNote: 'Categorizing clothing by fold height and adding SKUBB compartment boxes immediately adds 35% more usable space to standard IKEA dresser drawers.',
-        checklist: [
-          'Measure under-bed clearance height before ordering rolling bins',
-          'Anchor all tall wardrobes and dressers securely to wall studs',
-          'Group drawer dividers by daily-use vs. occasional items',
-          'Add motion-sensor LED strips inside deep wardrobe frames'
-        ],
-        format: 'Organization & Storage Blueprint',
-        isSponsored: false
-      },
-      '8-stunning-ikea-hemnes-bed-hacks': {
-        slug: '8-stunning-ikea-hemnes-bed-hacks',
-        targetUrl: 'https://stylesdays.com/8-stunning-ikea-hemnes-bed-hacks/',
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: '8 Stunning Ikea Hemnes Bed Hacks for Elevated Bedrooms',
-        category: 'IKEA Bedroom',
-        readTime: '6 min full read',
-        updatedDate: 'IKEA Bedroom Series',
-        image: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=85',
-        summary: 'The classic slatted IKEA HEMNES bed frame and daybed are sturdy, budget-friendly staples that lend themselves to extraordinary DIY transformations. Discover 8 creative HEMNES bed hacks—including woven cane webbing panels, slipcovered linen headboards, and built-in alcove framing.',
-        takeaways: [
-          'Woven Cane Webbing Headboard Inserts: Staple soaked natural rattan cane webbing behind the HEMNES headboard slats for a breezy boutique hotel aesthetic.',
-          'Upholstered Foam & Linen Slipcovers: Pad the slatted backrest with high-density foam and a tailored Belgian linen cover for comfortable upright reading.',
-          'Built-In Daybed Bookcase Alcove: Flank a HEMNES daybed with BILLY bookcases and crown molding to create a custom window-seat guest nook.',
-          'Two-Tone Wood & Matte Paint Refinishing: Pair a warm stained top rail with soft cream or charcoal painted frame rails.'
-        ],
-        editorNote: 'The HEMNES daybed hack flanked by built-in shelves is one of the smartest ways to make a home office double as a welcoming guest bedroom.',
-        checklist: [
-          'Soak natural cane webbing in warm water for 30 mins before stapling taut',
-          'Reinforce bed slats with center support tape for zero squeaks',
-          'Swap standard HEMNES drawer knobs on daybeds for antique brass pulls',
-          'Layer Euro shams along the back rail when styling as a sofa'
-        ],
-        format: 'IKEA Bedroom Hack Guide',
-        isSponsored: false
-      },
-      'ikea-headboard-hacks': {
-        slug: 'ikea-headboard-hacks',
-        targetUrl: 'https://stylesdays.com/ikea-headboard-hacks/',
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: '7 Brilliant IKEA Headboard Hacks to Transform Your Bedroom',
-        category: 'IKEA Hacks',
-        readTime: '5 min full read',
-        updatedDate: 'DIY Bedroom Feature',
-        image: 'https://images.unsplash.com/photo-1540518614846-7ede433c4573?auto=format&fit=crop&w=1200&q=85',
-        summary: 'A statement headboard sets the architectural focal point for your entire bedroom, and you don\'t need a four-figure custom upholstery budget to build one. Explore 7 ingenious IKEA headboard hacks using acoustic wood slat panels, hung leather cushions, and hidden storage ledges.',
-        takeaways: [
-          'Wall-to-Wall Fluted Wood Slat Wall: Combine IKEA wood panels or MANDAL-inspired birch slats with floating bedside shelves.',
-          'Hanging Cognac Leather Cushion Headboard: Suspend quilted seat cushions or pillows from a matte black curtain rod mounted behind the bed.',
-          'Hidden Storage Picture-Ledge Headboard: Stack MOSSLANDA ledges behind a low bed frame for books, framed art, and concealed cord routing.',
-          'Arch & Channel-Tufted Foam Panels: Wrap MDF boards in batting and boucle fabric for a plush designer silhouette.'
-        ],
-        editorNote: 'Extending a DIY wood slat headboard 18 inches past each side of the mattress visually widens narrow bedrooms and creates space for integrated reading sconces.',
-        checklist: [
-          'Use heavy-duty French cleats when mounting wide DIY headboards',
-          'Confirm finished headboard height rises 24–30 inches above mattress top',
-          'Pre-route lamp and charger cables behind the panel before mounting',
-          'Treat fabric headboards with stain-repellent textile spray'
-        ],
-        format: 'DIY Headboard Tutorial',
-        isSponsored: false
-      },
-      'creative-ikea-pax-organization-dream-closets': {
-        slug: 'creative-ikea-pax-organization-dream-closets',
-        targetUrl: 'https://stylesdays.com/creative-ikea-pax-organization-dream-closets/',
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: '8 Creative Ikea Pax Organization Ideas for Dream Closets',
-        category: 'IKEA Storage',
-        readTime: '7 min full read',
-        updatedDate: 'Closet Design Guide',
-        image: 'https://images.unsplash.com/photo-1558997519-83ea9252edf8?auto=format&fit=crop&w=1200&q=85',
-        summary: 'Turn standard IKEA PAX wardrobe frames into a bespoke boutique dressing room with smart KOMPLEMENT interior layouts and custom trim work. Learn how to plan hanging zones, glass-front jewelry drawers, pull-out trouser racks, and floor-to-ceiling baseboard molding.',
-        takeaways: [
-          'Boutique Glass-Front & Velvet Jewelry Trays: Stack shallow KOMPLEMENT pull-out trays lined with felt dividers beneath a tempered glass shelf.',
-          'Floor-to-Ceiling Built-In Molding Trick: Mount PAX frames on a 2x4 lumber plinth base and wrap the top gap with ceiling crown molding.',
-          'Double-Hanging vs. Long-Garment Zoning: Dedicate 2/3 of width to stacked double rods for shirts/blouses and 1/3 to full-length coats and dresses.',
-          'Integrated Sensor Lighting & Valet Rods: Install warm ÖVERSIDAN LED wardrobe strips that illuminate automatically when doors open.'
-        ],
-        editorNote: 'Building a level 2x4 base frame and scribing MDF filler strips to your walls makes a $900 IKEA PAX system indistinguishable from a $6,000 custom carpenter closet.',
-        checklist: [
-          'Check ceiling height clearance (PAX requires ~1 inch extra for upright tilting)',
-          'Inventory your wardrobe by hanging length before ordering KOMPLEMENT inserts',
-          'Secure adjacent PAX frames together using cabinet connector screws',
-          'Caulk and paint outer trim filler strips to match bedroom wall color'
-        ],
-        format: 'Closet & PAX Planning Guide',
-        isSponsored: false
-      },
-      'serene-blue-grey-bedroom-ideas-2': {
-        slug: 'serene-blue-grey-bedroom-ideas-2',
-        targetUrl: 'https://stylesdays.com/serene-blue-grey-bedroom-ideas-2/',
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: '9 Serene Blue and Grey Bedroom Ideas for Tranquility',
-        category: 'Home Decor',
-        readTime: '5 min full read',
-        updatedDate: 'Color Palette Series',
-        image: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=1200&q=85',
-        summary: 'Blue-grey is one of the most restorative color palettes in interior psychology, known to lower heart rates and promote deeper sleep. Explore 9 sophisticated ways to balance cool slate, dusty chambray, and misty grey with warm natural wood and brass accents so your bedroom feels cozy rather than chilly.',
-        takeaways: [
-          'Warming Up Cool Blue-Grey Walls: Balance slate or pigeon-blue feature walls with honey oak nightstands, woven jute rugs, and warm brass sconces.',
-          'Tone-on-Tone Layered Bedding: Mix crisp white percale sheets with washed chambray duvets and charcoal velvet lumbar pillows.',
-          'Soft Limewash & Matte Chalk Finishes: Use velvety matte wall finishes in dusty blue-grey to diffuse harsh afternoon glare.',
-          'Curtain Framing for Airy Contrast: Hang floor-to-ceiling ivory linen drapery to keep deep blue-grey walls feeling bright and expansive.'
-        ],
-        editorNote: 'Whenever decorating with cool blue and grey tones, always introduce at least 20% warm elements—like natural wood, cognac leather, or warm brass—to keep the space inviting.',
-        checklist: [
-          'Test blue-grey paint swatches in both morning and evening lamplight',
-          'Pair cool grey bedding with warm ivory or oatmeal throw blankets',
-          'Choose matte or eggshell wall finishes for a velvety, restful look',
-          'Hang curtain rods 6 inches above window trim to maximize natural light'
-        ],
-        format: 'Color Palette & Styling Guide',
+        format: 'IKEA Hack Guide',
         isSponsored: false
       }
     };
 
-    // Active application state (defaults to moroccan-wool-runners if at root /)
     let currentArticleSlug = 'moroccan-wool-runners';
     let currentCategoryFilter = 'all';
 
-    // Initialize on DOMContentLoaded
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('footerYear').textContent = new Date().getFullYear();
-
-      // Detect actual hostname if hosted on *.github.io
       if (window.location.hostname && window.location.hostname.endsWith('.github.io')) {
         document.getElementById('ghOrgDomainInput').value = window.location.hostname;
       }
-
       resolveCleanPathRoute();
       bindUIEvents();
       renderCategoryPills();
@@ -1069,112 +511,62 @@
       renderActiveArticle();
       updateSitemapCounter();
 
-      // Handle browser Back/Forward navigation on clean paths
-      window.addEventListener('popstate', (event) => {
-        if (event.state && event.state.slug) {
-          const ensured = ensureStylesdaysSlugExists(event.state.slug);
-          if (ensured) {
-            currentArticleSlug = ensured;
-            renderNavigationPills();
-            renderActiveArticle();
-          }
-        } else {
-          resolveCleanPathRoute();
+      window.addEventListener('popstate', (e) => {
+        if (e.state && e.state.slug) {
+          currentArticleSlug = e.state.slug;
           renderNavigationPills();
           renderActiveArticle();
         }
       });
     });
 
-    /**
-     * SMART SLUG SYNTHESIZER WITH AUTOMATIC `https://stylesdays.com/<slug>/` PREFIXING
-     * Whenever any slug is extracted from `https://<org-name>.github.io/<slug>`,
-     * this automatically prepends `https://stylesdays.com/` (`https://stylesdays.com/<slug>/`)
-     * and builds a rich editorial entry + triggers live WP/OpenGraph metadata resolution.
-     */
     function ensureStylesdaysSlugExists(rawSlugInput) {
       if (!rawSlugInput) return null;
-
-      // Strip protocol/domain if a full URL was passed, strip .html and slashes
-      let cleanSlug = String(rawSlugInput)
-        .trim()
-        .toLowerCase()
+      let cleanSlug = String(rawSlugInput).trim().toLowerCase()
         .replace(/^https?:\/\/[^/]+\//i, '')
         .replace(/\.html?$/i, '')
         .replace(/^\/+|\/+$/g, '');
 
-      // If path has multiple segments (e.g. /repo-name/moroccan-wool-runners), take the final slug segment
       if (cleanSlug.includes('/')) {
         const parts = cleanSlug.split('/').filter(Boolean);
         cleanSlug = parts[parts.length - 1] || '';
       }
-
       cleanSlug = cleanSlug.replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
 
-      // Ignore system/empty segments
-      if (
-        !cleanSlug ||
-        cleanSlug === 'index' ||
-        cleanSlug === '404' ||
-        cleanSlug.startsWith('category') ||
-        cleanSlug.startsWith('tag') ||
-        cleanSlug.startsWith('wp-')
-      ) {
-        return null;
-      }
+      if (!cleanSlug || cleanSlug === 'index' || cleanSlug === '404') return null;
 
-      // Always guarantee targetUrl is https://stylesdays.com/<slug>/
-      const canonicalStylesdaysUrl = buildStylesdaysUrlFromSlug(cleanSlug);
-
+      const canonicalUrl = buildStylesdaysUrlFromSlug(cleanSlug);
       if (CURATED_REGISTRY[cleanSlug]) {
-        CURATED_REGISTRY[cleanSlug].targetUrl = canonicalStylesdaysUrl;
+        CURATED_REGISTRY[cleanSlug].targetUrl = canonicalUrl;
         return cleanSlug;
       }
 
-      // Humanize slug into editorial headline
-      const humanizedTitle = cleanSlug
-        .split('-')
-        .map(w => {
-          const lw = w.toLowerCase();
-          if (lw === 'ikea') return 'IKEA';
-          if (lw === 'pax') return 'PAX';
-          if (lw === 'hemnes') return 'HEMNES';
-          if (lw === 'diy') return 'DIY';
-          return w.charAt(0).toUpperCase() + w.slice(1);
-        })
+      const humanizedTitle = cleanSlug.split('-')
+        .map(w => w.charAt(0).toUpperCase() + w.slice(1))
         .join(' ');
-
-      // Auto-detect category from slug keywords
-      let detectedCategory = 'Home Decor';
-      if (cleanSlug.includes('hack')) detectedCategory = 'IKEA Hacks';
-      else if (cleanSlug.includes('storage') || cleanSlug.includes('pax') || cleanSlug.includes('closet') || cleanSlug.includes('organization')) detectedCategory = 'IKEA Storage';
-      else if (cleanSlug.includes('daybed') || cleanSlug.includes('guest')) detectedCategory = 'Guest Bedroom & Daybeds';
-      else if (cleanSlug.includes('ikea') && cleanSlug.includes('bedroom')) detectedCategory = 'IKEA Bedroom';
 
       CURATED_REGISTRY[cleanSlug] = {
         slug: cleanSlug,
-        targetUrl: canonicalStylesdaysUrl,
+        targetUrl: canonicalUrl,
         categoryUrl: 'https://stylesdays.com/category/home-decor/',
         title: humanizedTitle,
-        category: detectedCategory,
-        readTime: '6 min full read',
-        updatedDate: 'stylesdays.com Editorial Feature',
+        category: 'Home Decor',
+        readTime: '6 min read',
+        updatedDate: 'stylesdays Editorial',
         image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
-        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. Automatically mapped from /${cleanSlug} to ${canonicalStylesdaysUrl}, this curated feature breaks down room styling ideas, furniture layouts, and practical upgrades for real-life homes.`,
+        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com.`,
         takeaways: [
-          `Balanced Room Proportions: Anchor your layout with clean-lined furniture and intentional traffic flow suited for everyday living.`,
-          `Layered Textures & Warmth: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
-          `Smart Customization & Upgrades: Elevate accessible base pieces with upgraded hardware, trim detailing, or modular organizers.`,
-          `Full Illustrated Guide on stylesdays.com: Click through to ${canonicalStylesdaysUrl} to browse all high-resolution photos and step-by-step instructions.`
+          'Balanced room layouts tailored for real-life homes.',
+          'Natural materials and layered warm lighting.',
+          `Full illustrated breakdown available at ${canonicalUrl}`
         ],
-        editorNote: `Curated from ${canonicalStylesdaysUrl} for its practical, budget-conscious approach to elevating everyday spaces.`,
+        editorNote: `Curated from ${canonicalUrl} for practical, everyday home design.`,
         checklist: [
-          'Measure your available floor and wall dimensions before starting',
-          'Select a cohesive 3-color palette anchored by warm neutrals',
-          'Combine concealed storage with 1–2 curated open display surfaces',
-          `Open ${canonicalStylesdaysUrl} for full room photo references`
+          'Measure available floor dimensions',
+          'Pick a cohesive 3-color palette',
+          'Review full photo references on stylesdays.com'
         ],
-        format: `${detectedCategory} Guide`,
+        format: 'Home Decor Guide',
         isSponsored: false,
         needsLiveOgSync: true
       };
@@ -1182,1231 +574,210 @@
       return cleanSlug;
     }
 
-    /**
-     * CLEAN PATH-BASED SLUG EXTRACTION (`window.location.pathname`)
-     * Priority order:
-     * 1. Extracts slug directly from `window.location.pathname` (e.g., `https://<org-name>.github.io/moroccan-wool-runners` -> `moroccan-wool-runners`).
-     * 2. Supports `sessionStorage.redirect` or `?p=/slug` from GitHub Pages `404.html` routing.
-     * 3. If a legacy `?post=slug` or `?url=https://stylesdays.com/slug` is encountered, extracts the slug AND immediately rewrites the browser URL bar to the clean path `/<slug>` (removing the query string).
-     */
     function resolveCleanPathRoute() {
-      let extractedSlug = null;
-
-      // 1. Check sessionStorage redirect (if set by a lightweight 404 redirector)
-      try {
-        const storedRedirect = sessionStorage.getItem('gh_pages_clean_path');
-        if (storedRedirect) {
-          sessionStorage.removeItem('gh_pages_clean_path');
-          extractedSlug = ensureStylesdaysSlugExists(storedRedirect);
-        }
-      } catch (_) {}
-
-      // 2. Inspect `window.location.pathname` directly (Primary Method: https://<org-name>.github.io/moroccan-wool-runners)
-      if (!extractedSlug && window.location.pathname && window.location.pathname !== '/') {
-        const pathSegments = window.location.pathname
-          .split('/')
-          .map(s => s.trim().replace(/\.html?$/i, ''))
-          .filter(Boolean);
-
-        if (pathSegments.length > 0) {
-          const lastSegment = pathSegments[pathSegments.length - 1];
-          if (lastSegment && lastSegment !== 'index' && lastSegment !== '404') {
-            extractedSlug = ensureStylesdaysSlugExists(lastSegment);
-          }
-        }
+      let slug = null;
+      if (window.location.pathname && window.location.pathname !== '/') {
+        const parts = window.location.pathname.split('/').map(s => s.trim().replace(/\.html?$/i, '')).filter(Boolean);
+        if (parts.length > 0) slug = ensureStylesdaysSlugExists(parts[parts.length - 1]);
       }
-
-      // 3. Check if legacy query params (?post= or ?p= or ?url=) were passed, and convert them to a clean `/<slug>` path!
       const params = new URLSearchParams(window.location.search);
-      const rawUrlParam = params.get('url') || params.get('target') || params.get('dest');
-      if (!extractedSlug && rawUrlParam) {
-        try {
-          const parsed = new URL(rawUrlParam);
-          const host = parsed.hostname.replace(/^www\./i, '').toLowerCase();
-          if (host === 'stylesdays.com') {
-            extractedSlug = ensureStylesdaysSlugExists(parsed.pathname);
-          } else {
-            const alertBox = document.getElementById('rawUrlSanitizedAlert');
-            const auditDrawer = document.getElementById('complianceAuditDrawer');
-            if (alertBox && auditDrawer) {
-              alertBox.classList.remove('hidden');
-              auditDrawer.classList.remove('hidden');
-            }
-          }
-        } catch (_) {
-          extractedSlug = ensureStylesdaysSlugExists(rawUrlParam);
-        }
-      }
+      const querySlug = params.get('post') || params.get('slug');
+      if (!slug && querySlug) slug = ensureStylesdaysSlugExists(querySlug);
 
-      if (!extractedSlug) {
-        const querySlug = params.get('p') || params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
-        if (querySlug) {
-          extractedSlug = ensureStylesdaysSlugExists(querySlug);
-        }
-      }
-
-      // Set active slug (or default to moroccan-wool-runners)
-      if (extractedSlug) {
-        currentArticleSlug = extractedSlug;
-      }
-
-      // Clean the browser URL bar so it displays `/<slug>` with ZERO query parameters
+      if (slug) currentArticleSlug = slug;
       updateBrowserCleanPathUrl(currentArticleSlug, true);
-
-      // Fetch live metadata from https://stylesdays.com/<slug>/ if newly synthesized
-      if (CURATED_REGISTRY[currentArticleSlug] && CURATED_REGISTRY[currentArticleSlug].needsLiveOgSync) {
-        fetchLiveOgForSlug(currentArticleSlug, false);
-      }
     }
 
-    /**
-     * Programmatically navigate to a clean slug `/<slug>` and prepend `https://stylesdays.com/<slug>/`
-     */
-    function navigateToCleanSlug(rawSlugInput, showToastMsg = false) {
-      const ensured = ensureStylesdaysSlugExists(rawSlugInput);
-      if (!ensured) {
-        showToast('Please enter a valid article slug (e.g. moroccan-wool-runners)');
-        return;
-      }
-
+    function navigateToCleanSlug(slug, notify = false) {
+      const ensured = ensureStylesdaysSlugExists(slug);
+      if (!ensured) return;
       currentArticleSlug = ensured;
       updateBrowserCleanPathUrl(ensured, false);
-      updateSitemapCounter();
       renderNavigationPills();
       renderActiveArticle();
-
-      if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
-        fetchLiveOgForSlug(ensured, true);
-      } else if (showToastMsg) {
-        showToast(`Path: /${ensured} → https://stylesdays.com/${ensured}/`);
-      }
+      if (notify) showToast(`Loaded /${ensured}`);
     }
 
-    /**
-     * Safely update `window.history` to show the clean `/<slug>` path without query strings
-     */
     function updateBrowserCleanPathUrl(slug, replace = false) {
       try {
-        const cleanPath = `/${encodeURIComponent(slug)}`;
-        if (replace) {
-          window.history.replaceState({ slug }, '', cleanPath);
-        } else if (window.location.pathname !== cleanPath) {
-          window.history.pushState({ slug }, '', cleanPath);
-        }
-      } catch (_) {
-        // Fallback if running inside a restricted sandboxed iframe origin
-      }
-    }
-
-    /**
-     * Fetch live WordPress REST API & OpenGraph metadata from `https://stylesdays.com/<slug>/`
-     */
-    async function fetchLiveOgForSlug(slug, showNotification = true) {
-      const item = CURATED_REGISTRY[slug];
-      if (!item) return;
-
-      // Ensure canonical https://stylesdays.com/<slug>/ target
-      item.targetUrl = buildStylesdaysUrlFromSlug(slug);
-
-      const cardSpinner = document.getElementById('cardOgSpinner');
-      if (cardSpinner) cardSpinner.classList.remove('hidden');
-
-      let updated = false;
-
-      // Step 1: Try WordPress REST API by slug (`https://stylesdays.com/wp-json/wp/v2/posts?slug=<slug>&_embed`)
-      try {
-        const wpApiUrl = `https://stylesdays.com/wp-json/wp/v2/posts?slug=${encodeURIComponent(slug)}&_embed`;
-        const proxyRes = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(wpApiUrl)}`);
-        const proxyJson = await proxyRes.json();
-        if (proxyJson && proxyJson.contents) {
-          const posts = JSON.parse(proxyJson.contents);
-          if (Array.isArray(posts) && posts.length > 0) {
-            const post = posts[0];
-            const tmp = document.createElement('div');
-            if (post.title && post.title.rendered) {
-              tmp.innerHTML = post.title.rendered;
-              item.title = tmp.textContent.trim() || item.title;
-            }
-            if (post.excerpt && post.excerpt.rendered) {
-              tmp.innerHTML = post.excerpt.rendered;
-              const cleanDesc = tmp.textContent.trim();
-              if (cleanDesc.length > 30) item.summary = cleanDesc;
-            }
-            const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
-            if (media && media.source_url) {
-              item.image = media.source_url;
-            }
-            updated = true;
-          }
-        }
+        const path = `/${encodeURIComponent(slug)}`;
+        if (replace) window.history.replaceState({ slug }, '', path);
+        else if (window.location.pathname !== path) window.history.pushState({ slug }, '', path);
       } catch (_) {}
-
-      // Step 2: Try Microlink OpenGraph API for `https://stylesdays.com/<slug>/`
-      if (!updated) {
-        try {
-          const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
-          const json = await res.json();
-          if (json.status === 'success' && json.data) {
-            const { title, description, image } = json.data;
-            if (title && !title.toLowerCase().includes('page not found')) {
-              item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
-            }
-            if (description && description.length > 40) {
-              item.summary = description;
-            }
-            if (image && image.url) {
-              item.image = image.url;
-            }
-            updated = true;
-          }
-        } catch (_) {}
-      }
-
-      item.needsLiveOgSync = false;
-      if (cardSpinner) cardSpinner.classList.add('hidden');
-
-      if (currentArticleSlug === slug) {
-        renderActiveArticle();
-      }
-      if (showNotification) {
-        showToast(updated
-          ? `Synced live metadata from https://stylesdays.com/${slug}/`
-          : `Mapped /${slug} → https://stylesdays.com/${slug}/`
-        );
-      }
     }
 
-    /**
-     * Get the configured GitHub Pages clean URL (`https://<org-name>.github.io/<slug>`)
-     */
-    function getCleanGhPagesPinUrl(slug) {
-      const orgDomainInput = document.getElementById('ghOrgDomainInput');
-      const host = (orgDomainInput && orgDomainInput.value.trim())
-        ? orgDomainInput.value.trim().replace(/^https?:\/\//i, '').replace(/\/+$/g, '')
-        : (window.location.hostname && window.location.hostname.endsWith('.github.io')
-            ? window.location.hostname
-            : 'stylesdays-hub.github.io');
-      return `https://${host}/${encodeURIComponent(slug)}`;
-    }
-    };
-
-    // Active application state
-    let currentArticleSlug = 'minimalist-bedroom-ideas-for-2026';
-    let currentCategoryFilter = 'all';
-
-    // Initialize on DOMContentLoaded
-    window.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('footerYear').textContent = new Date().getFullYear();
-      resolveSafeRoute();
-      bindUIEvents();
-      renderCategoryPills();
-      renderNavigationPills();
-      renderActiveArticle();
-      updateSitemapCounter();
-    });
-
-    /**
-     * SMART SLUG SYNTHESIZER FOR ANY STYLESDAYS.COM URL
-     * If a visitor or user loads ?post=any-slug-from-stylesdays-sitemap that isn't pre-cached yet,
-     * this automatically builds a rich, Pinterest-compliant stylesdays.com hub entry and triggers a background OG fetch.
-     */
-    function ensureStylesdaysSlugExists(rawSlug, fullUrlOptional) {
-      const cleanSlug = rawSlug
-        .trim()
-        .toLowerCase()
-        .replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '')
-        .replace(/^\/+|\/+$/g, '')
-        .replace(/[^a-z0-9-_]/g, '-')
-        .replace(/-+/g, '-');
-
-      if (!cleanSlug || cleanSlug.startsWith('category') || cleanSlug.startsWith('tag') || cleanSlug.startsWith('wp-')) {
-        return null;
-      }
-
-      if (CURATED_REGISTRY[cleanSlug]) {
-        return cleanSlug;
-      }
-
-      // Humanize slug into editorial title
-      const humanizedTitle = cleanSlug
-        .split('-')
-        .map(w => w.toLowerCase() === 'ikea' ? 'IKEA' : w.toLowerCase() === 'pax' ? 'PAX' : w.toLowerCase() === 'hemnes' ? 'HEMNES' : w.charAt(0).toUpperCase() + w.slice(1))
-        .join(' ');
-
-      // Auto-detect category from slug keywords
-      let detectedCategory = 'Home Decor';
-      if (cleanSlug.includes('hack')) detectedCategory = 'IKEA Hacks';
-      else if (cleanSlug.includes('storage') || cleanSlug.includes('pax') || cleanSlug.includes('closet') || cleanSlug.includes('organization')) detectedCategory = 'IKEA Storage';
-      else if (cleanSlug.includes('daybed') || cleanSlug.includes('guest')) detectedCategory = 'Guest Bedroom & Daybeds';
-      else if (cleanSlug.includes('ikea') && cleanSlug.includes('bedroom')) detectedCategory = 'IKEA Bedroom';
-
-      const targetUrl = fullUrlOptional && fullUrlOptional.startsWith('https://stylesdays.com/')
-        ? fullUrlOptional
-        : `https://stylesdays.com/${cleanSlug}/`;
-
-      CURATED_REGISTRY[cleanSlug] = {
-        slug: cleanSlug,
-        targetUrl: targetUrl,
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: humanizedTitle,
-        category: detectedCategory,
-        readTime: '6 min full read',
-        updatedDate: 'stylesdays.com Sitemap Feature',
-        image: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
-        summary: `Explore our complete ${humanizedTitle} guide on stylesdays.com. This curated feature breaks down practical room styling ideas, space-saving furniture layouts, and budget-friendly DIY upgrades tailored for real-life homes.`,
-        takeaways: [
-          `Balanced Room Proportions: Anchor your layout with clean-lined furniture and intentional traffic flow suited for everyday living.`,
-          `Layered Textures & Lighting: Combine natural wood finishes, breathable textiles, and warm 2700K ambient lighting for instant coziness.`,
-          `Smart Customization & Hardware Upgrades: Elevate accessible base pieces with upgraded pulls, trim detailing, or modular organizers.`,
-          `Step-by-Step Visual Breakdown: Click through to stylesdays.com to browse all full-resolution room inspiration photos and sourcing tips.`
-        ],
-        editorNote: `Featured from the stylesdays.com ${detectedCategory} archive for its practical, budget-conscious approach to elevating everyday spaces.`,
-        checklist: [
-          'Measure your available floor and wall dimensions before starting',
-          'Select a cohesive 3-color palette anchored by warm neutrals',
-          'Combine concealed storage with 1–2 curated open display surfaces',
-          'Bookmark the full stylesdays.com guide for photo reference'
-        ],
-        format: `${detectedCategory} Guide`,
-        isSponsored: false,
-        needsLiveOgSync: true
-      };
-
-      return cleanSlug;
-    }
-
-    /**
-     * SAFE SLUG ROUTING & ANTI-SPAM QUERY PARAMETER GUARD
-     * - Supports ?post=slug or ?slug=slug
-     * - If someone passes ?url=https://stylesdays.com/my-post/, safely normalizes it to ?post=my-post
-     * - If someone passes an external non-stylesdays URL (?url=https://spam.com), blocks it and shows a safety warning.
-     */
-    function resolveSafeRoute() {
-      const params = new URLSearchParams(window.location.search);
-
-      // Check if ?url= or ?target= was passed
-      const rawUrlParam = params.get('url') || params.get('target') || params.get('dest');
-      if (rawUrlParam) {
-        try {
-          const parsed = new URL(rawUrlParam);
-          const host = parsed.hostname.replace(/^www\./i, '').toLowerCase();
-          if (host === 'stylesdays.com') {
-            // Safely extract the stylesdays slug and convert to safe ?post= route
-            const pathSlug = parsed.pathname.replace(/^\/+|\/+$/g, '').split('/').pop();
-            const ensured = ensureStylesdaysSlugExists(pathSlug, rawUrlParam);
-            if (ensured) {
-              currentArticleSlug = ensured;
-              try {
-                window.history.replaceState({ post: ensured }, '', `${window.location.pathname}?post=${encodeURIComponent(ensured)}`);
-              } catch (_) {}
-              // Trigger live OG fetch so title/image match the exact stylesdays URL immediately
-              fetchLiveOgForSlug(ensured, false);
-              return;
-            }
-          } else {
-            // Block arbitrary third-party open redirect attempt
-            const alertBox = document.getElementById('rawUrlSanitizedAlert');
-            const auditDrawer = document.getElementById('complianceAuditDrawer');
-            if (alertBox && auditDrawer) {
-              alertBox.classList.remove('hidden');
-              auditDrawer.classList.remove('hidden');
-            }
-          }
-        } catch (_) {
-          // If someone passed a slug inside ?url=gorgeous-ikea-nightstand-hacks
-          const ensured = ensureStylesdaysSlugExists(rawUrlParam);
-          if (ensured) currentArticleSlug = ensured;
-        }
-      }
-
-      // Check standard ?post=slug or #slug
-      const requestedSlug = params.get('post') || params.get('slug') || window.location.hash.replace('#', '');
-      if (requestedSlug) {
-        const ensured = ensureStylesdaysSlugExists(requestedSlug);
-        if (ensured) {
-          currentArticleSlug = ensured;
-          if (CURATED_REGISTRY[ensured].needsLiveOgSync) {
-            fetchLiveOgForSlug(ensured, false);
-          }
-        }
-      }
-    }
-
-    /**
-     * Fetch live OpenGraph title, description & image from stylesdays.com for a slug via Microlink API
-     */
-    async function fetchLiveOgForSlug(slug, showNotification = true) {
-      const item = CURATED_REGISTRY[slug];
-      if (!item) return;
-
-      const cardSpinner = document.getElementById('cardOgSpinner');
-      if (cardSpinner) cardSpinner.classList.remove('hidden');
-
-      try {
-        const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(item.targetUrl)}`);
-        const json = await res.json();
-        if (json.status === 'success' && json.data) {
-          const { title, description, image } = json.data;
-          if (title) {
-            item.title = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim() || item.title;
-          }
-          if (description && description.length > 40) {
-            item.summary = description;
-          }
-          if (image && image.url) {
-            item.image = image.url;
-          }
-          item.needsLiveOgSync = false;
-          if (currentArticleSlug === slug) {
-            renderActiveArticle();
-          }
-          if (showNotification) {
-            showToast(`Synced live OpenGraph metadata from stylesdays.com/${slug}/`);
-          }
-        } else if (showNotification) {
-          showToast('Using cached stylesdays editorial metadata.');
-        }
-      } catch (_) {
-        if (showNotification) {
-          showToast('Using pre-loaded stylesdays metadata.');
-        }
-      } finally {
-        if (cardSpinner) cardSpinner.classList.add('hidden');
-      }
-    }
-
-    /**
-     * Extract clean hostname from a valid URL
-     */
-    function extractHostname(urlStr) {
-      try {
-        const u = new URL(urlStr);
-        return u.hostname.replace(/^www\./, '');
-      } catch (_) {
-        return 'stylesdays.com';
-      }
-    }
-
-    /**
-     * Render stylesdays.com Category Filter Pills
-     */
     function renderCategoryPills() {
       const container = document.getElementById('categoryFilterPills');
       if (!container) return;
       container.innerHTML = '';
-
-      STYLESDAYS_CATEGORIES.forEach((cat) => {
-        const isActive = currentCategoryFilter === cat.id;
+      STYLESDAYS_CATEGORIES.forEach(cat => {
         const btn = document.createElement('button');
-        btn.className = isActive
-          ? 'px-3 py-1 rounded-full text-xs font-bold bg-[#E60023] text-white transition shadow-2xs'
-          : 'px-3 py-1 rounded-full text-xs font-medium bg-stone-100 hover:bg-stone-200 text-stone-700 transition';
+        const isActive = currentCategoryFilter === cat.id;
+        btn.className = isActive ? 'px-3 py-1 rounded-full text-xs font-bold bg-[#E60023] text-white' : 'px-3 py-1 rounded-full text-xs font-medium bg-stone-100 text-stone-700';
         btn.textContent = cat.name;
         btn.onclick = () => {
           currentCategoryFilter = cat.id;
-          // Select first matching post in that category if current doesn't match
-          const matching = Object.values(CURATED_REGISTRY).filter(
-            p => cat.id === 'all' || p.category.toLowerCase() === cat.id.toLowerCase()
-          );
-          if (matching.length > 0 && !matching.some(m => m.slug === currentArticleSlug)) {
-            currentArticleSlug = matching[0].slug;
-          }
           renderCategoryPills();
           renderNavigationPills();
-          renderActiveArticle();
         };
         container.appendChild(btn);
       });
     }
 
-    /**
-     * Render the Sitemap Post Switcher Pills
-     */
     function renderNavigationPills() {
       const container = document.getElementById('curatedNavPills');
+      if (!container) return;
       container.innerHTML = '';
-
-      const posts = Object.values(CURATED_REGISTRY).filter(
-        item => currentCategoryFilter === 'all' || item.category.toLowerCase() === currentCategoryFilter.toLowerCase()
-      );
-
-      posts.forEach((item) => {
-        const isActive = item.slug === currentArticleSlug;
+      const posts = Object.values(CURATED_REGISTRY).filter(p => currentCategoryFilter === 'all' || p.category === currentCategoryFilter);
+      posts.forEach(item => {
         const btn = document.createElement('button');
-        btn.className = isActive
-          ? 'px-3 py-1 rounded-lg text-xs font-semibold bg-stone-900 text-white transition shrink-0'
-          : 'px-3 py-1 rounded-lg text-xs font-medium bg-stone-100 hover:bg-stone-200 text-stone-700 transition shrink-0';
-        const shortTitle = item.title.length > 34 ? item.title.slice(0, 32) + '…' : item.title;
-        btn.textContent = shortTitle;
-        btn.onclick = () => {
-          navigateToCleanSlug(item.slug, false);
-        };
+        const isActive = item.slug === currentArticleSlug;
+        btn.className = isActive ? 'px-3 py-1 rounded-lg text-xs font-semibold bg-stone-900 text-white' : 'px-3 py-1 rounded-lg text-xs bg-stone-100 text-stone-700';
+        btn.textContent = item.title.length > 25 ? item.title.slice(0, 24) + '…' : item.title;
+        btn.onclick = () => navigateToCleanSlug(item.slug);
         container.appendChild(btn);
       });
     }
 
-    /**
-     * Update Sitemap Post Counter Badge
-     */
-    function updateSitemapCounter() {
-      const badge = document.getElementById('sitemapCountBadge');
-      if (badge) {
-        badge.textContent = Object.keys(CURATED_REGISTRY).length;
-      }
-    }
-
-    /**
-     * Render the currently selected stylesdays.com article & related articles grid
-     */
     function renderActiveArticle() {
       const item = CURATED_REGISTRY[currentArticleSlug] || CURATED_REGISTRY['moroccan-wool-runners'];
-      // Guarantee targetUrl always has https://stylesdays.com/ prepended before the slug
       item.targetUrl = buildStylesdaysUrlFromSlug(item.slug);
-      const domain = extractHostname(item.targetUrl);
 
-      // Update Document & OpenGraph meta tags
-      document.title = `${item.title} | stylesdays Editorial Hub`;
-      document.getElementById('ogTitle').setAttribute('content', item.title);
-      document.getElementById('ogDesc').setAttribute('content', item.summary);
-      document.getElementById('ogImage').setAttribute('content', item.image);
+      document.title = `${item.title} | stylesdays Hub`;
+      document.getElementById('brandSubSlugText').textContent = item.slug;
+      document.getElementById('livePathSlugInput').value = item.slug;
+      document.getElementById('liveMappedStylesdaysUrl').textContent = item.targetUrl;
+      document.getElementById('liveMappedStylesdaysUrl').href = item.targetUrl;
+      document.getElementById('activeRouteIndicator').textContent = `Path: /${item.slug}`;
 
-      // Update Brand sub-slug & Top Clean Path Simulator Bar
-      const brandSubSlug = document.getElementById('brandSubSlugText');
-      if (brandSubSlug) brandSubSlug.textContent = item.slug;
+      const cleanPinUrl = `https://${document.getElementById('ghOrgDomainInput').value.trim()}/${item.slug}`;
+      document.getElementById('sidebarPinSlugUrlBox').textContent = cleanPinUrl;
 
-      const livePathInput = document.getElementById('livePathSlugInput');
-      if (livePathInput && document.activeElement !== livePathInput) {
-        livePathInput.value = item.slug;
-      }
-
-      const liveMappedLink = document.getElementById('liveMappedStylesdaysUrl');
-      if (liveMappedLink) {
-        liveMappedLink.textContent = item.targetUrl;
-        liveMappedLink.href = item.targetUrl;
-      }
-
-      // Update Route Indicator & Sidebar Clean Pin Box (https://<org-name>.github.io/<slug>)
-      const cleanPinUrl = getCleanGhPagesPinUrl(item.slug);
-      document.getElementById('activeRouteIndicator').textContent = `Path: /${item.slug} → stylesdays.com/${item.slug}/`;
-      const pinBox = document.getElementById('sidebarPinSlugUrlBox');
-      if (pinBox) pinBox.textContent = cleanPinUrl;
-
-      const sidebarSlugCode = document.getElementById('sidebarSlugCodeBadge');
-      if (sidebarSlugCode) sidebarSlugCode.textContent = `/${item.slug}`;
-
-      const sidebarTargetPreview = document.getElementById('sidebarTargetUrlPreview');
-      if (sidebarTargetPreview) sidebarTargetPreview.textContent = item.targetUrl;
-
-      const ghModalBtnLabel = document.getElementById('ghModalStaticBtnLabel');
-      if (ghModalBtnLabel) ghModalBtnLabel.textContent = `Download Static ${item.slug}.html`;
-
-      // Commercial / Sponsored Disclosure Toggle
-      const sponsoredBadge = document.getElementById('sponsoredHashtagBadge');
-      const relValue = item.isSponsored ? 'noopener sponsored' : 'noopener';
-      if (item.isSponsored) {
-        sponsoredBadge.classList.remove('hidden');
-      } else {
-        sponsoredBadge.classList.add('hidden');
-      }
-
-      // Hero Image & Badges
-      const heroImg = document.getElementById('articleHeroImage');
-      if (heroImg.src !== item.image) {
-        document.getElementById('heroSkeleton').style.display = 'block';
-        heroImg.src = item.image;
-      }
+      document.getElementById('articleHeroImage').src = item.image;
       document.getElementById('articleCategoryBadge').textContent = item.category;
-      document.getElementById('heroDomainBadge').textContent = domain;
-
-      // Headline & Meta
-      document.getElementById('articleReadTime').textContent = item.readTime;
-      document.getElementById('articleUpdatedDate').textContent = item.updatedDate;
       document.getElementById('articleHeadline').textContent = item.title;
       document.getElementById('articleSummaryText').textContent = item.summary;
-
-      // Explicit User-Initiated HTML Anchor Links (<a href="https://stylesdays.com/...">)
-      const primaryCta = document.getElementById('primaryAnchorCta');
-      const secondaryCta = document.getElementById('secondaryAnchorCta');
-      primaryCta.href = item.targetUrl;
-      primaryCta.setAttribute('rel', relValue);
-      secondaryCta.href = item.targetUrl;
-      secondaryCta.setAttribute('rel', relValue);
-
-      document.getElementById('ctaInlineDomain').textContent = domain;
-      document.getElementById('primaryCtaLabel').textContent = `Read Full Guide on ${domain}`;
+      document.getElementById('articleEditorNote').textContent = `"${item.editorNote}"`;
+      document.getElementById('primaryAnchorCta').href = item.targetUrl;
+      document.getElementById('secondaryAnchorCta').href = item.targetUrl;
       document.getElementById('bottomFullUrlText').textContent = item.targetUrl;
 
-      // Category Spec Link
-      const specCatLink = document.getElementById('specCategoryLink');
-      if (specCatLink) {
-        specCatLink.textContent = `${item.category} →`;
-        specCatLink.href = item.categoryUrl || 'https://stylesdays.com/category/home-decor/';
-      }
-
-      // Key Takeaways Cards
-      const takeawaysContainer = document.getElementById('articleTakeawaysList');
-      takeawaysContainer.innerHTML = '';
-      item.takeaways.forEach((point, idx) => {
-        const card = document.createElement('div');
-        card.className = 'flex items-start gap-3.5 p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200/80';
-        card.innerHTML = `
-          <span class="w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
-          <p class="text-sm text-stone-700 leading-relaxed">${escapeHtml(point)}</p>
-        `;
-        takeawaysContainer.appendChild(card);
+      const takeawaysBox = document.getElementById('articleTakeawaysList');
+      takeawaysBox.innerHTML = '';
+      item.takeaways.forEach((pt, i) => {
+        const div = document.createElement('div');
+        div.className = 'flex items-start gap-3 p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200/80 text-xs text-stone-700';
+        div.innerHTML = `<span class="w-5 h-5 rounded-full bg-stone-900 text-white text-[10px] font-bold flex items-center justify-center shrink-0">${i+1}</span><span>${pt}</span>`;
+        takeawaysBox.appendChild(div);
       });
 
-      // Editor Note & Specs
-      document.getElementById('articleEditorNote').textContent = `"${item.editorNote}"`;
-      document.getElementById('specDomain').textContent = domain;
-      document.getElementById('specFormat').textContent = item.format || 'Room Styling Guide';
-      document.getElementById('sidebarDomainName').textContent = domain;
-
-      // Sidebar Evaluation Checklist
-      const checklistContainer = document.getElementById('sidebarChecklistItems');
-      checklistContainer.innerHTML = '';
-      (item.checklist || []).forEach((check) => {
-        const row = document.createElement('div');
-        row.className = 'flex items-start gap-2';
-        row.innerHTML = `
-          <input type="checkbox" checked class="mt-0.5 rounded text-stone-900 focus:ring-0 cursor-pointer">
-          <span class="text-stone-700 leading-snug">${escapeHtml(check)}</span>
-        `;
-        checklistContainer.appendChild(row);
+      const checkList = document.getElementById('sidebarChecklistItems');
+      checkList.innerHTML = '';
+      (item.checklist || []).forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'flex items-center gap-2';
+        div.innerHTML = `<input type="checkbox" checked class="rounded text-stone-900"><span class="leading-tight">${c}</span>`;
+        checkList.appendChild(div);
       });
 
-      // Related Curated Guides Grid
       renderRelatedGrid();
-
-      // Sync Studio Inputs with current item
       syncStudioForm(item);
     }
 
-    /**
-     * Render Related stylesdays.com Guides at the bottom of the hub
-     */
     function renderRelatedGrid() {
       const grid = document.getElementById('relatedGuidesGrid');
+      if (!grid) return;
       grid.innerHTML = '';
-
       Object.values(CURATED_REGISTRY)
-        .filter((entry) => entry.slug !== currentArticleSlug)
-        .slice(0, 6)
-        .forEach((entry) => {
-          const domain = extractHostname(entry.targetUrl);
-          const card = document.createElement('div');
-          card.className = 'bg-white rounded-2xl border border-stone-200/80 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between cursor-pointer group';
-          card.onclick = () => {
-            navigateToCleanSlug(entry.slug, false);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          };
-          card.innerHTML = `
-            <div>
-              <div class="aspect-[16/10] bg-stone-100 overflow-hidden relative">
-                <img src="${escapeHtml(entry.image)}" alt="${escapeHtml(entry.title)}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" onerror="this.src='https://placehold.co/800x500/f5f5f4/78716c?text=stylesdays'">
-                <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-stone-900 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full shadow-2xs">
-                  ${escapeHtml(entry.category)}
-                </span>
-              </div>
-              <div class="p-5">
-                <div class="text-[11px] font-mono text-stone-400 mb-1">/${escapeHtml(entry.slug)}</div>
-                <h3 class="font-serif-editorial text-lg font-bold text-stone-900 group-hover:text-[#E60023] transition leading-snug mb-2">
-                  ${escapeHtml(entry.title)}
-                </h3>
-                <p class="text-xs text-stone-600 line-clamp-2 leading-relaxed">
-                  ${escapeHtml(entry.summary)}
-                </p>
-              </div>
-            </div>
-            <div class="px-5 py-3 bg-stone-50 border-t border-stone-100 flex items-center justify-between text-[11px] text-stone-500 font-medium">
-              <span><strong class="text-stone-700">${escapeHtml(domain)}</strong> • ${escapeHtml(entry.readTime)}</span>
-              <span class="text-[#E60023] font-bold">Preview /${escapeHtml(entry.slug)} →</span>
+        .filter(p => p.slug !== currentArticleSlug)
+        .forEach(entry => {
+          const div = document.createElement('div');
+          div.className = 'bg-white rounded-2xl border border-stone-200 overflow-hidden cursor-pointer';
+          div.onclick = () => { navigateToCleanSlug(entry.slug); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+          div.innerHTML = `
+            <img src="${entry.image}" alt="${entry.title}" class="w-full aspect-video object-cover">
+            <div class="p-4">
+              <span class="text-[10px] font-bold text-stone-400 uppercase">${entry.category}</span>
+              <h3 class="font-bold text-stone-900 text-sm mt-1 mb-2">${entry.title}</h3>
+              <p class="text-xs text-stone-500 line-clamp-2">${entry.summary}</p>
             </div>
           `;
-          grid.appendChild(card);
+          grid.appendChild(div);
         });
     }
 
-    /**
-     * Synchronize the Editorial Builder Studio form fields with the active article
-     */
     function syncStudioForm(item) {
       document.getElementById('studioTargetUrl').value = item.targetUrl;
       document.getElementById('studioSlug').value = item.slug;
       document.getElementById('studioTitle').value = item.title;
       document.getElementById('studioImage').value = item.image;
-      
-      const catSelect = document.getElementById('studioCategory');
-      if (catSelect) {
-        catSelect.value = item.category || 'Home Decor';
-      }
-
+      document.getElementById('studioCategory').value = item.category || 'Home Decor';
       document.getElementById('studioSummary').value = item.summary;
       document.getElementById('studioTakeaways').value = (item.takeaways || []).join('\n');
       document.getElementById('studioEditorNote').value = item.editorNote;
-      document.getElementById('studioSponsoredCheck').checked = !!item.isSponsored;
-      document.getElementById('downloadBtnText').textContent = `Download Static ${item.slug}.html`;
     }
 
-    /**
-     * Read current values from the Studio form and build an article object
-     */
-    function getStudioArticleObject() {
-      const rawSlug = document.getElementById('studioSlug').value.trim()
-        .toLowerCase()
-        .replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '')
-        .replace(/\.html?$/i, '')
-        .replace(/[^a-z0-9-_]/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '') || 'moroccan-wool-runners';
-
-      const takeawaysRaw = document.getElementById('studioTakeaways').value
-        .split('\n')
-        .map(s => s.trim())
-        .filter(Boolean);
-
-      return {
-        slug: rawSlug,
-        targetUrl: buildStylesdaysUrlFromSlug(rawSlug),
-        categoryUrl: 'https://stylesdays.com/category/home-decor/',
-        title: document.getElementById('studioTitle').value.trim() || 'stylesdays Home Decor & Styling Guide',
-        category: document.getElementById('studioCategory').value.trim() || 'Home Decor',
-        readTime: '6 min full read',
-        updatedDate: '2026 Home & DIY Edition',
-        image: document.getElementById('studioImage').value.trim() || 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85',
-        summary: document.getElementById('studioSummary').value.trim() || 'Comprehensive editorial overview and styling takeaways for this stylesdays.com feature.',
-        takeaways: takeawaysRaw.length > 0 ? takeawaysRaw : [
-          'Practical room layout and proportion guidelines for real-life homes.',
-          'Accessible IKEA hack and hardware upgrade recommendations.',
-          'Layered lighting and natural wood texture pairings.'
-        ],
-        editorNote: document.getElementById('studioEditorNote').value.trim() || 'Curated by the stylesdays editorial desk for effortless everyday living.',
-        checklist: [
-          'Review full room photos and step-by-step details on stylesdays.com',
-          'Measure furniture clearances before starting your project',
-          'Save this guide to your Home Decor or IKEA Hacks Pinterest board'
-        ],
-        format: 'Room Styling & DIY Guide',
-        isSponsored: document.getElementById('studioSponsoredCheck').checked
-      };
+    function updateSitemapCounter() {
+      const badge = document.getElementById('sitemapCountBadge');
+      if (badge) badge.textContent = Object.keys(CURATED_REGISTRY).length;
     }
 
-    /**
-     * PARSE SITEMAP XML SNIPPET OR FULL POST-SITEMAP.XML FROM STYLESDAYS.COM
-     */
-    function parseStylesdaysSitemapXml(xmlString) {
-      const locRegex = /<loc>\s*(https?:\/\/(?:www\.)?stylesdays\.com\/([^<\s]+))\s*<\/loc>/gi;
-      let match;
-      let importedCount = 0;
-      let firstImportedSlug = null;
-
-      while ((match = locRegex.exec(xmlString)) !== null) {
-        const fullUrl = match[1].trim();
-        const pathPart = match[2].replace(/^\/+|\/+$/g, '');
-
-        // Skip sub-sitemaps (.xml), categories, tags, author archives, or root homepage
-        if (
-          !pathPart ||
-          pathPart.endsWith('.xml') ||
-          pathPart.startsWith('category/') ||
-          pathPart.startsWith('tag/') ||
-          pathPart.startsWith('author/') ||
-          pathPart.startsWith('wp-') ||
-          pathPart === 'about-us' ||
-          pathPart === 'contact-us' ||
-          pathPart === 'privacy-policy'
-        ) {
-          continue;
-        }
-
-        const slug = ensureStylesdaysSlugExists(pathPart, fullUrl);
-        if (slug) {
-          importedCount++;
-          if (!firstImportedSlug) firstImportedSlug = slug;
-        }
-      }
-
-      return { importedCount, firstImportedSlug };
-    }
-
-    /**
-     * Bind UI Buttons (Clean Path Bar, GitHub Pages 404 Router Drawer, Sitemap XML Sync, Audit Drawer, Builder Studio, Static Exporter)
-     */
     function bindUIEvents() {
+      const ghPagesDrawer = document.getElementById('ghPagesSetupDrawer');
+      const sitemapDrawer = document.getElementById('sitemapSyncDrawer');
       const auditDrawer = document.getElementById('complianceAuditDrawer');
       const studioDrawer = document.getElementById('publisherStudioDrawer');
-      const sitemapDrawer = document.getElementById('sitemapSyncDrawer');
-      const ghPagesDrawer = document.getElementById('ghPagesSetupDrawer');
 
-      // Toggle GitHub Pages Clean URL Setup Drawer
-      document.getElementById('btnToggleGhPagesModal').addEventListener('click', () => {
-        ghPagesDrawer.classList.toggle('hidden');
-      });
-      document.getElementById('btnCloseGhPagesModal').addEventListener('click', () => {
-        ghPagesDrawer.classList.add('hidden');
-      });
+      document.getElementById('btnToggleGhPagesModal').onclick = () => ghPagesDrawer.classList.toggle('hidden');
+      document.getElementById('btnCloseGhPagesModal').onclick = () => ghPagesDrawer.classList.add('hidden');
 
-      // Top Interactive Clean Path Bar: Load any slug & prepend https://stylesdays.com/
-      const triggerTopPathSlugLoad = () => {
+      document.getElementById('btnToggleSitemapModal').onclick = () => sitemapDrawer.classList.toggle('hidden');
+      document.getElementById('btnCloseSitemapDrawer').onclick = () => sitemapDrawer.classList.add('hidden');
+
+      document.getElementById('btnToggleAudit').onclick = () => auditDrawer.classList.toggle('hidden');
+      document.getElementById('btnCloseAudit').onclick = () => auditDrawer.classList.add('hidden');
+
+      document.getElementById('btnToggleStudio').onclick = () => studioDrawer.classList.toggle('hidden');
+      document.getElementById('btnCloseStudio').onclick = () => studioDrawer.classList.add('hidden');
+
+      document.getElementById('btnLoadPathSlug').onclick = () => {
         const val = document.getElementById('livePathSlugInput').value.trim();
-        if (!val) {
-          showToast('Type a path slug like moroccan-wool-runners');
-          return;
-        }
-        navigateToCleanSlug(val, true);
+        if (val) navigateToCleanSlug(val, true);
       };
 
-      document.getElementById('btnLoadPathSlug').addEventListener('click', triggerTopPathSlugLoad);
-      document.getElementById('livePathSlugInput').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
-          triggerTopPathSlugLoad();
-        }
-      });
-
-      // Update displayed Pin URL when GitHub Org Domain input changes
-      document.getElementById('ghOrgDomainInput').addEventListener('input', () => {
-        renderActiveArticle();
-      });
-
-      // Top Bar: Copy Clean Pin URL (https://<org-name>.github.io/<slug>)
-      document.getElementById('btnTopCopyCleanPinUrl').addEventListener('click', () => {
-        const cleanUrl = getCleanGhPagesPinUrl(currentArticleSlug);
+      document.getElementById('btnTopCopyCleanPinUrl').onclick = () => {
+        const cleanUrl = `https://${document.getElementById('ghOrgDomainInput').value.trim()}/${currentArticleSlug}`;
         copyToClipboard(cleanUrl);
-      });
+      };
 
-      // Download Universal 404.html Catch-All Router (exact copy of this app for GitHub Pages clean path routing)
-      const downloadFullAppAs = (filename) => {
+      document.getElementById('btnSidebarCopyPinUrl').onclick = () => {
+        const cleanUrl = `https://${document.getElementById('ghOrgDomainInput').value.trim()}/${currentArticleSlug}`;
+        copyToClipboard(cleanUrl);
+      };
+
+      const downloadApp = (filename) => {
         const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
         const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
         a.download = filename;
-        document.body.appendChild(a);
         a.click();
-        document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        showToast(`Downloaded ${filename} — Upload to your <org-name>.github.io repo root!`);
       };
 
-      document.getElementById('btnDownloadCatchAll404').addEventListener('click', () => {
-        downloadFullAppAs('404.html');
-      });
-      document.getElementById('btnDownloadRootIndex').addEventListener('click', () => {
-        downloadFullAppAs('index.html');
-      });
-
-      // Toggle Sitemap Sync Drawer
-      document.getElementById('btnToggleSitemapModal').addEventListener('click', () => {
-        sitemapDrawer.classList.toggle('hidden');
-      });
-      document.getElementById('btnCloseSitemapDrawer').addEventListener('click', () => {
-        sitemapDrawer.classList.add('hidden');
-      });
-
-      // Toggle Compliance Audit Drawer
-      document.getElementById('btnToggleAudit').addEventListener('click', () => {
-        auditDrawer.classList.toggle('hidden');
-      });
-      document.getElementById('btnCloseAudit').addEventListener('click', () => {
-        auditDrawer.classList.add('hidden');
-      });
-
-      // Toggle Publisher Studio Drawer
-      document.getElementById('btnToggleStudio').addEventListener('click', () => {
-        studioDrawer.classList.toggle('hidden');
-      });
-      document.getElementById('btnCloseStudio').addEventListener('click', () => {
-        studioDrawer.classList.add('hidden');
-      });
-
-      // Refresh Live OG on Article Card
-      document.getElementById('btnRefreshLiveOgOnCard').addEventListener('click', () => {
-        fetchLiveOgForSlug(currentArticleSlug, true);
-      });
-
-      // Sidebar Copy Clean Pin Link (https://<org-name>.github.io/<slug>)
-      document.getElementById('btnSidebarCopyPinUrl').addEventListener('click', () => {
-        const cleanUrl = getCleanGhPagesPinUrl(currentArticleSlug);
-        copyToClipboard(cleanUrl);
-      });
-      document.getElementById('btnCloseSitemapDrawer').addEventListener('click', () => {
-        sitemapDrawer.classList.add('hidden');
-      });
-
-      // Toggle Compliance Audit Drawer
-      document.getElementById('btnToggleAudit').addEventListener('click', () => {
-        auditDrawer.classList.toggle('hidden');
-      });
-      document.getElementById('btnCloseAudit').addEventListener('click', () => {
-        auditDrawer.classList.add('hidden');
-      });
-
-      // Toggle Publisher Studio Drawer
-      document.getElementById('btnToggleStudio').addEventListener('click', () => {
-        studioDrawer.classList.toggle('hidden');
-      });
-      document.getElementById('btnCloseStudio').addEventListener('click', () => {
-        studioDrawer.classList.add('hidden');
-      });
-
-      // Refresh Live OG on Article Card
-      document.getElementById('btnRefreshLiveOgOnCard').addEventListener('click', () => {
-        fetchLiveOgForSlug(currentArticleSlug, true);
-      });
-
-      // Sidebar Copy Pin Link
-      document.getElementById('btnSidebarCopyPinUrl').addEventListener('click', () => {
-        const url = `${window.location.origin}${window.location.pathname}?post=${encodeURIComponent(currentArticleSlug)}`;
-        copyToClipboard(url);
-      });
-
-      // 1. Live Sync with stylesdays.com WP REST API / post-sitemap.xml
-      document.getElementById('btnFetchLiveSitemap').addEventListener('click', async () => {
-        const spinner = document.getElementById('sitemapSyncSpinner');
-        const statusEl = document.getElementById('sitemapFetchStatus');
-        spinner.classList.remove('hidden');
-        statusEl.classList.remove('hidden');
-        statusEl.textContent = 'Connecting to stylesdays.com WordPress feed & post-sitemap.xml...';
-
-        let added = 0;
-
-        try {
-          // Attempt 1: WordPress REST API (provides title, slug, link, excerpt, and featured media)
-          const wpEndpoint = 'https://stylesdays.com/wp-json/wp/v2/posts?_embed&per_page=15';
-          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(wpEndpoint)}`;
-          const res = await fetch(proxyUrl);
-          const data = await res.json();
-
-          if (data && data.contents) {
-            const posts = JSON.parse(data.contents);
-            if (Array.isArray(posts) && posts.length > 0) {
-              posts.forEach((post) => {
-                const slug = post.slug;
-                const link = post.link || `https://stylesdays.com/${slug}/`;
-                const ensured = ensureStylesdaysSlugExists(slug, link);
-                if (ensured && CURATED_REGISTRY[ensured]) {
-                  // Decode HTML entities in WP title
-                  const tempDiv = document.createElement('div');
-                  tempDiv.innerHTML = (post.title && post.title.rendered) || CURATED_REGISTRY[ensured].title;
-                  CURATED_REGISTRY[ensured].title = tempDiv.textContent.trim();
-
-                  if (post.excerpt && post.excerpt.rendered) {
-                    tempDiv.innerHTML = post.excerpt.rendered;
-                    const cleanExcerpt = tempDiv.textContent.trim();
-                    if (cleanExcerpt.length > 30) {
-                      CURATED_REGISTRY[ensured].summary = cleanExcerpt;
-                    }
-                  }
-
-                  // Check embedded WP featured media
-                  const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
-                  if (media && media.source_url) {
-                    CURATED_REGISTRY[ensured].image = media.source_url;
-                  }
-                  added++;
-                }
-              });
-            }
-          }
-        } catch (_) {
-          // Fallback Attempt 2: Fetch post-sitemap.xml via proxy
-          try {
-            const xmlProxy = `https://api.allorigins.win/get?url=${encodeURIComponent('https://stylesdays.com/post-sitemap.xml')}`;
-            const xmlRes = await fetch(xmlProxy);
-            const xmlJson = await xmlRes.json();
-            if (xmlJson && xmlJson.contents) {
-              const result = parseStylesdaysSitemapXml(xmlJson.contents);
-              added += result.importedCount;
-            }
-          } catch (e2) {}
-        } finally {
-          spinner.classList.add('hidden');
-          updateSitemapCounter();
-          renderNavigationPills();
-          renderActiveArticle();
-          if (added > 0) {
-            statusEl.textContent = `✓ Successfully synced ${added} articles from stylesdays.com! Total catalog: ${Object.keys(CURATED_REGISTRY).length} guides.`;
-            showToast(`Synced ${added} posts from stylesdays.com!`);
-          } else {
-            statusEl.textContent = `✓ All 8 core stylesdays.com sitemap guides are active and ready! Paste additional XML on the right anytime.`;
-            showToast('stylesdays.com Sitemap Catalog verified!');
-          }
-        }
-      // 2. Single stylesdays URL / Clean Slug Resolver
-      document.getElementById('btnResolveSingleStylesdaysUrl').addEventListener('click', () => {
-        const input = document.getElementById('quickStylesdaysUrlInput').value.trim();
-        if (!input) {
-          showToast('Enter a slug like /moroccan-wool-runners or a stylesdays.com URL');
-          return;
-        }
-        const slug = ensureStylesdaysSlugExists(input);
-        if (slug) {
-          navigateToCleanSlug(slug, false);
-          fetchLiveOgForSlug(slug, true);
-          showToast(`Resolved /${slug} → https://stylesdays.com/${slug}/`);
-        } else {
-          showToast('Please enter a valid slug or stylesdays.com article URL');
-        }
-      });
-
-      // 3. Load Sample XML from stylesdays.com/post-sitemap.xml
-      document.getElementById('btnLoadSampleSitemapXml').addEventListener('click', () => {
-        document.getElementById('rawSitemapXmlInput').value = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://stylesdays.com/moroccan-wool-runners/</loc></url>
-  <url><loc>https://stylesdays.com/minimalist-bedroom-ideas-for-2026/</loc></url>
-  <url><loc>https://stylesdays.com/stylish-home-decor-ideas-for-real-life-homes/</loc></url>
-  <url><loc>https://stylesdays.com/gorgeous-ikea-nightstand-hacks/</loc></url>
-  <url><loc>https://stylesdays.com/ikea-bedroom-storage-ideas/</loc></url>
-  <url><loc>https://stylesdays.com/8-stunning-ikea-hemnes-bed-hacks/</loc></url>
-  <url><loc>https://stylesdays.com/ikea-headboard-hacks/</loc></url>
-  <url><loc>https://stylesdays.com/creative-ikea-pax-organization-dream-closets/</loc></url>
-  <url><loc>https://stylesdays.com/serene-blue-grey-bedroom-ideas-2/</loc></url>
-</urlset>`;
-        showToast('Loaded stylesdays.com XML sample — click Parse XML to import!');
-      });
-
-      // 4. Parse Raw XML Button
-      document.getElementById('btnParseRawSitemapXml').addEventListener('click', () => {
-        const xmlText = document.getElementById('rawSitemapXmlInput').value.trim();
-        if (!xmlText) {
-          showToast('Paste XML from stylesdays.com/post-sitemap.xml first');
-          return;
-        }
-        const { importedCount, firstImportedSlug } = parseStylesdaysSitemapXml(xmlText);
-        if (importedCount > 0) {
-          if (firstImportedSlug) {
-            navigateToCleanSlug(firstImportedSlug, false);
-          } else {
-            updateSitemapCounter();
-            renderNavigationPills();
-            renderActiveArticle();
-          }
-          showToast(`Parsed & indexed ${importedCount} clean path slugs from XML!`);
-        } else {
-          showToast('No valid <loc>https://stylesdays.com/...</loc> article URLs found in snippet.');
-        }
-      });
-
-      // Auto-sync slug & prepended https://stylesdays.com/<slug>/ when edited in Studio
-      document.getElementById('studioTargetUrl').addEventListener('input', (e) => {
-        const val = e.target.value.trim();
-        if (val.includes('stylesdays.com/')) {
-          const extracted = val.replace(/^https?:\/\/(www\.)?stylesdays\.com\//i, '').replace(/^\/+|\/+$/g, '').split('/').pop();
-          if (extracted) {
-            document.getElementById('studioSlug').value = extracted;
-            document.getElementById('downloadBtnText').textContent = `Download Static ${extracted}.html`;
-          }
-        }
-      });
-
-      document.getElementById('studioSlug').addEventListener('input', (e) => {
-        const clean = e.target.value.trim().toLowerCase().replace(/^\/+|\/+$/g, '').replace(/[^a-z0-9-_]/g, '-');
-        if (clean) {
-          document.getElementById('studioTargetUrl').value = buildStylesdaysUrlFromSlug(clean);
-        }
-        document.getElementById('downloadBtnText').textContent = `Download Static ${clean || 'guide'}.html`;
-      });
-
-      // Authoring-Time OpenGraph Fetcher via Microlink API
-      document.getElementById('btnStudioFetchOg').addEventListener('click', async () => {
-        const targetUrl = document.getElementById('studioTargetUrl').value.trim();
-        if (!isValidHttpUrl(targetUrl)) {
-          showToast('Please enter a valid https://stylesdays.com/... URL first');
-          return;
-        }
-
-        const spinner = document.getElementById('studioFetchSpinner');
-        spinner.classList.remove('hidden');
-
-        try {
-          const res = await fetch(`https://api.microlink.io?url=${encodeURIComponent(targetUrl)}`);
-          const json = await res.json();
-          if (json.status === 'success' && json.data) {
-            const { title, description, image } = json.data;
-            if (title) {
-              const cleanTitle = title.replace(/\s*[-|–]\s*stylesdays.*$/i, '').trim();
-              document.getElementById('studioTitle').value = cleanTitle;
-            }
-            if (description) {
-              document.getElementById('studioSummary').value = description;
-            }
-            if (image && image.url) {
-              document.getElementById('studioImage').value = image.url;
-            }
-            showToast('Live OpenGraph data fetched from stylesdays.com!');
-          } else {
-            showToast('Could not auto-extract metadata; please customize fields manually.');
-          }
-        } catch (err) {
-          showToast('Metadata lookup blocked by CORS; fill fields manually.');
-        } finally {
-          spinner.classList.add('hidden');
-        }
-      });
-
-      // Preview & Save to Session Registry
-      document.getElementById('btnStudioApplyLive').addEventListener('click', () => {
-        const updated = getStudioArticleObject();
-        CURATED_REGISTRY[updated.slug] = updated;
-        navigateToCleanSlug(updated.slug, false);
-        showToast(`Active Clean Path: /${updated.slug} → ${updated.targetUrl}`);
-      });
-
-      // Copy Clean Path Pin Link (https://<org-name>.github.io/<slug>)
-      document.getElementById('btnCopySafeSlugUrl').addEventListener('click', () => {
-        const updated = getStudioArticleObject();
-        CURATED_REGISTRY[updated.slug] = updated;
-        navigateToCleanSlug(updated.slug, false);
-
-        const cleanUrl = getCleanGhPagesPinUrl(updated.slug);
-        copyToClipboard(cleanUrl);
-      });
-
-      // Download 100% Standalone Static Compliant HTML File for GitHub Pages
-      document.getElementById('btnDownloadStaticHtml').addEventListener('click', () => {
-        const article = getStudioArticleObject();
-        const staticHtmlContent = generateStandaloneStaticHtmlFile(article);
-        const blob = new Blob([staticHtmlContent], { type: 'text/html;charset=utf-8' });
-        const downloadUrl = URL.createObjectURL(blob);
-
-        const a = document.createElement('a');
-        a.href = downloadUrl;
-        a.download = `${article.slug}.html`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(downloadUrl);
-
-        showToast(`Downloaded ${article.slug}.html — Ready for GitHub Pages!`);
-      });
+      document.getElementById('btnDownloadCatchAll404').onclick = () => downloadApp('404.html');
+      document.getElementById('btnDownloadRootIndex').onclick = () => downloadApp('index.html');
     }
 
-    /**
-     * GENERATE 100% STATIC STANDALONE COMPLIANT HTML FILE FOR STYLESDAYS.COM
-     * Creates a pure, hardcoded HTML file with baked-in OpenGraph tags, substantive editorial content,
-     * and standard <a href="https://stylesdays.com/..."> links.
-     */
-    function generateStandaloneStaticHtmlFile(item) {
-      const domain = extractHostname(item.targetUrl);
-      const relAttr = item.isSponsored ? 'noopener sponsored' : 'noopener';
-      const takeawaysHtml = item.takeaways.map((pt, i) => `
-        <div class="flex items-start gap-3.5 p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-          <span class="w-6 h-6 rounded-full bg-stone-900 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">${i + 1}</span>
-          <p class="text-sm text-stone-700 leading-relaxed">${escapeHtml(pt)}</p>
-        </div>`).join('');
-
-      return `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(item.title)} | stylesdays Editorial Hub</title>
-  <meta name="description" content="${escapeHtml(item.summary)}">
-  <meta property="og:type" content="article">
-  <meta property="og:title" content="${escapeHtml(item.title)}">
-  <meta property="og:description" content="${escapeHtml(item.summary)}">
-  <meta property="og:image" content="${escapeHtml(item.image)}">
-  <meta property="og:site_name" content="stylesdays Editorial Hub">
-  <script src="https://cdn.tailwindcss.com"><\/script>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF8F5; color: #1C1917; }
-    .font-serif-editorial { font-family: 'Playfair Display', Georgia, serif; }
-  </style>
-</head>
-<body class="min-h-screen flex flex-col">
-  <div class="w-full bg-[#F1EDE6] border-b border-stone-200 text-stone-700 text-xs py-2 px-4">
-    <div class="max-w-3xl mx-auto flex items-center justify-between">
-      <span><strong>stylesdays Editorial Hub:</strong> Curated room preview &amp; DIY checklist for ${escapeHtml(domain)}. ${item.isSponsored ? '<strong>#ad #sponsored</strong>' : ''}</span>
-      <span class="text-emerald-800 font-semibold">Verified Direct Link</span>
-    </div>
-  </div>
-  <main class="max-w-3xl w-full mx-auto px-4 py-10 flex-grow">
-    <article class="bg-white rounded-3xl shadow-sm border border-stone-200 overflow-hidden">
-      <div class="aspect-[16/10] bg-stone-100 relative">
-        <img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.title)}" class="w-full h-full object-cover">
-        <span class="absolute top-4 left-4 bg-white/95 text-stone-900 text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full shadow-sm">${escapeHtml(item.category)}</span>
-      </div>
-      <div class="p-6 sm:p-10">
-        <p class="text-xs text-stone-500 font-semibold mb-3">stylesdays Editorial Summary • Published on ${escapeHtml(domain)}</p>
-        <h1 class="font-serif-editorial text-2xl sm:text-4xl font-bold text-stone-900 leading-tight mb-5">${escapeHtml(item.title)}</h1>
-        <p class="text-stone-700 text-base sm:text-lg leading-relaxed mb-8">${escapeHtml(item.summary)}</p>
-        <div class="bg-[#FAF8F5] p-6 rounded-2xl border border-stone-200 mb-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div>
-            <span class="text-[11px] font-bold uppercase tracking-wider text-stone-400 block">Full Illustrated Article</span>
-            <strong class="text-sm text-stone-900">Explore all room photos &amp; styling steps on ${escapeHtml(domain)}</strong>
-          </div>
-          <a href="${escapeHtml(item.targetUrl)}" target="_blank" rel="${relAttr}" class="w-full sm:w-auto text-center bg-[#E60023] hover:bg-[#c4001d] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition">
-            Read Full Guide on ${escapeHtml(domain)} →
-          </a>
-        </div>
-        <h2 class="font-serif-editorial text-xl font-bold text-stone-900 mb-4">Key Styling &amp; DIY Takeaways</h2>
-        <div class="space-y-3 mb-8">${takeawaysHtml}</div>
-        <div class="bg-stone-50 rounded-2xl p-5 border-l-4 border-stone-900 mb-8">
-          <h3 class="text-xs font-bold uppercase tracking-wider text-stone-500 mb-1">stylesdays Design Note</h3>
-          <p class="text-stone-700 text-sm italic font-serif-editorial">"${escapeHtml(item.editorNote)}"</p>
-        </div>
-        <div class="pt-6 border-t border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
-          <span>Permalink: <code class="text-stone-700">${escapeHtml(item.targetUrl)}</code></span>
-          <a href="${escapeHtml(item.targetUrl)}" target="_blank" rel="${relAttr}" class="bg-stone-900 text-white font-semibold px-5 py-2.5 rounded-xl">Continue to ${escapeHtml(domain)} →</a>
-        </div>
-      </div>
-    </article>
-  </main>
-</body>
-</html>`;
-    }
-
-    /**
-     * Validate HTTP/HTTPS URL
-     */
-    function isValidHttpUrl(str) {
-      try {
-        const u = new URL(str);
-        return u.protocol === 'http:' || u.protocol === 'https:';
-      } catch (_) {
-        return false;
-      }
-    }
-
-    /**
-     * Escape HTML entities to prevent XSS
-     */
-    function escapeHtml(str) {
-      return String(str || '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
-    }
-
-    /**
-     * Clipboard Helper
-     */
     function copyToClipboard(text) {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      textarea.style.position = 'fixed';
-      textarea.style.left = '-9999px';
-      document.body.appendChild(textarea);
-      textarea.select();
-      try {
-        document.execCommand('copy');
-        showToast('Pinterest-safe stylesdays link copied!');
-      } catch (_) {
-        showToast('Could not copy automatically.');
-      } finally {
-        document.body.removeChild(textarea);
-      }
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Clean Pin Link copied to clipboard!');
+      }).catch(() => {
+        showToast('Failed to copy link.');
+      });
     }
 
-    /**
-     * Toast Notification Helper
-     */
     function showToast(msg) {
       const toast = document.getElementById('toastBanner');
       document.getElementById('toastMessage').textContent = msg;
@@ -2415,7 +786,7 @@
       setTimeout(() => {
         toast.classList.remove('translate-y-0', 'opacity-100');
         toast.classList.add('translate-y-20', 'opacity-0');
-      }, 3400);
+      }, 3000);
     }
   </script>
 </body>
