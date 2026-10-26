@@ -1,0 +1,40 @@
+name: Generate & Deploy Pages from Sitemap
+
+on:
+  workflow_dispatch:
+    inputs:
+      sitemap_url:
+        description: 'Sitemap XML URL'
+        required: true
+        default: 'https://stylesdays.com/sitemap_index.xml'
+        type: string
+  schedule:
+    # Optional: Automatically update weekly on Sundays at midnight
+    - cron: '0 0 * * 0'
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run sitemap generator script
+        run: python generate_pages.py "${{ github.event.inputs.sitemap_url || 'https://stylesdays.com/sitemap_index.xml' }}"
+
+      - name: Commit and push generated static pages
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git status
+          git diff-index --quiet HEAD || git commit -m "Auto-generate static pages from sitemap [skip ci]"
+          git push
